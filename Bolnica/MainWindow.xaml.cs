@@ -28,6 +28,8 @@ namespace Bolnica
         public static readonly RoutedUICommand Home = new RoutedUICommand("Home", "Home", typeof(MainWindow));
         public static readonly RoutedUICommand UpcomingServices = new RoutedUICommand("UpcomingServices", "UpcomingServices", typeof(MainWindow));
         public static readonly RoutedUICommand PassedServices = new RoutedUICommand("PassedServices", "PassedServices", typeof(MainWindow));
+        public static readonly RoutedUICommand MedicalRecord = new RoutedUICommand("MedicalRecord", "MedicalRecord", typeof(MainWindow));
+
 
         public MainWindow()
         {
@@ -77,6 +79,14 @@ namespace Bolnica
             if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("PassedServicesPage"))
             {
                 this.Frame.Navigate(new PassedServicesPage());
+            }
+        }
+
+        private void MedicalRecord_Handler(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("MedicalRecordPage"))
+            {
+                this.Frame.Navigate(new MedicalRecordPage());
             }
         }
     }

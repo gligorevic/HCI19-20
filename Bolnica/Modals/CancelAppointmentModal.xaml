@@ -1,0 +1,48 @@
+﻿<Window x:Class="Bolnica.Modals.CancelAppointmentModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        xmlns:local="clr-namespace:Bolnica.Modals"
+        mc:Ignorable="d"
+        Title="CancelAppointmentModal" Height="450" Width="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.3*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" FontWeight="Bold">Otkaži pregled?</TextBlock>
+
+        <WrapPanel Grid.Column="0" Grid.Row="3" Margin="70, 0, 0, 0">
+            <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
+            <TextBlock Margin="7" Text="Opsti pregled" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </WrapPanel>
+
+        <WrapPanel Grid.Column="0" Grid.Row="2" Margin="70, 0, 0, 0">
+            <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
+            <TextBlock Margin="7" Text="16:00 25.11.2020" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </WrapPanel>
+
+        <WrapPanel Grid.Column="0" Grid.Row="1" Margin="70, 0, 0, 0">
+            <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
+            <TextBlock Margin="7" Text="Lekar Lekaric" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </WrapPanel>
+
+        <WrapPanel Grid.Column="1" Grid.Row="1" Margin="15, 0, 0, 0">
+            <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
+            <TextBlock Margin="7" Text="Soba 23" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </WrapPanel>
+
+        <Button Grid.Column="0" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Nazad na prethodnu stranicu" Margin="0, 30, 30,0" Click="GoBack_Handler">Nazad</Button>
+        <Button Grid.Column="1" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Potvrdi otkazivanje ovog pregleda" Margin="30, 30, 0, 0">Potvrdi</Button>
+    </Grid>
+</Window>

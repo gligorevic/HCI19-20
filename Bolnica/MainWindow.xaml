@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bolnica"
         mc:Ignorable="d"
-        Title="Medicinska Klinika" Height="700" Width="950" >
+        Title="Medicinska Klinika" Height="730" Width="950" >
 
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindow.ChangePassword" Executed="ChangePassword_Handler" />
@@ -14,6 +14,7 @@
         <CommandBinding Command="local:MainWindow.Home" Executed="GoHome_Handler" />
         <CommandBinding Command="local:MainWindow.UpcomingServices" Executed="UpcomingServices_Handler" />
         <CommandBinding Command="local:MainWindow.PassedServices" Executed="PassedServices_Handler" />
+        <CommandBinding Command="local:MainWindow.MedicalRecord" Executed="MedicalRecord_Handler" />
     </Window.CommandBindings>
 
     <Window.InputBindings>
@@ -23,6 +24,7 @@
         <KeyBinding Command="local:MainWindow.Home" Key="P" Modifiers="Alt" />
         <KeyBinding Command="local:MainWindow.UpcomingServices" Key="U" Modifiers="Ctrl" />
         <KeyBinding Command="local:MainWindow.PassedServices" Key="P" Modifiers="Ctrl" />
+        <KeyBinding Command="local:MainWindow.MedicalRecord" Key="M" Modifiers="Ctrl" />
     </Window.InputBindings>
 
     <DockPanel>
@@ -37,6 +39,12 @@
                     <MenuItem Header="Predstojeće usluge" Command="local:MainWindow.UpcomingServices" InputGestureText="Ctrl+U"/>
                     <MenuItem Header="Prethodne usluge" Command="local:MainWindow.PassedServices" InputGestureText="Ctrl+P"/>
                 </MenuItem>
+                <Separator />
+                <MenuItem Header="Zakazi pregled"/>
+                <MenuItem Header="Zakazi pregled" Command="local:MainWindow.MedicalRecord" InputGestureText="Ctrl+M"/>
+                <Separator/>
+                <MenuItem Header="Odjavi se" InputGestureText="Ctrl+ALT+Q"/>
+                
             </MenuItem>
             <MenuItem Header="_Početna" Command="local:MainWindow.Home" ToolTip="Idi na početnu stranicu"/>
         </Menu>

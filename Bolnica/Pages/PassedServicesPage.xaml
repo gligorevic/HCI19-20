@@ -4,11 +4,163 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Bolnica.Pages"
+      xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PassedServices">
 
-    <Grid>
-        
+    <Grid Margin="50,5,50,30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center">Prethodne medicinske usluge</TextBlock>
+        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+            <TabItem Header="Pregledi">
+                <ListView Margin="10" Name="AppointmentDataBinding">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Focusable" Value="false"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="130" Width="700" Margin="50,20,20,20" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="0.1*" />
+                                </Grid.RowDefinitions>
+                                <WrapPanel Grid.Column="0" Grid.Row="0">
+                                    <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding doctorName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="1" Grid.Row="0">
+                                    <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding Room}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="0" Grid.Row="1">
+                                    <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding Date}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="0" Grid.Row="2">
+                                    <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding Type}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <StackPanel  Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Pogledaj izvestaj za ovaj pregled" Click="ShowReport_Handler">Pogledaj izvestaj</Button>
+                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Oceni lekara koji je izvrsio ovaj pregled" Click="RateDoctor_Handler" Tag="{Binding doctorName}">Oceni lekara</Button>
+                                </StackPanel>
+                                <Line Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
+                                        X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                        StrokeThickness="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </TabItem>
+            <TabItem Header="Operacije">
+                <ListView Margin="10" Name="OperationDataBinding">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Focusable" Value="false"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="130" Width="700" Margin="50,20,20,20" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="0.7*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="0.1*" />
+                                </Grid.RowDefinitions>
+                                <WrapPanel Grid.Column="0" Grid.Row="0">
+                                    <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding doctorName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="1" Grid.Row="0">
+                                    <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding Room}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="0" Grid.Row="1">
+                                    <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding Date}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="0" Grid.Row="2">
+                                    <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding Type}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Oceni lekara koji je izvrsio ovu operaciju" Click="RateDoctor_Handler" Tag="{Binding doctorName}">Oceni lekara</Button>
+                                
+                                <Line Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
+                                        X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                        StrokeThickness="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Hospitalizacije">
+                <ListView Margin="10" Name="HospitalizationDataBinding">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Focusable" Value="false"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="130" Width="700" Margin="50,20,20,20" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="0.1*" />
+                                </Grid.RowDefinitions>
+                                <WrapPanel Grid.Column="0" Grid.Row="0">
+                                    <fa:ImageAwesome Icon="CalendarPlusOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding startDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="0" Grid.Row="1">
+                                    <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding endDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Grid.Column="0" Grid.Row="2">
+                                    <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                                    <TextBlock Margin="7" Text="{Binding Room}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </WrapPanel>
+
+
+                                <Line Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
+                                        X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                        StrokeThickness="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </TabItem>
+        </TabControl>
+        <Button Grid.Column="0" Grid.Row="2" Height="35" FontSize="20" Click="GoBack_Handler" ToolTip="Vrati se na prethodnu stranicu">Nazad</Button>
     </Grid>
 </Page>

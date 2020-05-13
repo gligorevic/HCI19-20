@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace Bolnica.Pages
 {
     /// <summary>
-    /// Interaction logic for MedicalRecordPage.xaml
+    /// Interaction logic for ReportPage.xaml
     /// </summary>
-    public partial class MedicalRecordPage : Page
+    public partial class ReportPage : Page
     {
-        public MedicalRecordPage()
+        public ReportPage()
         {
             InitializeComponent();
+            this.DataContext = new Appointment() { doctorName = "Doca Docic", date = "18:20 18.02.2020.", type="Opsti pregled"};
+        }
+
+        public class Appointment
+        {
+            public string doctorName { get; set; }
+
+            public string date { get; set; }
+
+            public string type { get; set; }
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)

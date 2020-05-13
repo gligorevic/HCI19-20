@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Bolnica.Pages
+namespace Bolnica.Modals
 {
     /// <summary>
-    /// Interaction logic for MedicalRecordPage.xaml
+    /// Interaction logic for CancelAppointmentModal.xaml
     /// </summary>
-    public partial class MedicalRecordPage : Page
+    public partial class CancelAppointmentModal : Window
     {
-        public MedicalRecordPage()
+        public CancelAppointmentModal()
         {
             InitializeComponent();
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.Close();
         }
     }
 }

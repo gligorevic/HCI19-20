@@ -1,0 +1,40 @@
+﻿<Page x:Class="Bolnica.Pages.RateDoctorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bolnica.Pages"
+      xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="OceniLekaraPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="60">
+            <TextBlock Text="Oceni lekara" FontSize="25" TextAlignment="Center"/>
+            <WrapPanel Margin="0, 45" HorizontalAlignment="Center">
+                <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                <TextBlock Text="{Binding DoctorName}" VerticalAlignment="Center" Margin="13,0,0,0"  FontSize="18"/>
+            </WrapPanel>
+            <WrapPanel Margin="0, 60">
+                <TextBlock Text="Unesite ocenu:" FontSize="22" />
+                <Button  Click="DecreaseRate_Handler" Background="Transparent"  Margin="15, 0, 0, 0" BorderThickness="0">
+                    <fa:ImageAwesome Icon="MinusCircle" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Cursor="Hand" ToolTip="Smanji ocenu"/>
+                </Button>
+                <TextBox Width="30" Height="35" Margin="10,0" Text="{Binding PatiientRate}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                <Button  Click="IncreaseRate_Handler" Background="Transparent"  Margin="15, 0, 0, 0" BorderThickness="0">
+                    <fa:ImageAwesome Icon="PlusCircle" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Cursor="Hand" ToolTip="Povecaj ocenu"/>
+                </Button>
+            </WrapPanel>
+        </StackPanel>
+        <Button ToolTip="Vrati se na prethodnu stranicu" FontSize="20" Grid.Column="0" Grid.Row="1" Width="200" Height="45" Click="GoBack_Handler">Nazad</Button>
+        <Button FontSize="20" Grid.Column="1" Grid.Row="1" Width="200" Height="45" ToolTip="Potvrdi unetu ocenu">Oceni</Button>
+    </Grid>
+</Page>

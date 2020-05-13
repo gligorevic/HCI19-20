@@ -34,3 +34,9 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\PassedServicesPage.baml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\FontAwesome.WPF.dll
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\FontAwesome.WPF.xml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Bolnica.csproj.CopyComplete
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\RateDoctorPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\RateDoctorPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ReportPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ReportPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\CancelAppointmentModal.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\CancelAppointmentModal.baml

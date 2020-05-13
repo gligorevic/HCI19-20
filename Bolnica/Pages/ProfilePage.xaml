@@ -48,7 +48,7 @@
         <Button Grid.Column="1" Grid.Row="9" Margin="15, 20, 15, 20" FontSize="20" Click="Open_ChangePass_Modal" ToolTip="Promeni trenutnu lozinku">Promeni lozinku</Button>
         <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" BorderThickness="1" BorderBrush="#FF000000"
         VerticalAlignment="Center">
-            <Image MinWidth="50" MinHeight="200" Source="" />
+            <Image MinWidth="50" MinHeight="200"/>
         </Border>
         <Button Grid.Column="2" Grid.Row="9" Margin="15, 20, 15, 20" FontSize="20" Click="Open_ChangeProfile_Handler" ToolTip="Izmeni podatke korisnickog profila">Izmeni profil</Button>
     </Grid>
