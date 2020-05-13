@@ -1,10 +1,46 @@
-﻿<NavigationWindow x:Class="Bolnica.MainWindow"
+﻿<Window x:Class="Bolnica.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bolnica"
         mc:Ignorable="d"
-        Title="Medicinska Klinika" Height="700" Width="950" Source="./Pages/HomePage.xaml">
-   
-</NavigationWindow>
+        Title="Medicinska Klinika" Height="700" Width="950" >
+
+    <Window.CommandBindings>
+        <CommandBinding Command="local:MainWindow.ChangePassword" Executed="ChangePassword_Handler" />
+        <CommandBinding Command="local:MainWindow.ViewProfile" Executed="ViewProfile_Handler" />
+        <CommandBinding Command="local:MainWindow.EditProfile" Executed="EditProfile_Handler" />
+        <CommandBinding Command="local:MainWindow.Home" Executed="GoHome_Handler" />
+        <CommandBinding Command="local:MainWindow.UpcomingServices" Executed="UpcomingServices_Handler" />
+        <CommandBinding Command="local:MainWindow.PassedServices" Executed="PassedServices_Handler" />
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Command="local:MainWindow.ChangePassword" Key="L" Modifiers="Ctrl+Alt" />
+        <KeyBinding Command="local:MainWindow.ViewProfile" Key="P" Modifiers="Ctrl+Alt" />
+        <KeyBinding Command="local:MainWindow.EditProfile" Key="I" Modifiers="Ctrl+Alt" />
+        <KeyBinding Command="local:MainWindow.Home" Key="P" Modifiers="Alt" />
+        <KeyBinding Command="local:MainWindow.UpcomingServices" Key="U" Modifiers="Ctrl" />
+        <KeyBinding Command="local:MainWindow.PassedServices" Key="P" Modifiers="Ctrl" />
+    </Window.InputBindings>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Padding="5">
+            <MenuItem Header="_Stranice">
+                <MenuItem Header="_Korisnicki profil">
+                    <MenuItem Header="Pogledaj profil" Command="local:MainWindow.ViewProfile" InputGestureText="Ctrl+ALT+P"/>
+                    <MenuItem Header="Izmeni profil" Command="local:MainWindow.EditProfile" InputGestureText="Ctrl+ALT+I"/>
+                    <MenuItem Header="Promeni lozinku" Command="local:MainWindow.ChangePassword" InputGestureText="Ctrl+ALT+L"/>
+                </MenuItem>
+                <MenuItem Header="Pregledi i _operacije">
+                    <MenuItem Header="Predstojeće usluge" Command="local:MainWindow.UpcomingServices" InputGestureText="Ctrl+U"/>
+                    <MenuItem Header="Prethodne usluge" Command="local:MainWindow.PassedServices" InputGestureText="Ctrl+P"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Početna" Command="local:MainWindow.Home" ToolTip="Idi na početnu stranicu"/>
+        </Menu>
+        
+        <Frame x:Name="Frame" DockPanel.Dock="Bottom" NavigationUIVisibility="Hidden"  Source="./Pages/HomePage.xaml" VerticalAlignment = "Stretch"/>
+        </DockPanel>  
+</Window>

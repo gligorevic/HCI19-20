@@ -23,3 +23,14 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ServicesPage.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\MedicalRecordPage.baml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ScheduleAppointmentPage.baml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ServicesPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\ChangePasswordModal.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\ChangePasswordModal.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\EditProfilePage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\EditProfilePage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\UpcomingServicesPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\PassedServicesPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\UpcomingServicesPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\PassedServicesPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\FontAwesome.WPF.dll
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\FontAwesome.WPF.xml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Bolnica.csproj.CopyComplete

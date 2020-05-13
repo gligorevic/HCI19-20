@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bolnica.Modals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,17 @@ namespace Bolnica.Pages
         private void Go_Back_Handler(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
+        }
+
+        private void Open_ChangePass_Modal(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordModal modalWindow = new ChangePasswordModal();
+            modalWindow.ShowDialog();
+        }
+
+        private void Open_ChangeProfile_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new EditProfilePage());
         }
     }
 }

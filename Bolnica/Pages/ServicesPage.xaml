@@ -5,10 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Bolnica.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="800"
       Title="ServicesPage">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <TextBlock Margin="10, 55, 10, 10" FontSize="25" TextAlignment="Center" ToolTip="Klikni na jednu od ponuđenih opcija">Izaberi</TextBlock>
+        <Button Click="Show_Upcoming_Handler" FontSize="18" Width="292" Height="52" Margin="10, 50, 10, 20" ToolTip="Pogledaj svoje predstojeće medicinske usluge">Predstojeće medicinske usluge</Button>
+        <Button Click="Show_Passed_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Pogledaj svoje obavljene medicinske usluge">Prethodne medicinske usluge</Button>
+        <Button Click="GoBack_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Vrati se na prethodnu stranicu">Nazad</Button>
+    </StackPanel>
 </Page>

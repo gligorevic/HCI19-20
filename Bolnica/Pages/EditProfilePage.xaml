@@ -1,0 +1,60 @@
+﻿<Page x:Class="Bolnica.Pages.EditProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bolnica.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="950"
+      Title="EditProfilePage">
+
+    <Grid Margin="80,30,80, 20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1.3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.5*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="18"  VerticalAlignment="Center">Ime i prezime:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1" FontSize="18"  VerticalAlignment="Center">Datum rođenja:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="2" FontSize="18"  VerticalAlignment="Center">Pol:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="3" FontSize="18"  VerticalAlignment="Center">JMBG:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="4" FontSize="18"  VerticalAlignment="Center">Država:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="5" FontSize="18"  VerticalAlignment="Center">Grad:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="6" FontSize="18"  VerticalAlignment="Center">Adresa:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="7" FontSize="18"  VerticalAlignment="Center">Broj stana:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="8" FontSize="18"  VerticalAlignment="Center">Email:</TextBlock>
+        <Button Grid.Column="0" Grid.Row="9" Margin="0, 20, 85, 20" FontSize="20" Click="Go_Back_Handler" ToolTip="Vrati se na prethodnu stranicu">Nazad</Button>
+        <TextBox Grid.Row="0" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <DatePicker Grid.Row="1" Grid.Column="1" Height="25" Width="300" Name="datePicker1"/>
+        <WrapPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <WrapPanel.Resources>
+                <Style TargetType="{x:Type RadioButton}">
+                    <Setter Property="Margin" Value="20,0" />
+                    <Setter Property="Padding" Value="10,10" />
+                </Style>
+            </WrapPanel.Resources>
+            <RadioButton GroupName="sex" FontSize="18">Muško</RadioButton>
+            <RadioButton GroupName="sex" FontSize="18">Žensko</RadioButton>
+            <RadioButton GroupName="sex" FontSize="18">Drugo</RadioButton>
+        </WrapPanel>
+        <TextBox Grid.Row="3" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="1" Height="25" Width="300"></TextBox>
+
+        <Button Grid.Column="1" Grid.Row="9" Margin="40, 20, 72, 20" FontSize="20" Click="SaveChanges_Handler" ToolTip="Sacuvaj podatke">Sačuvaj izmene</Button>
+    </Grid>
+</Page>

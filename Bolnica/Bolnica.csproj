@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Modals\ChangePasswordModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UpcomingServicesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,6 +82,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Modals\ChangePasswordModal.xaml.cs">
+      <DependentUpon>ChangePasswordModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditProfilePage.xaml.cs">
+      <DependentUpon>EditProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UpcomingServicesPage.xaml.cs">
+      <DependentUpon>UpcomingServicesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -75,6 +99,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\MedicalRecordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PassedServicesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,6 +122,9 @@
   <ItemGroup>
     <Compile Include="Pages\MedicalRecordPage.xaml.cs">
       <DependentUpon>MedicalRecordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PassedServicesPage.xaml.cs">
+      <DependentUpon>PassedServicesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
@@ -121,6 +152,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -24,5 +24,20 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
         }
+
+        private void GoBack_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+        private void Show_Passed_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PassedServicesPage());
+        }
+
+        private void Show_Upcoming_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new UpcomingServicesPage());
+        }
     }
 }

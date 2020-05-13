@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\App.xaml
-6379040208
+10-1656210709
 
-141433503203
-131569487696
-Pages\HomePage.xaml;MainWindow.xaml;Pages\MedicalRecordPage.xaml;Pages\ProfilePage.xaml;Pages\ScheduleAppointmentPage.xaml;Pages\ServicesPage.xaml;
+18-177402452
+142086350903
+Modals\ChangePasswordModal.xaml;Pages\EditProfilePage.xaml;Pages\UpcomingServicesPage.xaml;Pages\HomePage.xaml;MainWindow.xaml;Pages\MedicalRecordPage.xaml;Pages\PassedServicesPage.xaml;Pages\ProfilePage.xaml;Pages\ScheduleAppointmentPage.xaml;Pages\ServicesPage.xaml;
 
-False
+True
 
