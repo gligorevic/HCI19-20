@@ -1,0 +1,52 @@
+﻿<Page x:Class="Bolnica.Pages.ConfirmAppointmentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bolnica.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="730" d:DesignWidth="950"
+      Title="ConfirmAppointmentPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.6*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center">Potvrdi pregled</TextBlock>
+        <Border Padding="40" BorderBrush="Black" BorderThickness="1" CornerRadius="8" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="240, 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" FontSize="18" VerticalAlignment="Center">Datum:</Label>
+                <Label Grid.Column="0" Grid.Row="2" FontSize="18" VerticalAlignment="Center">Lekar:</Label>
+                <Label Grid.Column="0" Grid.Row="4" FontSize="18" VerticalAlignment="Center">Sala:</Label>
+                <Label Grid.Column="0" Grid.Row="5" FontSize="18" VerticalAlignment="Center">Prioritet:</Label>
+                <TextBlock Grid.Column="1" Grid.Row="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">19.04.2020.</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="2" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">dr Masa Masic</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="4" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Sala 1</TextBlock>
+                <WrapPanel Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <RadioButton GroupName="priority" FontSize="18">Lekar</RadioButton>
+                    <RadioButton GroupName="priority" FontSize="18" Margin="40,0,0,0">Termin</RadioButton></WrapPanel>
+            </Grid>
+        </Border>
+       
+        <Button Height="45" Margin="50,0" Grid.Column="0" Grid.Row="2" FontSize="20" Width="120" Click="GoBack_Handler"  HorizontalAlignment="Left" ToolTip="Nazad na prethodnu stranicu">Nazad</Button>
+        <Button Height="45" Margin="50,0" Grid.Column="1" Grid.Row="2" FontSize="20" Width="120" Click="ScheduleAppointment_Handler"  HorizontalAlignment="Right" ToolTip="Klikni da bi zakazao pregled">Potvrdi</Button>
+    </Grid>
+</Page>

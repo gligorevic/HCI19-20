@@ -1,0 +1,55 @@
+﻿<Page x:Class="Bolnica.Pages.ChoseTerminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:local="clr-namespace:Bolnica.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="730" d:DesignWidth="950"
+      Title="ChoseTerminPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <xctk:DateTimePicker Grid.Column="0" Grid.Row="0" x:Name="fromDTP"
+                Value="{Binding Path=CleanLogsDeletionDate, Mode=TwoWay}" Height="30" Width="172" />
+        <!-- AutoCloseCalendar="False"
+                IsOpen="True" -->
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <TextBlock DockPanel.Dock="Top" FontSize="22" TextAlignment="Center">Odaberi vreme</TextBlock>
+            <Border VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Black">
+                <ScrollViewer VerticalAlignment="Stretch">
+                    <ListBox FontSize="18">
+                        <ListBoxItem>12:20</ListBoxItem>
+                        <ListBoxItem>13:20</ListBoxItem>
+                        <ListBoxItem>14:50</ListBoxItem>
+                        <ListBoxItem>15:10</ListBoxItem>
+                        <ListBoxItem>16:40</ListBoxItem>
+                        <ListBoxItem>17:20</ListBoxItem>
+                        <ListBoxItem>17:50</ListBoxItem>
+                        <ListBoxItem>18:20</ListBoxItem>
+                        <ListBoxItem>19:20</ListBoxItem>
+                    </ListBox>
+                </ScrollViewer>
+            </Border>
+        </DockPanel>
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button FontSize="20" Width="120" Click="GoBack_Handler" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Height="45" Margin="50,0">Nazad</Button>
+            <Button FontSize="20" Width="120" Click="Continue_Handler" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Height="45" Margin="50,0">Nastavi</Button>
+        </Grid>
+    </Grid>
+</Page>

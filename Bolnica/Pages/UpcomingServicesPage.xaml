@@ -60,7 +60,7 @@
                                 </WrapPanel>
                                 <StackPanel  Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Otkaži ovaj pregled" Click="CancelAppointment_Handler">Otkaži</Button>
-                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Odloži ovaj pregled">Odloži</Button>
+                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Odloži ovaj pregled" Click="PostponeAppointment_Handler">Odloži</Button>
                                 </StackPanel>
                                 <Line Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
                                         X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"

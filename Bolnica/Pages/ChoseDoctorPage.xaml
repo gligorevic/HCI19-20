@@ -1,0 +1,45 @@
+﻿<Page x:Class="Bolnica.Pages.ChoseDoctorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Bolnica.Pages"
+      xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="730" d:DesignWidth="950"
+      Title="ChoseDoctorPage">
+
+    <StackPanel>
+        <TextBlock TextAlignment="Center" FontSize="25" Margin="100" ToolTip="Klikni na jednog od lekara i pritisni nastavi">Odaberi lekara</TextBlock>
+
+        <Border BorderThickness="1" BorderBrush="Black" Margin="50,0">
+            <WrapPanel >
+                <fa:ImageAwesome Icon="Search" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
+                <TextBox Width="800" BorderThickness="0" VerticalAlignment="Center" Height="30" FontSize="20"/>
+            </WrapPanel>
+        </Border>
+
+        <Border BorderThickness="1" BorderBrush="Black" Margin="50, 0">
+            <ScrollViewer Height="150" >
+                <ListBox FontSize="18">
+                    <ListBoxItem>Lekar #1</ListBoxItem>
+                    <ListBoxItem>Lekar #2</ListBoxItem>
+                    <ListBoxItem>Lekar #3</ListBoxItem>
+                    <ListBoxItem>Lekar #4</ListBoxItem>
+                </ListBox>
+            </ScrollViewer>
+        </Border>
+        <Grid Margin="50,70">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button FontSize="20" Width="120" Click="GoBack_Handler" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">Nazad</Button>
+            <Button FontSize="20" Width="120" Click="Continue_Handler" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right">Nastavi</Button>
+        </Grid>
+
+    </StackPanel>
+</Page>

@@ -24,5 +24,20 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
         }
+
+        private void GoBack_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+        private void ChoseTime_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ChoseTerminPage());
+        }
+
+        private void ChoseDoctor_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ChoseDoctorPage());
+        }
     }
 }

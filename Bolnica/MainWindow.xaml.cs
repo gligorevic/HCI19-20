@@ -29,6 +29,9 @@ namespace Bolnica
         public static readonly RoutedUICommand UpcomingServices = new RoutedUICommand("UpcomingServices", "UpcomingServices", typeof(MainWindow));
         public static readonly RoutedUICommand PassedServices = new RoutedUICommand("PassedServices", "PassedServices", typeof(MainWindow));
         public static readonly RoutedUICommand MedicalRecord = new RoutedUICommand("MedicalRecord", "MedicalRecord", typeof(MainWindow));
+        public static readonly RoutedUICommand ScheduleAppointment = new RoutedUICommand("ScheduleAppointment", "ScheduleAppointment", typeof(MainWindow));
+        public static readonly RoutedUICommand Blog = new RoutedUICommand("Blog", "Blog", typeof(MainWindow));
+        public static readonly RoutedUICommand Help = new RoutedUICommand("Help", "Help", typeof(MainWindow));
 
 
         public MainWindow()
@@ -88,6 +91,28 @@ namespace Bolnica
             {
                 this.Frame.Navigate(new MedicalRecordPage());
             }
+        }
+
+        private void ScheduletAppointment_Handler(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("ScheduleAppointmentPage"))
+            {
+                this.Frame.Navigate(new ScheduleAppointmentPage());
+            }
+        }
+
+        private void Blog_Handler(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("BlogPage"))
+            {
+                this.Frame.Navigate(new BlogPage());
+            }
+        }
+
+        private void Help_Handler(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpModal modalWindow = new HelpModal();
+            modalWindow.ShowDialog();
         }
     }
 }

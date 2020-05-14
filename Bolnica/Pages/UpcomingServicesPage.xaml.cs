@@ -87,5 +87,10 @@ namespace Bolnica.Pages
             CancelAppointmentModal modalWindow = new CancelAppointmentModal();
             modalWindow.ShowDialog();
         }
+
+        private void PostponeAppointment_Handler(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ChoseTerminPage());
+        }
     }
 }

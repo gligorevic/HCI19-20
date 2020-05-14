@@ -15,6 +15,9 @@
         <CommandBinding Command="local:MainWindow.UpcomingServices" Executed="UpcomingServices_Handler" />
         <CommandBinding Command="local:MainWindow.PassedServices" Executed="PassedServices_Handler" />
         <CommandBinding Command="local:MainWindow.MedicalRecord" Executed="MedicalRecord_Handler" />
+        <CommandBinding Command="local:MainWindow.ScheduleAppointment" Executed="ScheduletAppointment_Handler" />
+        <CommandBinding Command="local:MainWindow.Blog" Executed="Blog_Handler" />
+        <CommandBinding Command="local:MainWindow.Help" Executed="Help_Handler" />
     </Window.CommandBindings>
 
     <Window.InputBindings>
@@ -25,6 +28,9 @@
         <KeyBinding Command="local:MainWindow.UpcomingServices" Key="U" Modifiers="Ctrl" />
         <KeyBinding Command="local:MainWindow.PassedServices" Key="P" Modifiers="Ctrl" />
         <KeyBinding Command="local:MainWindow.MedicalRecord" Key="M" Modifiers="Ctrl" />
+        <KeyBinding Command="local:MainWindow.ScheduleAppointment" Key="S" Modifiers="Ctrl" />
+        <KeyBinding Command="local:MainWindow.Blog" Key="B" Modifiers="Alt" />
+        <KeyBinding Command="local:MainWindow.Help" Key="M" Modifiers="Alt" />
     </Window.InputBindings>
 
     <DockPanel>
@@ -40,15 +46,17 @@
                     <MenuItem Header="Prethodne usluge" Command="local:MainWindow.PassedServices" InputGestureText="Ctrl+P"/>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Zakazi pregled"/>
-                <MenuItem Header="Zakazi pregled" Command="local:MainWindow.MedicalRecord" InputGestureText="Ctrl+M"/>
+                <MenuItem Header="Zakazi pregled" Command="local:MainWindow.ScheduleAppointment" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Zdravstveni karton" Command="local:MainWindow.MedicalRecord" InputGestureText="Ctrl+M"/>
                 <Separator/>
                 <MenuItem Header="Odjavi se" InputGestureText="Ctrl+ALT+Q"/>
                 
             </MenuItem>
             <MenuItem Header="_Početna" Command="local:MainWindow.Home" ToolTip="Idi na početnu stranicu"/>
+            <MenuItem Header="_Blog" Command="local:MainWindow.Blog" ToolTip="Idi na blog stranicu"/>
+            <MenuItem Header="Po_moć" Command="local:MainWindow.Help" ToolTip="Klikni za pomoc u rukovanju softverom"/>
         </Menu>
         
-        <Frame x:Name="Frame" DockPanel.Dock="Bottom" NavigationUIVisibility="Hidden"  Source="./Pages/HomePage.xaml" VerticalAlignment = "Stretch"/>
+        <Frame x:Name="Frame" DockPanel.Dock="Bottom" NavigationUIVisibility="Hidden"  Source="./Pages/RegistrationPage.xaml" VerticalAlignment = "Stretch"/>
         </DockPanel>  
 </Window>
