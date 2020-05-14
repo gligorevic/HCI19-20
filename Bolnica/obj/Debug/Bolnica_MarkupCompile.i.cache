@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\App.xaml
-13-1389374278
+14-1179763450
 
-21523556421
+22-1687469310
 142086350903
-Modals\CancelAppointmentModal.xaml;Modals\ChangePasswordModal.xaml;Pages\EditProfilePage.xaml;Pages\RateDoctorPage.xaml;Pages\ReportPage.xaml;Pages\UpcomingServicesPage.xaml;Pages\HomePage.xaml;MainWindow.xaml;Pages\MedicalRecordPage.xaml;Pages\PassedServicesPage.xaml;Pages\ProfilePage.xaml;Pages\ScheduleAppointmentPage.xaml;Pages\ServicesPage.xaml;
+Modals\CancelAppointmentModal.xaml;Modals\ChangePasswordModal.xaml;Pages\EditProfilePage.xaml;Pages\RateDoctorPage.xaml;Pages\RecepiesPage.xaml;Pages\ReportPage.xaml;Pages\UpcomingServicesPage.xaml;Pages\HomePage.xaml;MainWindow.xaml;Pages\MedicalRecordPage.xaml;Pages\PassedServicesPage.xaml;Pages\ProfilePage.xaml;Pages\ScheduleAppointmentPage.xaml;Pages\ServicesPage.xaml;
 
-True
+False
 

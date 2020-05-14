@@ -28,8 +28,8 @@
                 <Button  Click="DecreaseRate_Handler" Background="Transparent"  Margin="15, 0, 0, 0" BorderThickness="0">
                     <fa:ImageAwesome Icon="MinusCircle" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Cursor="Hand" ToolTip="Smanji ocenu"/>
                 </Button>
-                <TextBox Width="30" Height="35" Margin="10,0" Text="{Binding PatiientRate}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
-                <Button  Click="IncreaseRate_Handler" Background="Transparent"  Margin="15, 0, 0, 0" BorderThickness="0">
+                <TextBox x:Name="patientRateBox" Width="30" Height="35" Margin="15,0" Text="{Binding PatientRate}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                <Button  Click="IncreaseRate_Handler" Background="Transparent" BorderThickness="0">
                     <fa:ImageAwesome Icon="PlusCircle" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Cursor="Hand" ToolTip="Povecaj ocenu"/>
                 </Button>
             </WrapPanel>

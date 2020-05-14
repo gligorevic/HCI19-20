@@ -40,3 +40,5 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ReportPage.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ReportPage.baml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\CancelAppointmentModal.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\CancelAppointmentModal.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\RecepiesPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\RecepiesPage.baml

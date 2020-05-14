@@ -19,14 +19,16 @@ namespace Bolnica.Pages
     /// <summary>
     /// Interaction logic for OceniLekaraPage.xaml
     /// </summary>
-    public partial class RateDoctorPage : Page
+    public partial class RateDoctorPage : Page, INotifyPropertyChanged
     {
         private Doctor doctor { get; set; } 
 
+
         public RateDoctorPage(string docName)
         {
+            
             InitializeComponent();
-            doctor = new Doctor() { DoctorName = docName};
+            doctor = new Doctor() { DoctorName = docName };
             this.DataContext = doctor;
         }
 
@@ -34,41 +36,19 @@ namespace Bolnica.Pages
 
         private void IncreaseRate_Handler(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(doctor.PatiientRate.ToString());
             doctor.PatiientRate = doctor.PatiientRate + 1;
+            patientRateBox.Text = doctor.PatiientRate.ToString();
         }
 
         private void DecreaseRate_Handler(object sender, RoutedEventArgs e)
         {
-
+            doctor.PatiientRate = doctor.PatiientRate - 1;
+            patientRateBox.Text = doctor.PatiientRate.ToString();
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
-        }
-    }
-
-    public class Doctor : INotifyPropertyChanged
-    {
-        public string DoctorName { get; set; }
-
-        private int patientRate = 0;
-
-        public int PatiientRate
-        {
-            get
-            {
-                return patientRate;
-            }
-            set
-            {
-                if (value != patientRate)
-                {
-                    patientRate = value;
-                    OnPropertyChanged("PatientRate");
-                }
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -80,5 +60,19 @@ namespace Bolnica.Pages
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
+
+    }
+
+    public class Doctor 
+    {
+        public string DoctorName { get; set; }
+
+        private int patientRate = 0;
+
+        public int PatiientRate
+        {
+            get { return patientRate; } set { patientRate = value; }
+        }
+        
     }
 }

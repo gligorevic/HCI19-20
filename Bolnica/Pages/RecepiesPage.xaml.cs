@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Bolnica.Pages
 {
     /// <summary>
-    /// Interaction logic for MedicalRecordPage.xaml
+    /// Interaction logic for RecepiesPage.xaml
     /// </summary>
-    public partial class MedicalRecordPage : Page
+    public partial class RecepiesPage : Page
     {
-        public MedicalRecordPage()
+        public RecepiesPage()
         {
             InitializeComponent();
         }
@@ -28,11 +28,6 @@ namespace Bolnica.Pages
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
-        }
-
-        private void ViewRecepies_Handler(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new RecepiesPage());
         }
     }
 }

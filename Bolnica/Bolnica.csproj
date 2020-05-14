@@ -74,6 +74,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\RecepiesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +109,9 @@
     </Compile>
     <Compile Include="Pages\RateDoctorPage.xaml.cs">
       <DependentUpon>RateDoctorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RecepiesPage.xaml.cs">
+      <DependentUpon>RecepiesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
