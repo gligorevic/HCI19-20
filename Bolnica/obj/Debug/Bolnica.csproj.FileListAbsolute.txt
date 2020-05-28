@@ -75,3 +75,11 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\MaterialDesignColors.pdb
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\MaterialDesignThemes.Wpf.pdb
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\MaterialDesignThemes.Wpf.xml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\RegistrationPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\LoginPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\RegistrateOrLoginPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\LoginPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\RegistrateOrLoginPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenEmailPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenPasswordPage.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenEmailPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenPasswordPage.baml

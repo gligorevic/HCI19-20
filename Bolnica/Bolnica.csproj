@@ -113,11 +113,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ForgotenEmailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ForgotenPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RateDoctorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RecepiesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegistrateOrLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,11 +185,23 @@
     <Compile Include="Pages\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ForgotenEmailPage.xaml.cs">
+      <DependentUpon>ForgotenEmailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ForgotenPasswordPage.xaml.cs">
+      <DependentUpon>ForgotenPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RateDoctorPage.xaml.cs">
       <DependentUpon>RateDoctorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RecepiesPage.xaml.cs">
       <DependentUpon>RecepiesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegistrateOrLoginPage.xaml.cs">
+      <DependentUpon>RegistrateOrLoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>

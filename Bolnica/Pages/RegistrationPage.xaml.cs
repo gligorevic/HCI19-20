@@ -30,9 +30,7 @@ namespace Bolnica.Pages
         private void IncreaseActive_Step(object sender, RoutedEventArgs e)
         {
             ActiveStep = ActiveStep + 1;
-
-
-            this.BackButton.Visibility = Visibility.Visible;
+   
             this.stepOneButton.Background = Brushes.White;
             this.stepTwoButton.Background = Brushes.White;
             this.firstStepForm.Visibility = Visibility.Hidden;
@@ -41,11 +39,11 @@ namespace Bolnica.Pages
             {
                 case 2:
                     this.secondStepForm.Visibility = Visibility.Visible;
-                    this.stepTwoButton.Background = Brushes.LightGray;
+                    this.stepTwoButton.Background = (Brush)new BrushConverter().ConvertFrom("#CAF4F4");
                     break;
                 case 3:
                     this.thirdStepForm.Visibility = Visibility.Visible;
-                    this.stepThreeButton.Background = Brushes.LightGray;
+                    this.stepThreeButton.Background = (Brush)new BrushConverter().ConvertFrom("#CAF4F4");
                     this.ContinueButton.Content = "Završi registraciju";
                     break;
                 case 4:
@@ -67,16 +65,54 @@ namespace Bolnica.Pages
             this.thirdStepForm.Visibility = Visibility.Hidden;
             switch (ActiveStep)
             {
+                case 0:
+                    this.NavigationService.GoBack();
+                    break;
                 case 1:
                     this.firstStepForm.Visibility = Visibility.Visible;
-                    this.BackButton.Visibility = Visibility.Hidden;
-                    this.stepOneButton.Background = Brushes.LightGray;
+                    this.stepOneButton.Background = (Brush)new BrushConverter().ConvertFrom("#CAF4F4");
                     break;
                 case 2:
                     this.secondStepForm.Visibility = Visibility.Visible;
-                    this.stepTwoButton.Background = Brushes.LightGray;
+                    this.stepTwoButton.Background = (Brush)new BrushConverter().ConvertFrom("#CAF4F4");
                     break;
             }
+        }
+
+        private void GoOn_Step1_Handler(object sender, RoutedEventArgs e)
+        {
+            ActiveStep = 1;
+            this.stepTwoButton.Background = Brushes.White;
+            this.stepThreeButton.Background = Brushes.White;
+            this.stepOneButton.Background = (Brush)new BrushConverter().ConvertFrom("#CAF4F4");
+
+            this.secondStepForm.Visibility = Visibility.Hidden;
+            this.thirdStepForm.Visibility = Visibility.Hidden;
+            this.firstStepForm.Visibility = Visibility.Visible;
+        }
+
+        private void GoOn_Step2_Handler(object sender, RoutedEventArgs e)
+        {
+            ActiveStep = 2;
+            this.stepOneButton.Background = Brushes.White;
+            this.stepThreeButton.Background = Brushes.White;
+            this.stepTwoButton.Background = (Brush)new BrushConverter().ConvertFrom("#CAF4F4");
+
+            this.thirdStepForm.Visibility = Visibility.Hidden;
+            this.firstStepForm.Visibility = Visibility.Hidden;
+            this.secondStepForm.Visibility = Visibility.Visible;  
+        }
+
+        private void GoOn_Step3_Handler(object sender, RoutedEventArgs e)
+        {
+            ActiveStep = 3;
+            this.stepOneButton.Background = Brushes.White;
+            this.stepTwoButton.Background = Brushes.White;
+            this.stepThreeButton.Background = (Brush)new BrushConverter().ConvertFrom("#CAF4F4");
+
+            this.firstStepForm.Visibility = Visibility.Hidden;
+            this.secondStepForm.Visibility = Visibility.Hidden;
+            this.thirdStepForm.Visibility = Visibility.Visible;
         }
     }
 }

@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Bolnica"
         mc:Ignorable="d"
         Title="Medicinska Klinika" Height="730" Width="950" >
-
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindow.ChangePassword" Executed="ChangePassword_Handler" />
         <CommandBinding Command="local:MainWindow.ViewProfile" Executed="ViewProfile_Handler" />
@@ -33,7 +32,7 @@
         <KeyBinding Command="local:MainWindow.Help" Key="M" Modifiers="Alt" />
     </Window.InputBindings>
 
-    <DockPanel>
+    <DockPanel Background="#CAF4F4">
         <Menu DockPanel.Dock="Top" Padding="5">
             <MenuItem Header="_Stranice">
                 <MenuItem Header="_Korisnicki profil">
@@ -57,6 +56,6 @@
             <MenuItem Header="Po_moć" Command="local:MainWindow.Help" ToolTip="Klikni za pomoc u rukovanju softverom"/>
         </Menu>
         
-        <Frame x:Name="Frame" DockPanel.Dock="Bottom" NavigationUIVisibility="Hidden"  Source="./Pages/RegistrationPage.xaml" VerticalAlignment = "Stretch"/>
+        <Frame x:Name="Frame" DockPanel.Dock="Bottom" NavigationUIVisibility="Hidden"  Source="./Pages/RegistrateOrLoginPage.xaml" VerticalAlignment = "Stretch"/>
         </DockPanel>  
 </Window>

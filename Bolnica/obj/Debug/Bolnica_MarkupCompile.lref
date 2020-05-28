@@ -8,8 +8,10 @@ FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ChoseDoctorPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ChoseTerminPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ConfirmAppointmentPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\EditProfilePage.xaml;;
+FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\LoginPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\RateDoctorPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\RecepiesPage.xaml;;
+FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\RegistrateOrLoginPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\RegistrationPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ReportPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\UpcomingServicesPage.xaml;;
@@ -20,4 +22,6 @@ FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\PassedServicesPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ProfilePage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ScheduleAppointmentPage.xaml;;
 FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ServicesPage.xaml;;
+FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ForgotenEmailPage.xaml;;
+FD:\3.Godina\HCI\Projekat\Bolnica\Bolnica\Pages\ForgotenPasswordPage.xaml;;
 

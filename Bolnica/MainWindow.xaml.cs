@@ -37,6 +37,7 @@ namespace Bolnica
         public MainWindow()
         {
             InitializeComponent();
+            this.FontFamily = new FontFamily("Segoe UI");
         }
 
         private void ChangePassword_Handler(object sender, ExecutedRoutedEventArgs e)
