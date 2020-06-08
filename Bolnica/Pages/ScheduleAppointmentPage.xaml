@@ -10,9 +10,24 @@
 
     <StackPanel Orientation="Vertical">
         <TextBlock Margin="10, 55, 10, 40" FontSize="25" TextAlignment="Center" ToolTip="Klikni na jednu od ponuđenih opcija">Izaberi</TextBlock>
-        <Button Click="ChoseTime_Handler" FontSize="18" Width="292" Height="52" Margin="10, 50, 10, 20" ToolTip="Pogledaj svoj korisnicki profil">Odaberi termin</Button>
-        <Button Click="ChoseDoctor_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Pogledaj svoje medicinske usluge">Odaberi lekara</Button>
-        <Button Click="GoBack_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Vrati se na prethodnu stranicu">Nazad</Button>
+        <Button Click="ChoseTime_Handler" FontSize="18" Width="292" Height="52" Margin="10, 50, 10, 20" ToolTip="Pogledaj svoj korisnicki profil">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Odaberi termin</Button>
+        <Button Click="ChoseDoctor_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Pogledaj svoje medicinske usluge">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Odaberi lekara</Button>
+        <Button Click="GoBack_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Vrati se na prethodnu stranicu">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Nazad</Button>
         
     </StackPanel>
 </Page>

@@ -89,6 +89,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modals\FeedbackModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modals\HelpModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +170,9 @@
     </Compile>
     <Compile Include="Modals\ChangePasswordModal.xaml.cs">
       <DependentUpon>ChangePasswordModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\FeedbackModal.xaml.cs">
+      <DependentUpon>FeedbackModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modals\HelpModal.xaml.cs">
       <DependentUpon>HelpModal.xaml</DependentUpon>

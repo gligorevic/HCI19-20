@@ -38,6 +38,7 @@ namespace Bolnica.Pages
                     this.NavigationService.GoBack();
                     break;
                 case 1:
+                    this.forgotenButton.Text = "Zaboravljen mail?";
                     this.firstStep.Visibility = Visibility.Visible;
                     this.secondStep.Visibility = Visibility.Hidden;
                     break;
@@ -53,6 +54,7 @@ namespace Bolnica.Pages
             ActiveStep = ActiveStep + 1;
             this.ContinueButton.Content = "Uloguj se";
             this.ContinueButton.ToolTip = "Prijavi se na svoj nalog";
+            this.forgotenButton.Text = "Zaboravljena lozinka?";
             this.firstStep.Visibility = Visibility.Hidden;
             this.secondStep.Visibility = Visibility.Visible;
         }

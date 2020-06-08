@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bolnica"
         mc:Ignorable="d"
-        Title="Medicinska Klinika" Height="730" Width="950" >
+        Title="Medicinska Klinika" Height="730" Width="950" ResizeMode="NoResize">
     <Window.CommandBindings>
         <CommandBinding Command="local:MainWindow.ChangePassword" Executed="ChangePassword_Handler" />
         <CommandBinding Command="local:MainWindow.ViewProfile" Executed="ViewProfile_Handler" />

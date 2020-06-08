@@ -6,7 +6,7 @@
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:local="clr-namespace:Bolnica.Modals"
         mc:Ignorable="d"
-        Title="CancelAppointmentModal" Height="450" Width="500">
+        Title="CancelAppointmentModal" Height="450" Width="500" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -42,7 +42,17 @@
             <TextBlock Margin="7" Text="Soba 23" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </WrapPanel>
 
-        <Button Grid.Column="0" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Nazad na prethodnu stranicu" Margin="0, 30, 30,0" Click="GoBack_Handler">Nazad</Button>
-        <Button Grid.Column="1" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Potvrdi otkazivanje ovog pregleda" Margin="30, 30, 0, 0">Potvrdi</Button>
+        <Button Grid.Column="0" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Nazad na prethodnu stranicu" Margin="0, 30, 30,0" Click="GoBack_Handler">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Nazad</Button>
+        <Button Grid.Column="1" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Potvrdi otkazivanje ovog pregleda" Margin="30, 30, 0, 0">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Potvrdi</Button>
     </Grid>
 </Window>

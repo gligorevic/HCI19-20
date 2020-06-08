@@ -160,6 +160,11 @@
                 </ListView>
             </TabItem>
         </TabControl>
-        <Button Grid.Column="0" Grid.Row="2" Height="35" FontSize="20" Click="GoBack_Handler" ToolTip="Vrati se na prethodnu stranicu">Nazad</Button>
+        <Button Grid.Column="0" Grid.Row="2" Height="35" FontSize="20" Click="GoBack_Handler" ToolTip="Vrati se na prethodnu stranicu">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Nazad</Button>
     </Grid>
 </Page>

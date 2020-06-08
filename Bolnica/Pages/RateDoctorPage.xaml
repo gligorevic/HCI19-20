@@ -34,7 +34,17 @@
                 </Button>
             </WrapPanel>
         </StackPanel>
-        <Button ToolTip="Vrati se na prethodnu stranicu" FontSize="20" Grid.Column="0" Grid.Row="1" Width="200" Height="45" Click="GoBack_Handler">Nazad</Button>
-        <Button FontSize="20" Grid.Column="1" Grid.Row="1" Width="200" Height="45" ToolTip="Potvrdi unetu ocenu">Oceni</Button>
+        <Button ToolTip="Vrati se na prethodnu stranicu" FontSize="20" Grid.Column="0" Grid.Row="1" Width="200" Height="45" Click="GoBack_Handler">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Nazad</Button>
+        <Button FontSize="20" Grid.Column="1" Grid.Row="1" Width="200" Height="45" ToolTip="Potvrdi unetu ocenu">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Oceni</Button>
     </Grid>
 </Page>

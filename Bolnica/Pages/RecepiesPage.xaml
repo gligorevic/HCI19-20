@@ -29,7 +29,12 @@
                 </ListBox>
             </ScrollViewer>
         </Border>
-        <Button FontSize="20" Width="550" Margin="70" Click="GoBack_Handler">Nazad</Button>
+        <Button FontSize="20" Width="550" Margin="70" Height="45" Click="GoBack_Handler">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Nazad</Button>
        
     </StackPanel>
 </Page>

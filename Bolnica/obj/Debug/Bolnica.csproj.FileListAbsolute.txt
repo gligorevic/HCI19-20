@@ -83,3 +83,6 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenEmailPage.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenPasswordPage.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenEmailPage.baml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenPasswordPage.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\App.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\FeedbackModal.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\FeedbackModal.baml

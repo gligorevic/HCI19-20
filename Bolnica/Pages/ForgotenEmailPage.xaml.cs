@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bolnica.Modals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,8 @@ namespace Bolnica.Pages
         private void Finsih_Handler(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new LoginPage());
+            FeedbackModal modalWindow = new FeedbackModal("Usepsno promenjen email", "Promenjen email", "Uspesno ste promenili email, od sada se prijavljujete koristeci novi email.", true);
+            modalWindow.ShowDialog();
         }
     }
 }

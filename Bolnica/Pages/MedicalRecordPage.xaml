@@ -86,8 +86,18 @@
                             </ListBox>
                         </ScrollViewer>
                     </Border>
-                    <Button Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" FontSize="20" Height="45" Click="ViewRecepies_Handler">Pogledaj svoje lekarske recepte</Button>
-                    <Button Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" FontSize="20" Height="45" ToolTip="Nazad na prethodnu stranicu" Click="GoBack_Handler">Nazad</Button>
+                    <Button Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" FontSize="20" Height="45" Click="ViewRecepies_Handler">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="6"/>
+                            </Style>
+                        </Button.Resources> Pogledaj svoje lekarske recepte</Button>
+                    <Button Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" FontSize="20" Height="45" ToolTip="Nazad na prethodnu stranicu" Click="GoBack_Handler">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="6"/>
+                            </Style>
+                        </Button.Resources> Nazad</Button>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -59,8 +59,18 @@
                                     <TextBlock Margin="7" Text="{Binding Type}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <StackPanel  Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Pogledaj izvestaj za ovaj pregled" Click="ShowReport_Handler">Pogledaj izvestaj</Button>
-                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Oceni lekara koji je izvrsio ovaj pregled" Click="RateDoctor_Handler" Tag="{Binding doctorName}">Oceni lekara</Button>
+                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Pogledaj izvestaj za ovaj pregled" Click="ShowReport_Handler">
+                                        <Button.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="6"/>
+                                            </Style>
+                                        </Button.Resources> Pogledaj izvestaj</Button>
+                                    <Button Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Oceni lekara koji je izvrsio ovaj pregled" Click="RateDoctor_Handler" Tag="{Binding doctorName}">
+                                        <Button.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="6"/>
+                                            </Style>
+                                        </Button.Resources> Oceni lekara</Button>
                                 </StackPanel>
                                 <Line Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
                                         X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
@@ -108,7 +118,12 @@
                                     <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
                                     <TextBlock Margin="7" Text="{Binding Type}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
-                                <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Oceni lekara koji je izvrsio ovu operaciju" Click="RateDoctor_Handler" Tag="{Binding doctorName}">Oceni lekara</Button>
+                                <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="30" FontSize="20" Margin="10,10,0,10" ToolTip="Oceni lekara koji je izvrsio ovu operaciju" Click="RateDoctor_Handler" Tag="{Binding doctorName}">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="6"/>
+                                        </Style>
+                                    </Button.Resources> Oceni lekara</Button>
                                 
                                 <Line Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
                                         X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
@@ -161,6 +176,11 @@
                 </ListView>
             </TabItem>
         </TabControl>
-        <Button Grid.Column="0" Grid.Row="2" Height="35" FontSize="20" Click="GoBack_Handler" ToolTip="Vrati se na prethodnu stranicu">Nazad</Button>
+        <Button Grid.Column="0" Grid.Row="2" Height="35" FontSize="20" Click="GoBack_Handler" ToolTip="Vrati se na prethodnu stranicu">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Nazad</Button>
     </Grid>
 </Page>

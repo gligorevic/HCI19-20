@@ -48,8 +48,18 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <Button FontSize="20" Width="120" Click="GoBack_Handler" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Height="45" Margin="50,0">Nazad</Button>
-            <Button FontSize="20" Width="120" Click="Continue_Handler" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Height="45" Margin="50,0">Nastavi</Button>
+            <Button FontSize="20" Width="120" Click="GoBack_Handler" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Height="45" Margin="50,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="6"/>
+                    </Style>
+                </Button.Resources> Nazad</Button>
+            <Button FontSize="20" Width="120" Click="Continue_Handler" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Height="45" Margin="50,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="6"/>
+                    </Style>
+                </Button.Resources> Nastavi</Button>
         </Grid>
     </Grid>
 </Page>

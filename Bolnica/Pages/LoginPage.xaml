@@ -51,21 +51,21 @@
                 <PasswordBox Grid.Column="1" Grid.Row="2" FontSize="22" Margin="10,0,0,0" VerticalAlignment="Center"></PasswordBox>
             </Grid>
             
-            <Button x:Name="ContinueButton" Grid.Row="1" Height="45" FontSize="20" Click="GoToNextStep_Handler" Cursor="Hand">
+            <Button x:Name="ContinueButton" Grid.Row="1" Height="45" FontSize="20" Click="GoToNextStep_Handler" >
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="6"/>
                     </Style>
                 </Button.Resources> Nastavi
             </Button>
-            <Button x:Name="BackButton" Grid.Row="2" Height="45" FontSize="20" Click="GoBack_Handler" Cursor="Hand" ToolTip="Vrati se nazad">
+            <Button x:Name="BackButton" Grid.Row="2" Height="45" FontSize="20" Click="GoBack_Handler"  ToolTip="Vrati se nazad">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="6"/>
                     </Style>
                 </Button.Resources> Nazad
             </Button>
-            <TextBlock x:Name="forgotenButton" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" TextDecorations="UnderLine" Cursor="Hand" PreviewMouseDown="Forgoten_Handler">
+            <TextBlock x:Name="forgotenButton" Cursor="Hand" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" TextDecorations="UnderLine"  PreviewMouseDown="Forgoten_Handler">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property= "Foreground" Value="#466DB2"/>

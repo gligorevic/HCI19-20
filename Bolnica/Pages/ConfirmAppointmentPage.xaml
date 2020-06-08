@@ -19,7 +19,7 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center">Potvrdi pregled</TextBlock>
-        <Border Padding="40" BorderBrush="Black" BorderThickness="1" CornerRadius="8" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="240, 0">
+        <Border Padding="40" BorderBrush="Black" BorderThickness="1" CornerRadius="8" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="240, 0" Background="White">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.6*" />
@@ -45,8 +45,18 @@
                     <RadioButton GroupName="priority" FontSize="18" Margin="40,0,0,0">Termin</RadioButton></WrapPanel>
             </Grid>
         </Border>
-       
-        <Button Height="45" Margin="50,0" Grid.Column="0" Grid.Row="2" FontSize="20" Width="120" Click="GoBack_Handler"  HorizontalAlignment="Left" ToolTip="Nazad na prethodnu stranicu">Nazad</Button>
-        <Button Height="45" Margin="50,0" Grid.Column="1" Grid.Row="2" FontSize="20" Width="120" Click="ScheduleAppointment_Handler"  HorizontalAlignment="Right" ToolTip="Klikni da bi zakazao pregled">Potvrdi</Button>
+
+        <Button Height="45" Margin="50,0" Grid.Column="0" Grid.Row="2" FontSize="20" Width="120" Click="GoBack_Handler"  HorizontalAlignment="Left" ToolTip="Nazad na prethodnu stranicu">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Nazad</Button>
+        <Button Height="45" Margin="50,0" Grid.Column="1" Grid.Row="2" FontSize="20" Width="120" Click="ScheduleAppointment_Handler"  HorizontalAlignment="Right" ToolTip="Klikni da bi zakazao pregled">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Potvrdi</Button>
     </Grid>
 </Page>
