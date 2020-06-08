@@ -31,7 +31,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">Prijavi se</TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="1" FontSize="22"  VerticalAlignment="Center">Email:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="1" FontSize="22" Margin="10,0,0,0"  VerticalAlignment="Center"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="1" FontSize="22" Margin="10,0,0,0"  VerticalAlignment="Center" Text="{Binding Path=Email,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </Grid>
             <Grid  Visibility="Hidden" Grid.Column="0" Grid.Row="0" x:Name="secondStep">
                 <Grid.ColumnDefinitions>
@@ -45,7 +45,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">Petar Petrovic</TextBlock>
                 <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="25" Width="320" CornerRadius="8">
-                    <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" >nenad.markic@gmail.com</TextBlock>
+                    <TextBlock x:Name="useremail" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding Path=FoundEmail, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                 </Border>
                 <TextBlock Grid.Column="0" Grid.Row="2" FontSize="22"  VerticalAlignment="Center">Lozinka:</TextBlock>
                 <PasswordBox Grid.Column="1" Grid.Row="2" FontSize="22" Margin="10,0,0,0" VerticalAlignment="Center"></PasswordBox>

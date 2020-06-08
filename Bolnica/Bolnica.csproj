@@ -289,6 +289,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\SIMS\Projekat\sims-2020-project\HospitalGeneratedCode\Class_Diagram___Hospital.csproj">
+      <Project>{6FFD98D7-B9B1-4BC4-AC77-17BACD1132B6}</Project>
+      <Name>Class_Diagram___Hospital</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -34,7 +34,7 @@ namespace Bolnica
         public static readonly RoutedUICommand Help = new RoutedUICommand("Help", "Help", typeof(MainWindow));
 
 
-        public MainWindow()
+       public MainWindow()
         {
             InitializeComponent();
             this.FontFamily = new FontFamily("Segoe UI");

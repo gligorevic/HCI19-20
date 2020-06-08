@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolnica", "Bolnica\Bolnica.csproj", "{B2FC15A9-619A-4725-B9BB-54C31C641470}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class_Diagram___Hospital", "..\..\..\SIMS\Projekat\sims-2020-project\HospitalGeneratedCode\Class_Diagram___Hospital.csproj", "{6FFD98D7-B9B1-4BC4-AC77-17BACD1132B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B2FC15A9-619A-4725-B9BB-54C31C641470}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2FC15A9-619A-4725-B9BB-54C31C641470}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2FC15A9-619A-4725-B9BB-54C31C641470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FFD98D7-B9B1-4BC4-AC77-17BACD1132B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FFD98D7-B9B1-4BC4-AC77-17BACD1132B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FFD98D7-B9B1-4BC4-AC77-17BACD1132B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FFD98D7-B9B1-4BC4-AC77-17BACD1132B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

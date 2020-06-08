@@ -86,3 +86,5 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Pages\ForgotenPasswordPage.ba
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\App.baml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\FeedbackModal.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\FeedbackModal.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\Class_Diagram___Hospital.dll
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\Class_Diagram___Hospital.pdb
