@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:val="clr-namespace:Bolnica.Validation"
       xmlns:local="clr-namespace:Bolnica.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="730" d:DesignWidth="950"
@@ -31,7 +32,32 @@
                 </Grid.RowDefinitions>
                 <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">Prijavi se</TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="1" FontSize="22"  VerticalAlignment="Center">Email:</TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="1" FontSize="22" Margin="10,0,0,0"  VerticalAlignment="Center" Text="{Binding Path=Email,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox  x:Name="email" Grid.Column="1" Grid.Row="1" FontSize="22" Margin="10,0,0,0"  VerticalAlignment="Center">
+                    <TextBox.Text>
+                        <Binding Path="Email" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <val:ProperEmailFormat ValidationStep="ConvertedProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    
+                                </Grid.ColumnDefinitions>
+
+                                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
             </Grid>
             <Grid  Visibility="Hidden" Grid.Column="0" Grid.Row="0" x:Name="secondStep">
                 <Grid.ColumnDefinitions>
@@ -56,7 +82,21 @@
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="6"/>
                     </Style>
-                </Button.Resources> Nastavi
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=email }" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                Nastavi
             </Button>
             <Button x:Name="BackButton" Grid.Row="2" Height="45" FontSize="20" Click="GoBack_Handler"  ToolTip="Vrati se nazad">
                 <Button.Resources>
