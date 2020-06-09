@@ -69,12 +69,12 @@
                     <RowDefinition Height="1.0*" />
                     <RowDefinition Height="2.0*" />
                 </Grid.RowDefinitions>
-                <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">Petar Petrovic</TextBlock>
+                <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Path=NameAndLastName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                 <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="25" Width="320" CornerRadius="8">
-                    <TextBlock x:Name="useremail" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding Path=FoundEmail, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=FoundEmail, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                 </Border>
                 <TextBlock Grid.Column="0" Grid.Row="2" FontSize="22"  VerticalAlignment="Center">Lozinka:</TextBlock>
-                <PasswordBox Grid.Column="1" Grid.Row="2" FontSize="22" Margin="10,0,0,0" VerticalAlignment="Center"></PasswordBox>
+                <PasswordBox Grid.Column="1" Grid.Row="2" FontSize="22" Margin="10,0,0,0" VerticalAlignment="Center" PasswordChanged="PasswordBox_PasswordChanged"></PasswordBox>
             </Grid>
             
             <Button x:Name="ContinueButton" Grid.Row="1" Height="45" FontSize="20" Click="GoToNextStep_Handler" >
@@ -89,7 +89,7 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=email }" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=email}" Value="False"/>
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="IsEnabled" Value="True"/>
                             </MultiDataTrigger>

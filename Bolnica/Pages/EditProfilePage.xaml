@@ -24,6 +24,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="1.5*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" FontSize="18"  VerticalAlignment="Center">Ime:</TextBlock>
@@ -35,15 +36,16 @@
         <TextBlock Grid.Column="0" Grid.Row="6" FontSize="18"  VerticalAlignment="Center">Grad:</TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="7" FontSize="18"  VerticalAlignment="Center">Adresa:</TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="8" FontSize="18"  VerticalAlignment="Center">Broj stana:</TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="9" FontSize="18"  VerticalAlignment="Center">Email:</TextBlock>
-        <Button Grid.Column="0" Grid.Row="10" Margin="0, 20, 85, 20" FontSize="20" Click="Go_Back_Handler" ToolTip="Vrati se na prethodnu stranicu">
+        <TextBlock Grid.Column="0" Grid.Row="9" FontSize="18"  VerticalAlignment="Center">Telefon:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="10" FontSize="18"  VerticalAlignment="Center">Email:</TextBlock>
+        <Button Grid.Column="0" Grid.Row="11" Margin="0, 20, 85, 20" FontSize="20" Click="Go_Back_Handler" ToolTip="Vrati se na prethodnu stranicu">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
             </Button.Resources> Nazad</Button>
-        <TextBox Grid.Row="0" Grid.Column="1" Height="25" Width="300"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <DatePicker Grid.Row="2" Grid.Column="1" Height="25" Width="300" Name="datePicker1"/>
         <WrapPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <WrapPanel.Resources>
@@ -56,14 +58,15 @@
             <RadioButton GroupName="sex" FontSize="18">Žensko</RadioButton>
             <RadioButton GroupName="sex" FontSize="18">Drugo</RadioButton>
         </WrapPanel>
-        <TextBox Grid.Row="4" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Jmbg, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
         <TextBox Grid.Row="5" Grid.Column="1" Height="25" Width="300"></TextBox>
         <TextBox Grid.Row="6" Grid.Column="1" Height="25" Width="300"></TextBox>
         <TextBox Grid.Row="7" Grid.Column="1" Height="25" Width="300"></TextBox>
         <TextBox Grid.Row="8" Grid.Column="1" Height="25" Width="300"></TextBox>
         <TextBox Grid.Row="9" Grid.Column="1" Height="25" Width="300"></TextBox>
-
-        <Button Grid.Column="1" Grid.Row="10" Margin="40, 20, 72, 20" FontSize="20" Click="SaveChanges_Handler" ToolTip="Sacuvaj podatke iz forme">
+        <TextBox Grid.Row="10" Grid.Column="1" Height="25" Width="300"></TextBox>
+        
+        <Button Grid.Column="1" Grid.Row="11" Margin="40, 20, 72, 20" FontSize="20" Click="SaveChanges_Handler" ToolTip="Sacuvaj podatke iz forme">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>

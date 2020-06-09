@@ -1,4 +1,6 @@
-﻿using Controller.UserControllers;
+﻿using Bolnica.Modals;
+using Bolnica.State;
+using Controller.UserControllers;
 using Dto.UserDTOs;
 using System;
 using System.Collections.Generic;
@@ -24,8 +26,28 @@ namespace Bolnica.Pages
     public partial class LoginPage : Page, INotifyPropertyChanged
     {
         private UnautheticatedUserController unautheticatedUserController = new UnautheticatedUserController();
+        private AppState state = AppState.GetInstance();
+
 
         #region NotifyProperties
+        private string _nameAndLastName;
+
+        public string NameAndLastName
+        {
+            get
+            {
+                return _nameAndLastName;
+            }
+            set
+            {
+                if (value != _nameAndLastName)
+                {
+                    _nameAndLastName = value;
+                    OnPropertyChanged("NameAndLastName");
+                }
+            }
+        }
+
         private string _foundEmail;
 
         public string FoundEmail
@@ -59,6 +81,24 @@ namespace Bolnica.Pages
                 {
                     _email = value;
                     OnPropertyChanged("Email");
+                }
+            }
+        }
+
+        private string _password;
+
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                if (value != _password)
+                {
+                    _password = value;
+                    OnPropertyChanged("Password");
                 }
             }
         }
@@ -103,8 +143,16 @@ namespace Bolnica.Pages
         {
             if(ActiveStep == 1)
             {
-                UserInfoDTO foundUser = unautheticatedUserController.GetUserInfoByEmail(_email);
-                useremail.Text = foundUser.getEmail();
+                UserInfoDTO foundUser = unautheticatedUserController.GetUserInfoByEmail(Email);
+                if(foundUser == null)
+                {
+                    FeedbackModal f = new FeedbackModal("Korisnik nije pronađen", "Greška, korisnik ne postoji", "Korisnik sa unetom email adresom ne postoji, pokusajte sa ponovnim unosom vodeci racuna o velikim i malim slovima.", false);
+                    f.ShowDialog();
+                    return;
+                } 
+
+                FoundEmail = foundUser.getEmail();
+                NameAndLastName = foundUser.getName() + " " + foundUser.getLastName();
 
                 ActiveStep = ActiveStep + 1;
                 this.ContinueButton.Content = "Uloguj se";
@@ -115,7 +163,17 @@ namespace Bolnica.Pages
             }
             else if (ActiveStep == 2)
             {
-                this.NavigationService.Navigate(new HomePage());
+                UserDTO user = unautheticatedUserController.Login(Email, Password);
+                if(user != null)
+                {
+                    state.CurrentUser = user;
+                    this.NavigationService.Navigate(new HomePage());
+                } else
+                {
+                    FeedbackModal f = new FeedbackModal("Pogrešna lozinka", "Greška, lozinka se ne poklapa", "Korisnik sa unetom email adresom ne koristi unetu lozinku, pokusajte sa ponovnim unosom vodeci racuna o velikim i malim slovima.", false);
+                    f.ShowDialog();
+                    return;
+                }  
             }
             
         }
@@ -132,6 +190,12 @@ namespace Bolnica.Pages
                     this.NavigationService.Navigate(new ForgotenPasswordPage());
                     break;
             }
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
         }
     }
 }
