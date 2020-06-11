@@ -83,6 +83,8 @@
     </ApplicationDefinition>
     <Compile Include="Converters\ComparisonConverter.cs" />
     <Compile Include="State\AppState.cs" />
+    <Compile Include="Validation\LettersOnly.cs" />
+    <Compile Include="Validation\NumbersOnly.cs" />
     <Compile Include="Validation\ProperEmailFormat.cs" />
     <Page Include="Modals\CancelAppointmentModal.xaml">
       <SubType>Designer</SubType>

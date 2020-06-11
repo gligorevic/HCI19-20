@@ -4,6 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Bolnica.Pages"
+      xmlns:val="clr-namespace:Bolnica.Validation"
+      xmlns:local1="clr-namespace:Bolnica.Converters"
+      xmlns:local2="clr-namespace:Model.User;assembly=Class_Diagram___Hospital"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="950"
       Title="EditProfilePage">
@@ -44,33 +47,87 @@
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
             </Button.Resources> Nazad</Button>
-        <TextBox Grid.Row="0" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Name, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <DatePicker Grid.Row="2" Grid.Column="1" Height="25" Width="300" Name="datePicker1"/>
-        <WrapPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <TextBox Grid.Row="0" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=NameU, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <DatePicker Grid.Row="2" Grid.Column="1" Height="25" Width="300" SelectedDate="{Binding Path=DateOfBirth, Mode=TwoWay}"/>
+        <WrapPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Width="300" VerticalAlignment="Center" >
             <WrapPanel.Resources>
-                <Style TargetType="{x:Type RadioButton}">
-                    <Setter Property="Margin" Value="20,0" />
-                    <Setter Property="Padding" Value="10,10" />
-                </Style>
+                <local1:ComparisonConverter x:Key="ComparisonConverter" />
             </WrapPanel.Resources>
-            <RadioButton GroupName="sex" FontSize="18">Muško</RadioButton>
-            <RadioButton GroupName="sex" FontSize="18">Žensko</RadioButton>
-            <RadioButton GroupName="sex" FontSize="18">Drugo</RadioButton>
+            <RadioButton GroupName="sex" FontSize="18" Padding="0,0,22,0" VerticalContentAlignment="Center" IsChecked="{Binding Path=Sex, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static local2:Sex.Male}}">Muško</RadioButton>
+            <RadioButton GroupName="sex" FontSize="18" Padding="0,0,22,0" VerticalContentAlignment="Center" IsChecked="{Binding Path=Sex, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static local2:Sex.Female}}">Žensko</RadioButton>
+            <RadioButton GroupName="sex" FontSize="18" VerticalContentAlignment="Center" IsChecked="{Binding Path=Sex, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static local2:Sex.Other}}">Drugo</RadioButton>
         </WrapPanel>
-        <TextBox Grid.Row="4" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Jmbg, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="1" Height="25" Width="300"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="1" Height="25" Width="300"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="1" Height="25" Width="300"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="1" Height="25" Width="300"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="1" Height="25" Width="300"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="1" Height="25" Width="300"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Jmbg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <ComboBox ItemsSource="{Binding Path=Countries, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"  SelectedValue="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="300" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" SelectionChanged="ComboBox_SelectionChanged">
+        </ComboBox>
+        <ComboBox ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"  SelectedValue="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="300" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        </ComboBox>
+        <TextBox Grid.Row="7" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=AddressNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Telephone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox x:Name="email" Grid.Row="10" Grid.Column="1" Height="25" Width="300">
+            <TextBox.Text>
+                <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:ProperEmailFormat ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         
         <Button Grid.Column="1" Grid.Row="11" Margin="40, 20, 72, 20" FontSize="20" Click="SaveChanges_Handler" ToolTip="Sacuvaj podatke iz forme">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
-            </Button.Resources> Sačuvaj izmene</Button>
+            </Button.Resources>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=NameU.Length, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=LastName.Length, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Jmbg.Length, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Address.Length, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Telephone.Length, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Text.Length, ElementName=email, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=email}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style> Sačuvaj izmene</Button>
     </Grid>
 </Page>

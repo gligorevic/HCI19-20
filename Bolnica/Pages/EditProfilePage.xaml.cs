@@ -1,4 +1,9 @@
-﻿using Model.User;
+﻿using Bolnica.State;
+using Class_Diagram___Hospital.Controller.LocationControllers;
+using Class_Diagram___Hospital.Dto.LocationDTOs;
+using Class_Diagram___Hospital.Dto.UserDTOs;
+using Controller.PatientControllers;
+using Model.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,11 +27,16 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class EditProfilePage : Page, INotifyPropertyChanged
     {
+        private CountryController countryController = new CountryController();
+        private CityController cityController = new CityController();
+        private AppState state = AppState.GetInstance();
+
+        private PatientController patientController = new PatientController();
 
         #region NotifyProperties
         private string _name;
 
-        public string Name
+        public string NameU
         {
             get
             {
@@ -37,7 +47,7 @@ namespace Bolnica.Pages
                 if (value != _name)
                 {
                     _name = value;
-                    OnPropertyChanged("Name");
+                    OnPropertyChanged("NameU");
                 }
             }
         }
@@ -97,9 +107,9 @@ namespace Bolnica.Pages
             }
         }
 
-        private string _dateOfBirth;
+        private DateTime _dateOfBirth;
 
-        public string DateOfBirth
+        public DateTime DateOfBirth
         {
             get
             {
@@ -151,9 +161,43 @@ namespace Bolnica.Pages
             }
         }
 
-        private string _country;
+        private CityDTO _city;
 
-        public string Country
+        public CityDTO City
+        {
+            get
+            {
+                return _city;
+            }
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        private List<CityDTO> _cities;
+
+        public List<CityDTO> Cities
+        {
+            get
+            {
+                return _cities;
+            }
+            set
+            {
+                _cities = value;
+                OnPropertyChanged("Cities");
+            }
+
+        }
+
+        private CountryDTO _country;
+
+        public CountryDTO Country
         {
             get
             {
@@ -169,23 +213,21 @@ namespace Bolnica.Pages
             }
         }
 
-        private string _city;
+        private List<CountryDTO> _countries;
 
-        public string City
+        public List<CountryDTO> Countries
         {
             get
             {
-                return _city;
+                return _countries;
             }
             set
             {
-                if (value != _city)
-                {
-                    _city = value;
-                    OnPropertyChanged("City");
-                }
+                _countries = value;
+                OnPropertyChanged("Countries");
             }
         }
+
         private string _address;
 
         public string Address
@@ -203,9 +245,10 @@ namespace Bolnica.Pages
                 }
             }
         }
-        private string _addressNumber;
 
-        public string AddressNumber
+        private int _addressNumber;
+
+        public int AddressNumber
         {
             get
             {
@@ -230,9 +273,30 @@ namespace Bolnica.Pages
             }
         }
         #endregion
+
         public EditProfilePage()
         {
             InitializeComponent();
+            this.DataContext = this;
+
+            PatientDTO patient = state.CurrentPatient;
+
+            Countries = countryController.getAllCountries();
+            Country = Countries.Find(c => c.Name.Equals(patient.getBirthPlace().CountryName));
+            
+
+            Cities = cityController.getCitiesByCountryName(patient.getBirthPlace().CountryName);
+            City = Cities.Find(c => c.Name.Equals(patient.getBirthPlace().Name));
+
+            NameU = patient.getName();
+            LastName = patient.getLastName();
+            DateOfBirth = patient.getBirthDate();
+            Sex = patient.getSex();
+            Address = patient.getAddress();
+            AddressNumber = patient.getAppartmentNumber();
+            Telephone = patient.getTelephone();
+            Email = patient.getEmail();
+            Jmbg = patient.getJmbg();
         }
 
         private void Go_Back_Handler(object sender, RoutedEventArgs e)
@@ -242,7 +306,18 @@ namespace Bolnica.Pages
 
         private void SaveChanges_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, null, Email, Telephone, Address, AddressNumber);
+            patientDTO.setId(AppState.GetInstance().CurrentPatient.getId());
+            PatientDTO returnedPatient = patientController.editPatient(patientDTO);
+
+            if(returnedPatient != null)
+                this.NavigationService.GoBack();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Cities = cityController.getCitiesByCountryName(Country.Name);
+            City = _cities[0];
         }
     }
 }

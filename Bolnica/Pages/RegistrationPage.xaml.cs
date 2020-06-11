@@ -254,9 +254,9 @@ namespace Bolnica.Pages
             }
         }
 
-        private int _addressNumber;
+        private string _addressNumber;
 
-        public int AddressNumber
+        public string AddressNumber
         {
             get
             {
@@ -318,13 +318,17 @@ namespace Bolnica.Pages
                     this.RegistrateButton.Visibility = Visibility.Visible;
                     break;
                 case 4:
-                    MessageBox.Show(NameU);
-                    PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, Password, Email, Telephone, Address, AddressNumber);
+                    PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, Password, Email, Telephone, Address, Int32.Parse(AddressNumber));
                     PatientDTO returnedPatient = unautheticatedUserController.Registration(patientDTO);
                     if (returnedPatient != null)
                     {
                         this.NavigationService.Navigate(new LoginPage());
                         FeedbackModal feedback = new FeedbackModal("Uspešno izvršena registracija", "Uspešna registracija", "Izvršili ste uspešnu registraciju, možete se ulogovati sa emailom " + patientDTO.getEmail() + " i unetom lozinkom i koristiti funkcionalnosti koje nudi aplikacija.", true);
+                        feedback.ShowDialog();
+                    } else
+                    {
+                        ActiveStep = 3;
+                        FeedbackModal feedback = new FeedbackModal("Neuspešna registracija", "Korisnik već postoji", "Korisnik sa unetim emailom ili jmbg-om već postoji u sistemu. Pokušajte sa unosom drugog emaila.", false);
                         feedback.ShowDialog();
                     }
                     break;
