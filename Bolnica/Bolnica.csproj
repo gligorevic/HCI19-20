@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ComparisonConverter.cs" />
     <Compile Include="State\AppState.cs" />
     <Compile Include="Validation\ProperEmailFormat.cs" />
     <Page Include="Modals\CancelAppointmentModal.xaml">

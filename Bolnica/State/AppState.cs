@@ -1,4 +1,5 @@
-﻿using Dto.UserDTOs;
+﻿using Class_Diagram___Hospital.Dto.UserDTOs;
+using Dto.UserDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace Bolnica.State
     {
         private UserDTO currentUser;
 
-        public UserDTO CurrentUser {
+        public UserDTO CurrentUser
+        {
             get
             {
                 return currentUser;
@@ -19,15 +21,24 @@ namespace Bolnica.State
             set { currentUser = value; }
         }
 
+        private PatientDTO currentPatient;
+
+        public PatientDTO CurrentPatient
+        {
+            get { return currentPatient; }
+            set { currentPatient = value; }
+        }
+
+
         private AppState() { }
-        
+
         private static AppState instance = new AppState();
-        
+
         public static AppState GetInstance()
         {
             return instance;
         }
 
-        
+
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Bolnica.Modals;
 using Bolnica.State;
+using Class_Diagram___Hospital.Dto.UserDTOs;
+using Controller.PatientControllers;
 using Controller.UserControllers;
 using Dto.UserDTOs;
 using System;
@@ -27,7 +29,7 @@ namespace Bolnica.Pages
     {
         private UnautheticatedUserController unautheticatedUserController = new UnautheticatedUserController();
         private AppState state = AppState.GetInstance();
-
+        private PatientController patientController = new PatientController();
 
         #region NotifyProperties
         private string _nameAndLastName;
@@ -164,9 +166,11 @@ namespace Bolnica.Pages
             else if (ActiveStep == 2)
             {
                 UserDTO user = unautheticatedUserController.Login(Email, Password);
+                PatientDTO patient = patientController.GetPatientByUserId(user.getId());
                 if(user != null)
                 {
                     state.CurrentUser = user;
+                    state.CurrentPatient = patient;
                     this.NavigationService.Navigate(new HomePage());
                 } else
                 {

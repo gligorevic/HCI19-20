@@ -1,6 +1,8 @@
 ﻿using Bolnica.Modals;
 using Bolnica.State;
+using Class_Diagram___Hospital.Dto.UserDTOs;
 using Dto.UserDTOs;
+using Model.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -97,6 +99,24 @@ namespace Bolnica.Pages
                 {
                     _dateOfBirth = value;
                     OnPropertyChanged("DateOfBirth");
+                }
+            }
+        }
+
+        private Sex _sex;
+
+        public Sex Sex
+        {
+            get
+            {
+                return _sex;
+            }
+            set
+            {
+                if (value != _sex)
+                {
+                    _sex = value;
+                    OnPropertyChanged("Sex");
                 }
             }
         }
@@ -204,13 +224,17 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
-            UserDTO currentUser = state.CurrentUser;
-            NameAndLastName = currentUser.getName() + " " + currentUser.getLastName();
-            Jmbg = currentUser.getJmbg();
-            Address = currentUser.getAddress();
-            AddressNumber = currentUser.getAppartmentNumber().ToString();
-            Email = currentUser.getEmail();
-            Telephone = currentUser.getTelephone();
+            PatientDTO currentPatient = state.CurrentPatient;
+            NameAndLastName = currentPatient.getName() + " " + currentPatient.getLastName();
+            Jmbg = currentPatient.getJmbg();
+            Address = currentPatient.getAddress();
+            AddressNumber = currentPatient.getAppartmentNumber().ToString();
+            Email = currentPatient.getEmail();
+            Telephone = currentPatient.getTelephone();
+            DateOfBirth = currentPatient.getBirthDate().ToString();
+            City = currentPatient.getBirthPlace().Name;
+            Country = currentPatient.getBirthPlace().CountryName;
+            Sex = currentPatient.getSex();
         }
 
 
