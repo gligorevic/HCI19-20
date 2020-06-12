@@ -241,7 +241,7 @@ namespace Bolnica.Pages
 
         private void Go_Back_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void Open_ChangePass_Modal(object sender, RoutedEventArgs e)

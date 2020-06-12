@@ -3,6 +3,7 @@ using Class_Diagram___Hospital.Controller.LocationControllers;
 using Class_Diagram___Hospital.Dto.LocationDTOs;
 using Class_Diagram___Hospital.Dto.UserDTOs;
 using Controller.PatientControllers;
+using Dto.UserDTOs;
 using Model.User;
 using System;
 using System.Collections.Generic;
@@ -246,9 +247,9 @@ namespace Bolnica.Pages
             }
         }
 
-        private int _addressNumber;
+        private string _addressNumber;
 
-        public int AddressNumber
+        public string AddressNumber
         {
             get
             {
@@ -293,7 +294,7 @@ namespace Bolnica.Pages
             DateOfBirth = patient.getBirthDate();
             Sex = patient.getSex();
             Address = patient.getAddress();
-            AddressNumber = patient.getAppartmentNumber();
+            AddressNumber = patient.getAppartmentNumber().ToString();
             Telephone = patient.getTelephone();
             Email = patient.getEmail();
             Jmbg = patient.getJmbg();
@@ -306,18 +307,22 @@ namespace Bolnica.Pages
 
         private void SaveChanges_Handler(object sender, RoutedEventArgs e)
         {
-            PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, null, Email, Telephone, Address, AddressNumber);
+            PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, null, Email, Telephone, Address, Int32.Parse(AddressNumber));
             patientDTO.setId(AppState.GetInstance().CurrentPatient.getId());
             PatientDTO returnedPatient = patientController.editPatient(patientDTO);
+            AppState.GetInstance().CurrentPatient = returnedPatient;
+            AppState.GetInstance().CurrentUser = returnedPatient;
 
-            if(returnedPatient != null)
-                this.NavigationService.GoBack();
+            if (returnedPatient != null)
+                this.NavigationService.Navigate(new ProfilePage());
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Cities = cityController.getCitiesByCountryName(Country.Name);
-            City = _cities[0];
+            CityDTO curCity = Cities.Find(c => c.Name.Equals(AppState.GetInstance().CurrentPatient.getBirthPlace().Name));
+            if (curCity == null) City = _cities[0];
+            else City = curCity;
         }
     }
 }

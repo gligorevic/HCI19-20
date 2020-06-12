@@ -166,9 +166,9 @@ namespace Bolnica.Pages
             else if (ActiveStep == 2)
             {
                 UserDTO user = unautheticatedUserController.Login(Email, Password);
-                PatientDTO patient = patientController.GetPatientByUserId(user.getId());
                 if(user != null)
                 {
+                    PatientDTO patient = patientController.GetPatientByUserId(user.getId());
                     state.CurrentUser = user;
                     state.CurrentPatient = patient;
                     this.NavigationService.Navigate(new HomePage());

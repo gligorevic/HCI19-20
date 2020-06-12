@@ -47,8 +47,58 @@
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
             </Button.Resources> Nazad</Button>
-        <TextBox Grid.Row="0" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=NameU, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Height="25" Width="300" Name="name">
+            <TextBox.Text>
+                <Binding Path="NameU" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:LettersOnly ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Height="25" Width="300" Name="lastname">
+            <TextBox.Text>
+                <Binding Path="LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:LettersOnly ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <DatePicker Grid.Row="2" Grid.Column="1" Height="25" Width="300" SelectedDate="{Binding Path=DateOfBirth, Mode=TwoWay}"/>
         <WrapPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" Width="300" VerticalAlignment="Center" >
             <WrapPanel.Resources>
@@ -58,14 +108,114 @@
             <RadioButton GroupName="sex" FontSize="18" Padding="0,0,22,0" VerticalContentAlignment="Center" IsChecked="{Binding Path=Sex, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static local2:Sex.Female}}">Žensko</RadioButton>
             <RadioButton GroupName="sex" FontSize="18" VerticalContentAlignment="Center" IsChecked="{Binding Path=Sex, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static local2:Sex.Other}}">Drugo</RadioButton>
         </WrapPanel>
-        <TextBox Grid.Row="4" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Jmbg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Height="25" Width="300" Name="jmbg">
+            <TextBox.Text>
+                <Binding Path="Jmbg" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:NumbersOnly ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <ComboBox ItemsSource="{Binding Path=Countries, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"  SelectedValue="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="300" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" SelectionChanged="ComboBox_SelectionChanged">
         </ComboBox>
         <ComboBox ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"  SelectedValue="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="300" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
         </ComboBox>
-        <TextBox Grid.Row="7" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=AddressNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="1" Height="25" Width="300" Text="{Binding Path=Telephone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="1" Height="25" Width="300" Name="address">
+            <TextBox.Text>
+                    <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:LettersOnly ValidationStep="ConvertedProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
+        <TextBox Grid.Row="8" Grid.Column="1" Height="25" Width="300" Name="addressnumber">
+            <TextBox.Text>
+                <Binding Path="AddressNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:NumbersOnly ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox Grid.Row="9" Grid.Column="1" Height="25" Width="300" Name="telephone">
+            <TextBox.Text>
+                <Binding Path="Telephone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:NumbersOnly ValidationStep="ConvertedProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
         <TextBox x:Name="email" Grid.Row="10" Grid.Column="1" Height="25" Width="300">
             <TextBox.Text>
                 <Binding Path="Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -123,6 +273,42 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=email}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=name}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=lastname}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=jmbg}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=address}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=addressnumber}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=telephone}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="False"/>
                         </MultiDataTrigger>
