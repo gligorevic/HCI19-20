@@ -1,7 +1,9 @@
 ﻿using Bolnica.Modals;
 using Bolnica.Pages;
+using Bolnica.State;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace Bolnica
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow :Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public static readonly RoutedUICommand ChangePassword = new RoutedUICommand("ChangePassword", "ChangePassword", typeof(MainWindow));
         public static readonly RoutedUICommand ViewProfile = new RoutedUICommand("ViewProfile", "ViewProfile", typeof(MainWindow));
@@ -32,11 +34,47 @@ namespace Bolnica
         public static readonly RoutedUICommand ScheduleAppointment = new RoutedUICommand("ScheduleAppointment", "ScheduleAppointment", typeof(MainWindow));
         public static readonly RoutedUICommand Blog = new RoutedUICommand("Blog", "Blog", typeof(MainWindow));
         public static readonly RoutedUICommand Help = new RoutedUICommand("Help", "Help", typeof(MainWindow));
+        public static readonly RoutedUICommand Logout = new RoutedUICommand("Logout", "Logout", typeof(MainWindow));
 
 
-       public MainWindow()
+        #region NotifyProperties
+        private Visibility _logout = Visibility.Hidden;
+
+        public Visibility LogoutVisibility
+        {
+            get
+            {
+                return _logout;
+            }
+            set
+            {
+                if (value != _logout)
+                {
+                    _logout = value;
+                    OnPropertyChanged("LogoutVisibility");
+                }
+            }
+        }
+ 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+        #endregion
+
+        public void setLogoutVisible()
+        {
+            LogoutVisibility = Visibility.Visible;
+        }
+
+        public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
             this.FontFamily = new FontFamily("Segoe UI");
         }
 
@@ -114,6 +152,13 @@ namespace Bolnica
         {
             HelpModal modalWindow = new HelpModal();
             modalWindow.ShowDialog();
+        }
+
+        private void Logout_Handler(object sender, ExecutedRoutedEventArgs e)
+        {
+            LogoutVisibility = Visibility.Hidden;
+            AppState.GetInstance().restart();
+            this.Frame.Navigate(new LoginPage());
         }
     }
 }

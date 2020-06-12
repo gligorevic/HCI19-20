@@ -131,7 +131,7 @@ namespace Bolnica.Pages
             switch (ActiveStep)
             {
                 case 0:
-                    this.NavigationService.GoBack();
+                    this.NavigationService.Navigate(new RegistrateOrLoginPage());
                     break;
                 case 1:
                     this.forgotenButton.Text = "Zaboravljen mail?";
@@ -171,6 +171,7 @@ namespace Bolnica.Pages
                     PatientDTO patient = patientController.GetPatientByUserId(user.getId());
                     state.CurrentUser = user;
                     state.CurrentPatient = patient;
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).setLogoutVisible();
                     this.NavigationService.Navigate(new HomePage());
                 } else
                 {
@@ -201,5 +202,6 @@ namespace Bolnica.Pages
             if (this.DataContext != null)
             { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).Password; }
         }
+
     }
 }

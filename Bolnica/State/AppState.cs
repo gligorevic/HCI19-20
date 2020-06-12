@@ -39,6 +39,9 @@ namespace Bolnica.State
             return instance;
         }
 
-
+        public void restart() {
+            CurrentPatient = null;
+            CurrentUser = null;
+        }
     }
 }
