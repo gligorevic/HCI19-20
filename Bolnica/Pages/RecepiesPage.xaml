@@ -11,8 +11,8 @@
 
     <StackPanel>
         <TextBlock TextAlignment="Center" FontSize="25" Margin="100">Medicinski recepti</TextBlock>
-
-        <Border BorderThickness="1" BorderBrush="Black" Margin="50,0">
+        
+        <Border BorderThickness="1" BorderBrush="Black" Margin="50,0" Background="White">
             <WrapPanel >
                 <fa:ImageAwesome Icon="Search" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
                 <TextBox Width="800" BorderThickness="0" VerticalAlignment="Center" Height="30" FontSize="20"/>
@@ -34,7 +34,7 @@
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
-            </Button.Resources> Nazad</Button>
-       
+            </Button.Resources> Nazad
+        </Button>
     </StackPanel>
 </Page>

@@ -18,24 +18,25 @@
             <RowDefinition Height="4*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <xctk:DateTimePicker Grid.Column="0" Grid.Row="0" x:Name="fromDTP"
-                Value="{Binding Path=CleanLogsDeletionDate, Mode=TwoWay}" Height="30" Width="172" />
-        <!-- AutoCloseCalendar="False"
-                IsOpen="True" -->
+        <Viewbox Stretch="UniformToFill">
+            <Calendar
+            SelectedDatesChanged="Calendar_OnSelectedDatesChanged"
+            Grid.Column="0"
+            Grid.Row="0"
+            Name="MonthlyCalendar" 
+            SelectionMode="MultipleRange"  
+            DisplayDate="6/6/2020"
+            DisplayDateStart="{x:Static sys:DateTime.Today}"
+            FirstDayOfWeek="Monday"
+            IsTodayHighlighted="True" 
+            xmlns:sys="clr-namespace:System;assembly=mscorlib" Margin="15,39,88,19" Width="229">
+            </Calendar>
+        </Viewbox>
         <DockPanel Grid.Column="1" Grid.Row="0">
             <TextBlock DockPanel.Dock="Top" FontSize="22" TextAlignment="Center">Odaberi vreme</TextBlock>
             <Border VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Black">
                 <ScrollViewer VerticalAlignment="Stretch">
-                    <ListBox FontSize="18">
-                        <ListBoxItem>12:20</ListBoxItem>
-                        <ListBoxItem>13:20</ListBoxItem>
-                        <ListBoxItem>14:50</ListBoxItem>
-                        <ListBoxItem>15:10</ListBoxItem>
-                        <ListBoxItem>16:40</ListBoxItem>
-                        <ListBoxItem>17:20</ListBoxItem>
-                        <ListBoxItem>17:50</ListBoxItem>
-                        <ListBoxItem>18:20</ListBoxItem>
-                        <ListBoxItem>19:20</ListBoxItem>
+                    <ListBox FontSize="18" ItemsSource="{Binding Path=TimesList, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Path=PickedTime, UpdateSourceTrigger=PropertyChanged}">
                     </ListBox>
                 </ScrollViewer>
             </Border>

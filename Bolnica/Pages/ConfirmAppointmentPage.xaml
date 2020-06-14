@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Bolnica.Pages"
+      xmlns:local1="clr-namespace:Bolnica.Converters"
+      xmlns:local2="clr-namespace:Model.MedicalService;assembly=Class_Diagram___Hospital"
       mc:Ignorable="d" 
       d:DesignHeight="730" d:DesignWidth="950"
       Title="ConfirmAppointmentPage">
@@ -37,12 +39,15 @@
                 <Label Grid.Column="0" Grid.Row="2" FontSize="18" VerticalAlignment="Center">Lekar:</Label>
                 <Label Grid.Column="0" Grid.Row="4" FontSize="18" VerticalAlignment="Center">Sala:</Label>
                 <Label Grid.Column="0" Grid.Row="5" FontSize="18" VerticalAlignment="Center">Prioritet:</Label>
-                <TextBlock Grid.Column="1" Grid.Row="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">19.04.2020.</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="2" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">dr Masa Masic</TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="4" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right">Sala 1</TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=PickedDateTime, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="2" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=DoctorName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="4" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=AvailableServiceRoom, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="U medjuvremenu moze doci do promene sale"></TextBlock>
                 <WrapPanel Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <RadioButton GroupName="priority" FontSize="18">Lekar</RadioButton>
-                    <RadioButton GroupName="priority" FontSize="18" Margin="40,0,0,0">Termin</RadioButton></WrapPanel>
+                    <WrapPanel.Resources>
+                        <local1:ComparisonConverter x:Key="ComparisonConverter" />
+                    </WrapPanel.Resources>
+                    <RadioButton GroupName="priority" FontSize="18" IsChecked="{Binding Path=Priority, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static local2:Priority.Doctor}}">Lekar</RadioButton>
+                    <RadioButton GroupName="priority" FontSize="18" Margin="40,0,0,0" IsChecked="{Binding Path=Priority, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static local2:Priority.Date}}">Termin</RadioButton></WrapPanel>
             </Grid>
         </Border>
 

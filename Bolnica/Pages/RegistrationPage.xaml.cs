@@ -372,6 +372,9 @@ namespace Bolnica.Pages
             this.secondStepForm.Visibility = Visibility.Hidden;
             this.thirdStepForm.Visibility = Visibility.Hidden;
             this.firstStepForm.Visibility = Visibility.Visible;
+
+            this.ContinueButton.Visibility = Visibility.Visible;
+            this.RegistrateButton.Visibility = Visibility.Hidden;
         }
 
         private void GoOn_Step2_Handler(object sender, RoutedEventArgs e)
@@ -383,7 +386,10 @@ namespace Bolnica.Pages
 
             this.thirdStepForm.Visibility = Visibility.Hidden;
             this.firstStepForm.Visibility = Visibility.Hidden;
-            this.secondStepForm.Visibility = Visibility.Visible;  
+            this.secondStepForm.Visibility = Visibility.Visible;
+
+            this.ContinueButton.Visibility = Visibility.Visible;
+            this.RegistrateButton.Visibility = Visibility.Hidden;
         }
 
         private void GoOn_Step3_Handler(object sender, RoutedEventArgs e)
@@ -396,6 +402,9 @@ namespace Bolnica.Pages
             this.firstStepForm.Visibility = Visibility.Hidden;
             this.secondStepForm.Visibility = Visibility.Hidden;
             this.thirdStepForm.Visibility = Visibility.Visible;
+
+            this.ContinueButton.Visibility = Visibility.Hidden;
+            this.RegistrateButton.Visibility = Visibility.Visible;
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

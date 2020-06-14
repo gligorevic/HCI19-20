@@ -10,22 +10,38 @@
       Title="ChoseDoctorPage">
 
     <StackPanel>
-        <TextBlock TextAlignment="Center" FontSize="25" Margin="100" ToolTip="Klikni na jednog od lekara i pritisni nastavi">Odaberi lekara</TextBlock>
+        <TextBlock TextAlignment="Center" FontSize="25" Margin="0,100,0,50" ToolTip="Klikni na jednog od lekara i pritisni nastavi">Odaberi lekara</TextBlock>
 
-        <Border BorderThickness="1" BorderBrush="Black" Margin="50,0">
+        <WrapPanel Margin="50">
+            <TextBlock FontSize="18" Margin="0,0,15,0">Prosečna ocena:</TextBlock>
+            <ComboBox Name="cmbSelect" SelectionChanged="Number_SelectionChanged">
+                <ComboBoxItem IsSelected="True">1+</ComboBoxItem>
+                <ComboBoxItem>2+</ComboBoxItem>
+                <ComboBoxItem>3+</ComboBoxItem>
+                <ComboBoxItem>4+</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+            </ComboBox>
+        </WrapPanel>
+        
+        <Border BorderThickness="1" BorderBrush="Black" Margin="50,0" Background="White">
             <WrapPanel >
                 <fa:ImageAwesome Icon="Search" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                <TextBox Width="800" BorderThickness="0" VerticalAlignment="Center" Height="30" FontSize="20"/>
+                <TextBox Text="{Binding DoctorFilter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Width="800" BorderThickness="0" VerticalAlignment="Center" Height="30" FontSize="20" TextChanged="filter_TextChanged"/>
             </WrapPanel>
         </Border>
 
         <Border BorderThickness="1" BorderBrush="Black" Margin="50, 0">
             <ScrollViewer Height="150" >
-                <ListBox FontSize="18">
-                    <ListBoxItem>Lekar #1</ListBoxItem>
-                    <ListBoxItem>Lekar #2</ListBoxItem>
-                    <ListBoxItem>Lekar #3</ListBoxItem>
-                    <ListBoxItem>Lekar #4</ListBoxItem>
+                <ListBox FontSize="18"  ItemsSource="{Binding Path=Doctors, UpdateSourceTrigger=PropertyChanged}"  SelectedValue="{Binding Path=Doctor, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text=" "></TextBlock>
+                                <TextBlock Text="{Binding LastName}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </ScrollViewer>
         </Border>
