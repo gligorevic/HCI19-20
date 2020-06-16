@@ -176,7 +176,7 @@
                     <TextBox.Text>
                         <Binding Path="Address" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <val:LettersOnly ValidationStep="ConvertedProposedValue"/>
+                                <val:LettersNumbersAndSpaces ValidationStep="ConvertedProposedValue"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

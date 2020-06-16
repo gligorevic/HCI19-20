@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Controller.MedicalInfoControllers;
+using Controller.MedicalServiceControllers;
+using Dto.MedicalInfoDTOs;
+using Dto.MedicalServiceDTOs;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,21 +23,66 @@ namespace Bolnica.Pages
     /// <summary>
     /// Interaction logic for ReportPage.xaml
     /// </summary>
-    public partial class ReportPage : Page
+    public partial class ReportPage : Page, INotifyPropertyChanged
     {
-        public ReportPage()
+        private ReportController reportController= new ReportController();
+
+        #region NotifyProperties
+        private AppointmentOperationDTO _appointment;
+
+        public AppointmentOperationDTO Appointment
         {
-            InitializeComponent();
-            this.DataContext = new Appointment() { doctorName = "Doca Docic", date = "18:20 18.02.2020.", type="Opsti pregled"};
+            get
+            {
+                return _appointment;
+            }
+            set
+            {
+                if (value != _appointment)
+                {
+                    _appointment = value;
+                    OnPropertyChanged("Appointment");
+                }
+            }
         }
 
-        public class Appointment
+        private ReportDTO _report;
+
+        public ReportDTO Report
         {
-            public string doctorName { get; set; }
+            get
+            {
+                return _report;
+            }
+            set
+            {
+                if (value != _report)
+                {
+                    _report = value;
+                    OnPropertyChanged("Report");
+                }
+            }
+        }
 
-            public string date { get; set; }
 
-            public string type { get; set; }
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        public ReportPage(AppointmentOperationDTO appointment)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            Report = reportController.GetReportByAppointmentId(appointment.Id);
+            Appointment = appointment;
+
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)

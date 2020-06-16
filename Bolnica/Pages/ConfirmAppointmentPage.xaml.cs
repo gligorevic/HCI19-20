@@ -163,6 +163,18 @@ namespace Bolnica.Pages
                 this.NavigationService.Navigate(new HomePage());
                 FeedbackModal feedback = new FeedbackModal("Usepešno zakazan pregled", "Uspešno zakazan pregled", "Izvšili ste uspešno zakazivanje pregleda za " + appointment.getStartDate() + " kod doktora " + PickedDoctor.Name + " " + PickedDoctor.LastName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
                 feedback.ShowDialog();
+            } else
+            {
+                PickNewDateOrGetRecomended pickNewDateOrGetRecomended = new PickNewDateOrGetRecomended(appointmentOperationDTO, PickedDoctor);
+                pickNewDateOrGetRecomended.ShowDialog();
+
+                AppointmentOperationDTO appointmentWithNewDate = pickNewDateOrGetRecomended.getAppointmentInfo();
+                if(appointmentWithNewDate == null)
+                {
+                    this.NavigationService.Navigate(new ChoseTerminPage(PickedDoctor));
+                } else {
+                    PickedDateTime = appointmentWithNewDate.getStartDate();
+                }
             }
 
             

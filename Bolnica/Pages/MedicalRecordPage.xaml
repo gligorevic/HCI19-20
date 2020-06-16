@@ -27,21 +27,21 @@
 
         <WrapPanel  Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
             <Label FontSize="20" Width="145">Ime i prezime:</Label>
-            <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">Marko Markic</TextBlock>
+            <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Text="{Binding Path=NameU, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </WrapPanel>
         <WrapPanel  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
             <Label FontSize="20" Width="145">Datum rođenja:</Label>
-            <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">21.08.1997.</TextBlock>
+            <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Text="{Binding Path=DateOfBirth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </WrapPanel>
         <WrapPanel  Grid.Column="1" Grid.Row="2" VerticalAlignment="Center">
             <Label FontSize="20" Width="145">Pol:</Label>
-            <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">Muški</TextBlock>
+            <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Text="{Binding Path=Sex, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </WrapPanel>
         <TabControl Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="15">
             <TabItem Header="Zdravstveni karton">
                 <Grid Margin="65, 12">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.32*" />
+                        <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
 
                     </Grid.ColumnDefinitions>
@@ -56,20 +56,20 @@
                     </Grid.RowDefinitions>
                     <WrapPanel  Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
                         <Label FontSize="20" Width="80">Težina:</Label>
-                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">80kg</TextBlock>
+                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Text="{Binding Path=Weight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </WrapPanel>
                     <WrapPanel  Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
                         <Label FontSize="20" Width="80">Visina:</Label>
-                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">189cm</TextBlock>
+                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Text="{Binding Path=HeightP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </WrapPanel>
                     
                     <WrapPanel  Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
                         <Label FontSize="20" Width="120">Dioptrija:</Label>
-                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">-1</TextBlock>
+                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Text="{Binding Path=Dioptre, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </WrapPanel>
                     <WrapPanel  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
                         <Label FontSize="20" Width="120">Krvna grupa:</Label>
-                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center">AB+</TextBlock>
+                        <TextBlock Margin="10,0,0,0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Text="{Binding Path=BloodType, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </WrapPanel>
 
                     <Line Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
@@ -78,11 +78,7 @@
                     <TextBlock Grid.Column="0" Grid.Row="3" FontSize="20" FontWeight="Bold" VerticalAlignment="Center">Alergije</TextBlock>
                     <Border Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black">
                         <ScrollViewer Height="120" >
-                            <ListBox FontSize="18">
-                                <ListBoxItem>Alergija #1</ListBoxItem>
-                                <ListBoxItem>Alergija #2</ListBoxItem>
-                                <ListBoxItem>Alergija #3</ListBoxItem>
-                                <ListBoxItem>Alergija #4</ListBoxItem>
+                            <ListBox FontSize="18" ItemsSource="{Binding Path=Allergies, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="AllergyName">
                             </ListBox>
                         </ScrollViewer>
                     </Border>

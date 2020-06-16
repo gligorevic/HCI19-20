@@ -82,7 +82,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ComparisonConverter.cs" />
+    <Compile Include="Modals\PickNewDateOrGetRecomended.xaml.cs">
+      <DependentUpon>PickNewDateOrGetRecomended.xaml</DependentUpon>
+    </Compile>
     <Compile Include="State\AppState.cs" />
+    <Compile Include="Validation\LettersNumbersAndSpaces.cs" />
     <Compile Include="Validation\LettersOnly.cs" />
     <Compile Include="Validation\NumbersOnly.cs" />
     <Compile Include="Validation\ProperEmailFormat.cs" />
@@ -99,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modals\HelpModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\PickNewDateOrGetRecomended.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

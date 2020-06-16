@@ -38,7 +38,7 @@ namespace Bolnica
 
 
         #region NotifyProperties
-        private Visibility _logout = Visibility.Hidden;
+        private Visibility _logout = Visibility.Collapsed;
 
         public Visibility LogoutVisibility
         {
@@ -156,7 +156,7 @@ namespace Bolnica
 
         private void Logout_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            LogoutVisibility = Visibility.Hidden;
+            LogoutVisibility = Visibility.Collapsed;
             AppState.GetInstance().restart();
             this.Frame.Navigate(new LoginPage());
         }

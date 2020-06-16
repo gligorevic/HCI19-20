@@ -12,11 +12,11 @@
     <StackPanel Margin="40,15">
         <WrapPanel Margin="0,15" >
             <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-            <TextBlock Text="{Binding Path=doctorName, Mode=OneWay}" Width="260" VerticalAlignment="Center" FontSize="18" Margin="15,0,0,0"/>
+            <TextBlock Text="{Binding Path=Appointment.DoctorName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalAlignment="Center" FontSize="18" Margin="15,0,0,0"/>
             <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-            <TextBlock Text="{Binding Path=date, Mode=OneWay}" Width="260" VerticalAlignment="Center" FontSize="18" Margin="15,0,0,0"/>
+            <TextBlock Text="{Binding Path=Appointment.StartDate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalAlignment="Center" FontSize="18" Margin="15,0,0,0"/>
             <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-            <TextBlock Text="{Binding Path=type, Mode=OneWay}" VerticalAlignment="Center" FontSize="18" Margin="15,0,0,0"/>
+            <TextBlock Text="{Binding Path=Appointment.Type, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalAlignment="Center" Height="30" FontSize="18" Margin="15,0,0,0"/>
         </WrapPanel>
         <Line HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
                                         X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
@@ -24,24 +24,25 @@
         <TextBlock FontSize="22" Margin="0,20,0,0"  FontWeight="Bold">Opis problema</TextBlock>
         <Border BorderThickness="1" BorderBrush="Black" Margin="0, 10, 0, 0" Background="White">
             <ScrollViewer Height="100">
-                <TextBlock Padding="7" FontSize="18" TextWrapping="Wrap">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsu</TextBlock>
+                <TextBlock Padding="7" FontSize="18" TextWrapping="Wrap" Text="{Binding Path=Report.ProblemDescription, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </ScrollViewer>
         </Border>
         <TextBlock FontSize="22" Margin="0,20,0,0"  FontWeight="Bold">Opis pregleda</TextBlock>
         <Border BorderThickness="1" BorderBrush="Black" Margin="0, 10, 0, 0" Background="White">
             <ScrollViewer Height="100">
-                <TextBlock Padding="7" FontSize="18" TextWrapping="Wrap">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsu</TextBlock>
+                <TextBlock Padding="7" FontSize="18" TextWrapping="Wrap" Text="{Binding Path=Report.AppointmentDescription, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </ScrollViewer>
         </Border>
         <TextBlock FontSize="22" Margin="0,20,0,0"  FontWeight="Bold">Dijagnoze</TextBlock>
-        <Border BorderThickness="1" BorderBrush="Black" Margin="0, 10, 0, 0">
-            <ScrollViewer Height="100" >
-                <ListBox FontSize="18">
-                    <ListBoxItem>Dijagnoza #1</ListBoxItem>
-                    <ListBoxItem>Dijagnoza #2</ListBoxItem>
-                    <ListBoxItem>Dijagnoza #3</ListBoxItem>
-                    <ListBoxItem>Dijagnoza #4</ListBoxItem>
-                </ListBox>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="0, 10, 0, 0" Background="White">
+            <ScrollViewer Height="100">
+                <ItemsControl FontSize="18" ItemsSource="{Binding Report.Diagnosis}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Border>
         <Button Width="120" Height="45" FontSize="20" HorizontalAlignment="Left" Margin="0, 30, 0, 0" Click="GoBack_Handler">

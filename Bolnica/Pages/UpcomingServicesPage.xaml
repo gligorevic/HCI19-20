@@ -22,7 +22,7 @@
         <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center">Naredne medicinske usluge</TextBlock>
         <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
             <TabItem Header="Pregledi">
-                <ListView Margin="10" Name="AppointmentDataBinding">
+                <ListView Margin="10" ItemsSource="{Binding Appointments}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Focusable" Value="false"/>
@@ -44,15 +44,15 @@
                                 </Grid.RowDefinitions>
                                 <WrapPanel Grid.Column="0" Grid.Row="0">
                                     <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding doctorName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding DoctorName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="1" Grid.Row="0">
                                     <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding Room}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding RoomName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="0" Grid.Row="1">
                                     <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding Date}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding StartDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="0" Grid.Row="2">
                                     <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
@@ -72,7 +72,7 @@
                 
             </TabItem>
             <TabItem Header="Operacije">
-                <ListView Margin="10" Name="OperationDataBinding">
+                <ListView Margin="10" ItemsSource="{Binding Operations}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Focusable" Value="false"/>
@@ -94,15 +94,15 @@
                                 </Grid.RowDefinitions>
                                 <WrapPanel Grid.Column="0" Grid.Row="0">
                                     <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding doctorName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding DoctorName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="1" Grid.Row="0">
                                     <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding Room}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding RoomName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="0" Grid.Row="1">
                                     <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding Date}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding StartDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="0" Grid.Row="2">
                                     <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
@@ -118,7 +118,7 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Hospitalizacije">
-                <ListView Margin="10" Name="HospitalizationDataBinding">
+                <ListView Margin="10" ItemsSource="{Binding Hospitalizations}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Focusable" Value="false"/>
@@ -139,15 +139,15 @@
                                 </Grid.RowDefinitions>
                                 <WrapPanel Grid.Column="0" Grid.Row="0">
                                     <fa:ImageAwesome Icon="CalendarPlusOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding startDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding StartDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="0" Grid.Row="1">
                                     <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding endDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding EndDate}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 <WrapPanel Grid.Column="0" Grid.Row="2">
                                     <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                                    <TextBlock Margin="7" Text="{Binding Room}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Margin="7" Text="{Binding RoomName}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </WrapPanel>
                                 
 

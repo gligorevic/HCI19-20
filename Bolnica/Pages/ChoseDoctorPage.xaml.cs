@@ -128,7 +128,10 @@ namespace Bolnica.Pages
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            if (Priority.Equals("Doctor"))
+                this.NavigationService.Navigate(new ScheduleAppointmentPage());
+            else
+                this.NavigationService.Navigate(new ChoseTerminPage());
         }
 
         private void Continue_Handler(object sender, RoutedEventArgs e)

@@ -29,6 +29,7 @@ namespace Bolnica.State
             set { currentPatient = value; }
         }
 
+        public static PatientDTO Get { get; internal set; }
 
         private AppState() { }
 

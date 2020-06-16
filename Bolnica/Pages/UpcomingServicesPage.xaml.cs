@@ -1,6 +1,11 @@
 ﻿using Bolnica.Modals;
+using Bolnica.State;
+using Class_Diagram___Hospital.Dto.UserDTOs;
+using Controller.MedicalServiceControllers;
+using Dto.MedicalServiceDTOs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,62 +24,88 @@ namespace Bolnica.Pages
     /// <summary>
     /// Interaction logic for FinishedServicesPage.xaml
     /// </summary>
-    public partial class UpcomingServicesPage : Page
+    public partial class UpcomingServicesPage : Page, INotifyPropertyChanged
     {
+        private AppointmentController appointmentController = new AppointmentController();
+        private OperationController operationController = new OperationController();
+        private HospitalizationController hospitalizationController = new HospitalizationController();
+
+        #region NotifyProperties
+
+        private List<AppointmentOperationDTO> _appointments;
+
+        public List<AppointmentOperationDTO> Appointments
+        {
+            get
+            {
+                return _appointments;
+            }
+            set
+            {
+                if (value != _appointments)
+                {
+                    _appointments = value;
+                    OnPropertyChanged("Appointments");
+                }
+            }
+        }
+
+        private List<AppointmentOperationDTO> _operations;
+
+        public List<AppointmentOperationDTO> Operations
+        {
+            get
+            {
+                return _operations;
+            }
+            set
+            {
+                if (value != _operations)
+                {
+                    _operations = value;
+                    OnPropertyChanged("Appointments");
+                }
+            }
+        }
+
+        private List<HospitalizationDTO> _hospitalizations;
+
+        public List<HospitalizationDTO> Hospitalizations
+        {
+            get
+            {
+                return _hospitalizations;
+            }
+            set
+            {
+                if (value != _hospitalizations)
+                {
+                    _hospitalizations = value;
+                    OnPropertyChanged("Hospitalizations");
+                }
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
         public UpcomingServicesPage()
         {
             InitializeComponent();
+            this.DataContext = this;
+            PatientDTO curPatient = AppState.GetInstance().CurrentPatient;
 
-            List<Appointment> items = new List<Appointment>();
-            items.Add(new Appointment() { doctorName = "John Doe", Date = "12.12.2020", Room = "Soba 23", Type="Opsti Pregled"});
-            items.Add(new Appointment() { doctorName = "Jane Doe", Date = "11.12.2021", Room = "Soba 21", Type = "Specijalisticki" });
-            items.Add(new Appointment() { doctorName = "Sammy Doe", Date = "10.09.2020", Room = "Soba 13", Type = "Specijalisticki" });
-            AppointmentDataBinding.ItemsSource = items;
-
-
-            List<Operation> operations = new List<Operation>();
-            operations.Add(new Operation() { doctorName = "Lekar Lekaric", Date = "06.06.2020", Room = "Soba 13", Type = "Tip operacije 1" });
-            operations.Add(new Operation() { doctorName = "Milenko Lekaric", Date = "3.12.2021", Room = "Soba 11", Type = "Tip operacije 3" });
-            operations.Add(new Operation() { doctorName = "Lekar Milenkic", Date = "05.08.2020", Room = "Soba 3", Type = "Tip operacije 2" });
-            OperationDataBinding.ItemsSource = operations;
-
-            List<Hospitalization> hospitalizations = new List<Hospitalization>();
-            hospitalizations.Add(new Hospitalization() { startDate = "06.06.2020", endDate="26.06.2020", Room = "Soba 13"});
-            hospitalizations.Add(new Hospitalization() { startDate = "06.08.2020", endDate = "26.08.2020", Room = "Soba 11" });
-            hospitalizations.Add(new Hospitalization() { startDate = "26.06.2020", endDate = "16.07.2020", Room = "Soba 3" });
-            HospitalizationDataBinding.ItemsSource = hospitalizations;
-        }
-
-        public class Appointment
-        {
-            public string doctorName { get; set; }
-
-            public string Date { get; set; }
-
-            public string Room { get; set; }
-
-            public string Type { get; set; }
-        }
-
-
-        public class Operation
-        {
-            public string doctorName { get; set; }
-
-            public string Date { get; set; }
-
-            public string Room { get; set; }
-
-            public string Type { get; set; }
-        }
-
-        public class Hospitalization
-        {
-            public string startDate { get; set; }
-
-            public string endDate { get; set; }
-
-            public string Room { get; set; }
+            Appointments = appointmentController.getAllUpcomingAppointmentsByPatientId(curPatient.getId());
+            Operations = operationController.getAllUpcomingOperationsByPatientId(curPatient.getId());
+            Hospitalizations = hospitalizationController.getAllUpcomingHospitalizationsByPatientId(curPatient.getId());
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
@@ -84,8 +115,14 @@ namespace Bolnica.Pages
 
         private void CancelAppointment_Handler(object sender, RoutedEventArgs e)
         {
-            CancelAppointmentModal modalWindow = new CancelAppointmentModal();
+            Button button = sender as Button;
+            AppointmentOperationDTO appointment = button.DataContext as AppointmentOperationDTO;
+
+            CancelAppointmentModal modalWindow = new CancelAppointmentModal(appointment);
             modalWindow.ShowDialog();
+            FeedbackModal feedback = new FeedbackModal("Uspešno otkazan pregled", "Uspešno otkazivanje", "Izvršili ste uspešno otkazivanje pregleda koji je trebao da bude izvršen datuma " + appointment.StartDate + " kod lekara " + appointment.DoctorName + ".", true);
+            feedback.ShowDialog();
+            Appointments = appointmentController.getAllUpcomingAppointmentsByPatientId(AppState.GetInstance().CurrentPatient.getId());
         }
 
         private void PostponeAppointment_Handler(object sender, RoutedEventArgs e)

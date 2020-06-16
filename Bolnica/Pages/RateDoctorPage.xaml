@@ -21,14 +21,14 @@
             <TextBlock Text="Oceni lekara" FontSize="25" TextAlignment="Center"/>
             <WrapPanel Margin="0, 45" HorizontalAlignment="Center">
                 <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                <TextBlock Text="{Binding DoctorName}" VerticalAlignment="Center" Margin="13,0,0,0"  FontSize="18"/>
+                <TextBlock Text="{Binding Path=Appointment.DoctorName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="13,0,0,0"  FontSize="18"/>
             </WrapPanel>
             <WrapPanel Margin="0, 60">
                 <TextBlock Text="Unesite ocenu:" FontSize="22" />
                 <Button  Click="DecreaseRate_Handler" Background="Transparent"  Margin="15, 0, 0, 0" BorderThickness="0">
                     <fa:ImageAwesome Icon="MinusCircle" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Cursor="Hand" ToolTip="Smanji ocenu"/>
                 </Button>
-                <TextBox x:Name="patientRateBox" Width="30" Height="35" Margin="15,0" Text="{Binding PatientRate}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                <TextBox x:Name="patientRateBox" Width="30" Height="35" Margin="15,0" Text="{Binding Path=Rate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
                 <Button  Click="IncreaseRate_Handler" Background="Transparent" BorderThickness="0">
                     <fa:ImageAwesome Icon="PlusCircle" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Cursor="Hand" ToolTip="Povecaj ocenu"/>
                 </Button>
@@ -40,7 +40,7 @@
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
             </Button.Resources> Nazad</Button>
-        <Button FontSize="20" Grid.Column="1" Grid.Row="1" Width="200" Height="45" ToolTip="Potvrdi unetu ocenu">
+        <Button FontSize="20" Grid.Column="1" Grid.Row="1" Width="200" Height="45" ToolTip="Potvrdi unetu ocenu" Click="Submit_Handler">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>

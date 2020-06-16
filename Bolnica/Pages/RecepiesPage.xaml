@@ -10,23 +10,73 @@
       Title="RecepiesPage">
 
     <StackPanel>
-        <TextBlock TextAlignment="Center" FontSize="25" Margin="100">Medicinski recepti</TextBlock>
-        
-        <Border BorderThickness="1" BorderBrush="Black" Margin="50,0" Background="White">
-            <WrapPanel >
-                <fa:ImageAwesome Icon="Search" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30"/>
-                <TextBox Width="800" BorderThickness="0" VerticalAlignment="Center" Height="30" FontSize="20"/>
-            </WrapPanel>
-        </Border>
-        
-        <Border BorderThickness="1" BorderBrush="Black" Margin="50, 0">
-            <ScrollViewer Height="150" >
-                <ListBox FontSize="18">
-                    <ListBoxItem>Recept #1</ListBoxItem>
-                    <ListBoxItem>Recept #2</ListBoxItem>
-                    <ListBoxItem>Recept #3</ListBoxItem>
-                    <ListBoxItem>Recept #4</ListBoxItem>
-                </ListBox>
+        <TextBlock TextAlignment="Center" FontSize="25" Margin="0,100,0,40">Medicinski recepti</TextBlock>
+
+        <Border BorderThickness="1" BorderBrush="Black" Margin="50, 0"  Background="White">
+            <ScrollViewer Height="300" >
+                <ItemsControl FontSize="18" ItemsSource="{Binding Prescriptions}">
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <Grid DockPanel.Dock="Top" Height="44">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="270"></ColumnDefinition>
+                                        <ColumnDefinition Width="270"></ColumnDefinition>
+                                        <ColumnDefinition Width="270"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="36*" />
+                                        <RowDefinition Height="8" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0">Datum izdavanja</Label>
+                                    <Label Grid.Column="1">Lek</Label>
+                                    <Label Grid.Column="2">Količina</Label>
+                                    <Line Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
+                                      X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                      StrokeDashArray="2 2" StrokeThickness="1" Margin="0,0,0,5"/>
+                                </Grid>
+                                <ItemsPresenter></ItemsPresenter>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="270*" />
+                                    <ColumnDefinition Width="540" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="0.3*" />
+                                   
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding IssueDate}"></TextBlock>
+                                
+                                <ItemsControl Grid.Column="1" Grid.Row="0" x:Name="listBox2" ItemsSource= "{Binding PrescriptionItems}" HorizontalContentAlignment="Stretch">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="270*" />
+                                                    <ColumnDefinition Width="270" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="1*" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock  Grid.Column="0" Grid.Row="0" Text="{Binding DrugName}"></TextBlock>
+                                                <TextBlock  Grid.Column="1" Grid.Row="0" Text="{Binding Amount}"></TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Line Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Stroke="Black"
+                                      X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                      StrokeDashArray="2 2" StrokeThickness="1" Margin="0,20,0,10" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Border>
         <Button FontSize="20" Width="550" Margin="70" Height="45" Click="GoBack_Handler">

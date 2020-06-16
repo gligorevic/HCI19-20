@@ -24,22 +24,22 @@
 
         <WrapPanel Grid.Column="0" Grid.Row="3" Margin="70, 0, 0, 0">
             <fa:ImageAwesome Icon="Suitcase" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
-            <TextBlock Margin="7" Text="Opsti pregled" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Margin="7" Text="{Binding Path=Appointment.Type, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </WrapPanel>
 
-        <WrapPanel Grid.Column="0" Grid.Row="2" Margin="70, 0, 0, 0">
+        <WrapPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="70, 0, 0, 0">
             <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
-            <TextBlock Margin="7" Text="16:00 25.11.2020" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Margin="7" Text="{Binding Path=Appointment.StartDate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </WrapPanel>
 
         <WrapPanel Grid.Column="0" Grid.Row="1" Margin="70, 0, 0, 0">
             <fa:ImageAwesome Icon="UserPlus" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
-            <TextBlock Margin="7" Text="Lekar Lekaric" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Margin="7" Text="{Binding Path=Appointment.DoctorName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </WrapPanel>
 
         <WrapPanel Grid.Column="1" Grid.Row="1" Margin="15, 0, 0, 0">
             <fa:ImageAwesome Icon="Bed" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25"/>
-            <TextBlock Margin="7" Text="Soba 23" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Margin="7" Text="{Binding Path=Appointment.RoomName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </WrapPanel>
 
         <Button Grid.Column="0" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Nazad na prethodnu stranicu" Margin="0, 30, 30,0" Click="GoBack_Handler">
@@ -48,7 +48,7 @@
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
             </Button.Resources> Nazad</Button>
-        <Button Grid.Column="1" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Potvrdi otkazivanje ovog pregleda" Margin="30, 30, 0, 0">
+        <Button Click="CancelAppointment_Handler" Grid.Column="1" Grid.Row="4" Width="120" Height="45" FontSize="20" ToolTip="Potvrdi otkazivanje ovog pregleda" Margin="30, 30, 0, 0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>

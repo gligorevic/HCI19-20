@@ -38,7 +38,6 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\Xceed.Wpf.AvalonDock.Themes
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\Xceed.Wpf.AvalonDock.Themes.Metro.dll
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\Xceed.Wpf.Toolkit.dll
-D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\Class_Diagram___Hospital.pdb
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\FontAwesome.WPF.xml
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\MaterialDesignColors.pdb
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Release\MaterialDesignThemes.Wpf.pdb
@@ -88,3 +87,6 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Release\Bolnica.csproj.CoreCompileI
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Release\Bolnica.csproj.CopyComplete
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Release\Bolnica.exe
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Release\Bolnica.pdb
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Release\Modals\PickNewDateOrGetRecomended.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Release\Modals\PickNewDateOrGetRecomended.baml

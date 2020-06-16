@@ -1,4 +1,5 @@
-﻿using Bolnica.State;
+﻿using Bolnica.Modals;
+using Bolnica.State;
 using Class_Diagram___Hospital.Controller.LocationControllers;
 using Class_Diagram___Hospital.Dto.LocationDTOs;
 using Class_Diagram___Hospital.Dto.UserDTOs;
@@ -314,7 +315,12 @@ namespace Bolnica.Pages
             AppState.GetInstance().CurrentUser = returnedPatient;
 
             if (returnedPatient != null)
+            {
                 this.NavigationService.Navigate(new ProfilePage());
+
+                FeedbackModal feedback = new FeedbackModal("Uspešno izemenjeni podaci", "Izmenjeni podaci o korisniku", "Uspešno ste promenili podatke o svom korisničkom profilu.", true);
+                feedback.Show();
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

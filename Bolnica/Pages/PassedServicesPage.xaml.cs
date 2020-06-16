@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Bolnica.State;
+using Class_Diagram___Hospital.Dto.UserDTOs;
+using Controller.MedicalServiceControllers;
+using Dto.MedicalServiceDTOs;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,62 +23,88 @@ namespace Bolnica.Pages
     /// <summary>
     /// Interaction logic for PassedServices.xaml
     /// </summary>
-    public partial class PassedServicesPage : Page
+    public partial class PassedServicesPage : Page, INotifyPropertyChanged
     {
+        private AppointmentController appointmentController = new AppointmentController();
+        private OperationController operationController = new OperationController();
+        private HospitalizationController hospitalizationController = new HospitalizationController();
+
+        #region NotifyProperties
+
+        private List<AppointmentOperationDTO> _appointments;
+
+        public List<AppointmentOperationDTO> Appointments
+        {
+            get
+            {
+                return _appointments;
+            }
+            set
+            {
+                if (value != _appointments)
+                {
+                    _appointments = value;
+                    OnPropertyChanged("Appointments");
+                }
+            }
+        }
+
+        private List<AppointmentOperationDTO> _operations;
+
+        public List<AppointmentOperationDTO> Operations
+        {
+            get
+            {
+                return _operations;
+            }
+            set
+            {
+                if (value != _operations)
+                {
+                    _operations = value;
+                    OnPropertyChanged("Appointments");
+                }
+            }
+        }
+
+        private List<HospitalizationDTO> _hospitalizations;
+
+        public List<HospitalizationDTO> Hospitalizations
+        {
+            get
+            {
+                return _hospitalizations;
+            }
+            set
+            {
+                if (value != _hospitalizations)
+                {
+                    _hospitalizations = value;
+                    OnPropertyChanged("Hospitalizations");
+                }
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
         public PassedServicesPage()
         {
             InitializeComponent();
+            this.DataContext = this;
+            PatientDTO curPatient = AppState.GetInstance().CurrentPatient;
 
-            List<Appointment> items = new List<Appointment>();
-            items.Add(new Appointment() { doctorName = "John Doe", Date = "12.12.2020", Room = "Soba 23", Type = "Opsti Pregled" });
-            items.Add(new Appointment() { doctorName = "Jane Doe", Date = "11.12.2021", Room = "Soba 21", Type = "Specijalisticki" });
-            items.Add(new Appointment() { doctorName = "Sammy Doe", Date = "10.09.2020", Room = "Soba 13", Type = "Specijalisticki" });
-            AppointmentDataBinding.ItemsSource = items;
-
-
-            List<Operation> operations = new List<Operation>();
-            operations.Add(new Operation() { doctorName = "Lekar Lekaric", Date = "06.06.2020", Room = "Soba 13", Type = "Tip operacije 1" });
-            operations.Add(new Operation() { doctorName = "Milenko Lekaric", Date = "3.12.2021", Room = "Soba 11", Type = "Tip operacije 3" });
-            operations.Add(new Operation() { doctorName = "Lekar Milenkic", Date = "05.08.2020", Room = "Soba 3", Type = "Tip operacije 2" });
-            OperationDataBinding.ItemsSource = operations;
-
-            List<Hospitalization> hospitalizations = new List<Hospitalization>();
-            hospitalizations.Add(new Hospitalization() { startDate = "06.06.2020", endDate = "26.06.2020", Room = "Soba 13" });
-            hospitalizations.Add(new Hospitalization() { startDate = "06.08.2020", endDate = "26.08.2020", Room = "Soba 11" });
-            hospitalizations.Add(new Hospitalization() { startDate = "26.06.2020", endDate = "16.07.2020", Room = "Soba 3" });
-            HospitalizationDataBinding.ItemsSource = hospitalizations;
-        }
-
-        public class Appointment
-        {
-            public string doctorName { get; set; }
-
-            public string Date { get; set; }
-
-            public string Room { get; set; }
-
-            public string Type { get; set; }
-        }
-
-
-        public class Operation
-        {
-            public string doctorName { get; set; }
-
-            public string Date { get; set; }
-
-            public string Room { get; set; }
-
-            public string Type { get; set; }
-        }
-
-        public class Hospitalization
-        {
-            public string startDate { get; set; }
-
-            public string endDate { get; set; }
-
-            public string Room { get; set; }
+            Appointments = appointmentController.getAllPasedAppointmentsByPatientId(curPatient.getId());
+            Operations = operationController.getAllPasedOperationsByPatientId(curPatient.getId());
+            Hospitalizations = hospitalizationController.getAllPasedHospitalizationsByPatientId(curPatient.getId());
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
@@ -83,13 +114,17 @@ namespace Bolnica.Pages
 
         private void RateDoctor_Handler(object sender, RoutedEventArgs e)
         {
-            var myValue = ((Button)sender).Tag;
-            this.NavigationService.Navigate(new RateDoctorPage(myValue.ToString()));
+            Button button = sender as Button;
+            AppointmentOperationDTO appointment = button.DataContext as AppointmentOperationDTO;
+            this.NavigationService.Navigate(new RateDoctorPage(appointment));
         }
 
         private void ShowReport_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ReportPage());
+
+            Button button = sender as Button;
+            AppointmentOperationDTO appointment = button.DataContext as AppointmentOperationDTO;
+            this.NavigationService.Navigate(new ReportPage(appointment));
         }
     }
 }
