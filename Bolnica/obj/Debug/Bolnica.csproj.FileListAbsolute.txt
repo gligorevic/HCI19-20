@@ -91,3 +91,5 @@ D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\Class_Diagram___Hospital.pdb
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\PickNewDateOrGetRecomended.g.cs
 D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\obj\Debug\Modals\PickNewDateOrGetRecomended.baml
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\itextsharp.dll
+D:\3.Godina\HCI\Projekat\Bolnica\Bolnica\bin\Debug\itextsharp.xml
