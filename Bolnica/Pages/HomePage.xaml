@@ -34,7 +34,7 @@
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
             </Button.Resources> Zdravstveni karton</Button>
-        <Button Click="Generate_TherapyUse_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Pogledaj svoj zdravstveni karton">
+        <Button Click="Generate_TherapyUse_Handler" FontSize="18" Width="292" Height="52" Margin="20" ToolTip="Prikaz terapija po danima">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>

@@ -1,6 +1,7 @@
 ﻿using Bolnica.State;
 using Controller.DoctorControllers;
 using Controller.MedicalServiceControllers;
+using Dto.MedicalServiceDTOs;
 using Dto.UserDTOs;
 using System;
 using System.Collections.Generic;
@@ -32,11 +33,30 @@ namespace Bolnica.Pages
         private AppointmentController appointmentController = new AppointmentController();
         private DoctorDTO PickedDoctor { get; set; }
         private List<DateTime> availableDates;
-        DateTime SelectedDate { get; set; }
+        private DateTime SelectedDate { get; set; }
+        private AppointmentOperationDTO Appointment { get; set; }
 
         public string Priority { get; set; }
 
         #region INotifyPropertyChanged
+        private Boolean _isEnabledButton;
+
+        public Boolean IsEnabledButton
+        {
+            get
+            {
+                return _isEnabledButton;
+            }
+            set
+            {
+                if (value != _isEnabledButton)
+                {
+                    _isEnabledButton = value;
+                    OnPropertyChanged("IsEnabledButton");
+                }
+            }
+        }
+
         private TimeSpan _pickedTime;
 
         public TimeSpan PickedTime
@@ -83,6 +103,21 @@ namespace Bolnica.Pages
         }
         #endregion
 
+        public ChoseTerminPage(AppointmentOperationDTO appointment)
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            Appointment = appointment;
+
+            availableDates = doctorController.GetAllAvailableAppointmentDates();
+            Priority = "Postpone";
+
+            foreach (DateTime date in availableDates)
+            {
+                MonthlyCalendar.SelectedDates.Add(date);
+            }
+        }
+
         public ChoseTerminPage(DoctorDTO doctor)
         {
             InitializeComponent();
@@ -101,22 +136,37 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             Priority = "Termin";
+            this.DataContext = this;
+
+            availableDates = doctorController.GetAllAvailableAppointmentDates();
+            
+            foreach (DateTime date in availableDates)
+            {
+                MonthlyCalendar.SelectedDates.Add(date);
+            }
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
             if (Priority == "Doctor")
                 this.NavigationService.Navigate(new ChoseDoctorPage());
-            else
+            else if (Priority.Equals("Termin"))
                 this.NavigationService.Navigate(new ScheduleAppointmentPage());
+            else
+                this.NavigationService.GoBack();
         }
 
         private void Continue_Handler(object sender, RoutedEventArgs e)
         {
             if (Priority.Equals("Doctor"))
                 this.NavigationService.Navigate(new ConfirmAppointmentPage(PickedDoctor, PickedTime, SelectedDate, Priority));
+            else if (Priority.Equals("Termin"))
+                this.NavigationService.Navigate(new ChoseDoctorPage(PickedTime, SelectedDate));
             else
-                this.NavigationService.Navigate(new ChoseDoctorPage("21.10.2020. 12:44"));
+            {
+                Appointment.StartDate = SelectedDate.Date + PickedTime;
+                this.NavigationService.Navigate(new ChoseDoctorPage(Appointment));
+            }
         }
 
         private void Calendar_OnSelectedDatesChanged(object sender, SelectionChangedEventArgs e)
@@ -133,7 +183,25 @@ namespace Bolnica.Pages
                         TimesList = appointmentController.GetAvailableAppointmentTimesByDateAndPatientAndDoctorId(SelectedDate, AppState.GetInstance().CurrentPatient.getId(), PickedDoctor.id);
                         
                         if(TimesList != null && TimesList.Count > 0)
+                        {
                             PickedTime = TimesList[0];
+                            IsEnabledButton = true;
+                        } else
+                        {
+                            IsEnabledButton = false;
+                        }
+                    } else 
+                    {
+                        TimesList = appointmentController.GetAvailableAppointmentTimesByDateAndPatientId(SelectedDate, AppState.GetInstance().CurrentPatient.getId());
+
+                        if (TimesList != null && TimesList.Count > 0)
+                        {
+                            PickedTime = TimesList[0];
+                            IsEnabledButton = true;
+                        } else
+                        {
+                            IsEnabledButton = false;
+                        }
                     }
 
                     counterSelectionDate = 0;

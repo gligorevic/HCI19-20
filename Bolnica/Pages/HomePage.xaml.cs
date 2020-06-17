@@ -1,4 +1,5 @@
-﻿using Bolnica.Pages;
+﻿using Bolnica.Modals;
+using Bolnica.Pages;
 using Bolnica.State;
 using Controller.PatientControllers;
 using iTextSharp.text;
@@ -92,7 +93,6 @@ namespace Bolnica
             sub.Colspan = 1;
             PdfPCell ned = new PdfPCell(new Phrase("Nedelja"));
             ned.Colspan = 1;
-
             
             table.AddCell(pon);
             table.AddCell(uto);
@@ -101,9 +101,6 @@ namespace Bolnica
             table.AddCell(pet);
             table.AddCell(sub);
             table.AddCell(ned);
-
-
-
 
             foreach (PrescriptionItem p in prescriptionItems)
             {
@@ -146,6 +143,9 @@ namespace Bolnica
 
             document.Add(table);
             document.Close();
+
+            FeedbackModal feedback = new FeedbackModal("Uspešno generisan pdf teraija", "Prikaz terapija", "Pdf u kojem se nalazi raspored uzimanja terapija nalazi se u fajlu therapy.pdf koji je na desktopu.", true);
+            feedback.ShowDialog();
         }
     }
 }

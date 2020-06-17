@@ -55,7 +55,7 @@
                         <Setter Property="CornerRadius" Value="6"/>
                     </Style>
                 </Button.Resources> Nazad</Button>
-            <Button FontSize="20" Width="120" Click="Continue_Handler" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Height="45" Margin="50,0">
+            <Button FontSize="20" Width="120" Click="Continue_Handler" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Height="45" Margin="50,0" IsEnabled="{Binding Path=IsEnabledButton, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="6"/>

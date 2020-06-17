@@ -35,6 +35,7 @@ namespace Bolnica.Pages
         private PatientController patientController = new PatientController();
 
         private ServiceRoom serviceRoom { get; set; }
+        private AppointmentOperationDTO Appointment { get; set; }
 
         #region INotifyPropertyChanged
         private Priority _priority;
@@ -117,10 +118,25 @@ namespace Bolnica.Pages
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-        public ConfirmAppointmentPage()
+        public ConfirmAppointmentPage(AppointmentOperationDTO appointment)
         {
             InitializeComponent();
             this.DataContext = this;
+
+            Appointment = appointment;
+
+            DoctorName = "dr. " + appointment.DoctorName;
+            PickedDateTime = appointment.StartDate;
+            serviceRoom = serviceRoomController.getAvailableServiceRoom(appointment.StartDate);
+            if (serviceRoom == null)
+            {
+                AvailableServiceRoom = "Soba ce biti naknadno dodeljena.";
+            }
+            else
+            {
+                AvailableServiceRoom = serviceRoom.getRoomName();
+            }
+            Priority = Priority.Date;
         }
 
 
@@ -132,10 +148,11 @@ namespace Bolnica.Pages
             PickedDoctor = pickedDoctor;
             PickedDateTime = selectedDate.Date + pickedTime;
             serviceRoom = serviceRoomController.getAvailableServiceRoom(selectedDate.Date + pickedTime);
-            if(serviceRoom == null)
+            if (serviceRoom == null)
             {
                 AvailableServiceRoom = "Soba ce biti naknadno dodeljena.";
-            } else
+            }
+            else
             {
                 AvailableServiceRoom = serviceRoom.getRoomName();
             }
@@ -143,7 +160,8 @@ namespace Bolnica.Pages
             if (priority.Equals("Doctor"))
             {
                 Priority = Priority.Doctor;
-            } else
+            }
+            else
             {
                 Priority = Priority.Date;
             }
@@ -155,30 +173,64 @@ namespace Bolnica.Pages
         }
 
         private void ScheduleAppointment_Handler(object sender, RoutedEventArgs e)
-        {   
-            AppointmentOperationDTO appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.id, AppState.GetInstance().CurrentPatient.getId(), serviceRoom.getId(), Priority, PickedDateTime);
-            AppointmentOperationDTO appointment = patientController.scheduleAppointment(appointmentOperationDTO);
-            if(appointment != null)
+        {
+            if (Appointment == null)
             {
-                this.NavigationService.Navigate(new HomePage());
-                FeedbackModal feedback = new FeedbackModal("Usepešno zakazan pregled", "Uspešno zakazan pregled", "Izvšili ste uspešno zakazivanje pregleda za " + appointment.getStartDate() + " kod doktora " + PickedDoctor.Name + " " + PickedDoctor.LastName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
-                feedback.ShowDialog();
+                AppointmentOperationDTO appointmentOperationDTO;
+                if (serviceRoom != null)
+                {  
+                    appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.id, AppState.GetInstance().CurrentPatient.getId(), serviceRoom.getId(), Priority, PickedDateTime);
+                }
+                else {
+                    appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.id, AppState.GetInstance().CurrentPatient.getId(), -1, Priority, PickedDateTime);
+                }
+                AppointmentOperationDTO appointment = patientController.scheduleAppointment(appointmentOperationDTO);
+                if (appointment != null)
+                {
+                    this.NavigationService.Navigate(new HomePage());
+                    FeedbackModal feedback = new FeedbackModal("Usepešno zakazan pregled", "Uspešno zakazan pregled", "Izvšili ste uspešno zakazivanje pregleda za " + appointment.getStartDate() + " kod doktora " + PickedDoctor.Name + " " + PickedDoctor.LastName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
+                    feedback.ShowDialog();
+                }
+                else
+                {
+                    PickNewDateOrGetRecomended pickNewDateOrGetRecomended = new PickNewDateOrGetRecomended(appointmentOperationDTO, PickedDoctor);
+                    pickNewDateOrGetRecomended.ShowDialog();
+
+                    AppointmentOperationDTO appointmentWithNewDate = pickNewDateOrGetRecomended.getAppointmentInfo();
+                    if (appointmentWithNewDate == null)
+                    {
+                        this.NavigationService.Navigate(new ChoseTerminPage(PickedDoctor));
+                    }
+                    else
+                    {
+                        PickedDateTime = appointmentWithNewDate.getStartDate();
+                    }
+                }
             } else
             {
-                PickNewDateOrGetRecomended pickNewDateOrGetRecomended = new PickNewDateOrGetRecomended(appointmentOperationDTO, PickedDoctor);
-                pickNewDateOrGetRecomended.ShowDialog();
-
-                AppointmentOperationDTO appointmentWithNewDate = pickNewDateOrGetRecomended.getAppointmentInfo();
-                if(appointmentWithNewDate == null)
+                AppointmentOperationDTO appointment = patientController.PostponeAppointment(Appointment);
+                if (appointment != null)
                 {
-                    this.NavigationService.Navigate(new ChoseTerminPage(PickedDoctor));
-                } else {
-                    PickedDateTime = appointmentWithNewDate.getStartDate();
+                    this.NavigationService.Navigate(new UpcomingServicesPage());
+                    FeedbackModal feedback = new FeedbackModal("Usepešno odložen pregled", "Uspešno odložen pregled", "Izvšili ste uspešno odlaganje pregleda za " + appointment.getStartDate() + " kod doktora " + PickedDoctor.Name + " " + PickedDoctor.LastName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
+                    feedback.ShowDialog();
+                }
+                else
+                {
+                    PickNewDateOrGetRecomended pickNewDateOrGetRecomended = new PickNewDateOrGetRecomended(Appointment, PickedDoctor);
+                    pickNewDateOrGetRecomended.ShowDialog();
+
+                    AppointmentOperationDTO appointmentWithNewDate = pickNewDateOrGetRecomended.getAppointmentInfo();
+                    if (appointmentWithNewDate == null)
+                    {
+                        this.NavigationService.Navigate(new ChoseTerminPage(PickedDoctor));
+                    }
+                    else
+                    {
+                        PickedDateTime = appointmentWithNewDate.getStartDate();
+                    }
                 }
             }
-
-            
-            
         }
     }
 }

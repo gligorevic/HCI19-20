@@ -127,7 +127,10 @@ namespace Bolnica.Pages
 
         private void PostponeAppointment_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ChoseTerminPage());
+            Button button = sender as Button;
+            AppointmentOperationDTO appointment = button.DataContext as AppointmentOperationDTO;
+
+            this.NavigationService.Navigate(new ChoseTerminPage(appointment));
         }
     }
 }
