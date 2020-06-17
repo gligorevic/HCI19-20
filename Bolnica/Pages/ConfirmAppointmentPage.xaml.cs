@@ -212,7 +212,7 @@ namespace Bolnica.Pages
                 if (appointment != null)
                 {
                     this.NavigationService.Navigate(new UpcomingServicesPage());
-                    FeedbackModal feedback = new FeedbackModal("Usepešno odložen pregled", "Uspešno odložen pregled", "Izvšili ste uspešno odlaganje pregleda za " + appointment.getStartDate() + " kod doktora " + PickedDoctor.Name + " " + PickedDoctor.LastName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
+                    FeedbackModal feedback = new FeedbackModal("Usepešno odložen pregled", "Uspešno odložen pregled", "Izvšili ste uspešno odlaganje pregleda za " + appointment.StartDate + " kod doktora " + appointment.DoctorName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
                     feedback.ShowDialog();
                 }
                 else

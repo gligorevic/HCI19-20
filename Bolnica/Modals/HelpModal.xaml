@@ -7,6 +7,36 @@
         mc:Ignorable="d"
         Title="Pomoc" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.22*" />
+            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="0.5*" />
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" Name="Breadcrumb">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" IsItemsHost="True">
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBoxItem PreviewMouseDown="GoTo_HelpHome">Pomoć</ListBoxItem>
+            <ListBoxItem IsEnabled="False" Name="Separator">
+                /
+            </ListBoxItem>
+            <ListBoxItem Name="CurrentPath"></ListBoxItem>
+        </ListBox>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+            <StackPanel Name="parent" Margin="60, 20" Grid.Row="1">
+            </StackPanel>
+        </ScrollViewer>
+        <Button Grid.Column="0" FontSize="18" Grid.Row="2" HorizontalAlignment="Right" Width="90" Height="45" Margin="0,0,30,0" Click="Close_Handler">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources> Zatvori</Button>
     </Grid>
 </Window>

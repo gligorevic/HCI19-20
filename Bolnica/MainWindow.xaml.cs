@@ -80,63 +80,87 @@ namespace Bolnica
 
         private void ChangePassword_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            ChangePasswordModal modalWindow = new ChangePasswordModal();
-            modalWindow.ShowDialog();
+            if (AppState.GetInstance().CurrentUser != null)
+            {
+                ChangePasswordModal modalWindow = new ChangePasswordModal();
+                modalWindow.ShowDialog();
+            }
         }
 
         private void ViewProfile_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("ProfilePage"))
+            if (AppState.GetInstance().CurrentUser != null)
             {
-                this.Frame.Navigate(new ProfilePage());
+                if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("ProfilePage"))
+                {
+                    this.Frame.Navigate(new ProfilePage());
+                }
             }
         }
 
         private void EditProfile_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("EditProfilePage"))
+            if (AppState.GetInstance().CurrentUser != null)
             {
-                this.Frame.Navigate(new EditProfilePage());
+                if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("EditProfilePage"))
+                {
+                    this.Frame.Navigate(new EditProfilePage());
+                }
             }
         }
 
         private void GoHome_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("HomePage"))
+            if (AppState.GetInstance().CurrentUser != null)
             {
-                this.Frame.Navigate(new HomePage());
+                if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("HomePage"))
+                {
+                    this.Frame.Navigate(new HomePage());
+                }
             }
         }
 
         private void UpcomingServices_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("UpcomingServicesPage"))
+            if (AppState.GetInstance().CurrentUser != null)
             {
-                this.Frame.Navigate(new UpcomingServicesPage());
+                if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("UpcomingServicesPage"))
+                {
+                    this.Frame.Navigate(new UpcomingServicesPage());
+                }
             }
         }
 
         private void PassedServices_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("PassedServicesPage"))
+            if (AppState.GetInstance().CurrentUser != null)
             {
-                this.Frame.Navigate(new PassedServicesPage());
+                if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("PassedServicesPage"))
+                {
+                    this.Frame.Navigate(new PassedServicesPage());
+                }
             }
         }
 
         private void MedicalRecord_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("MedicalRecordPage"))
+            if (AppState.GetInstance().CurrentUser != null)
             {
-                this.Frame.Navigate(new MedicalRecordPage());
+                if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("MedicalRecordPage"))
+                {
+                    this.Frame.Navigate(new MedicalRecordPage());
+                }
             }
         }
 
         private void ScheduletAppointment_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("ScheduleAppointmentPage"))
+            if (AppState.GetInstance().CurrentUser != null)
             {
-                this.Frame.Navigate(new ScheduleAppointmentPage());
+                if (!(Frame.NavigationService.Content.GetType().Name.ToString()).Equals("ScheduleAppointmentPage"))
+                {
+                    this.Frame.Navigate(new ScheduleAppointmentPage());
+                }
             }
         }
 
@@ -150,15 +174,18 @@ namespace Bolnica
 
         private void Help_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            HelpModal modalWindow = new HelpModal();
+            HelpModal modalWindow = new HelpModal(Frame.NavigationService.Content.GetType().Name.ToString());
             modalWindow.ShowDialog();
         }
 
         private void Logout_Handler(object sender, ExecutedRoutedEventArgs e)
         {
-            LogoutVisibility = Visibility.Collapsed;
-            AppState.GetInstance().restart();
-            this.Frame.Navigate(new LoginPage());
+            if (AppState.GetInstance().CurrentUser != null)
+            {
+                LogoutVisibility = Visibility.Collapsed;
+                AppState.GetInstance().restart();
+                this.Frame.Navigate(new LoginPage());
+            }
         }
     }
 }

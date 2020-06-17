@@ -27,7 +27,7 @@ namespace Bolnica.Pages
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new HomePage());
         }
 
         private void Show_Passed_Handler(object sender, RoutedEventArgs e)

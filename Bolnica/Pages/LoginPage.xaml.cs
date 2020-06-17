@@ -159,7 +159,7 @@ namespace Bolnica.Pages
                 ActiveStep = ActiveStep + 1;
                 this.ContinueButton.Content = "Uloguj se";
                 this.ContinueButton.ToolTip = "Prijavi se na svoj nalog";
-                this.forgotenButton.Text = "Zaboravljena lozinka?";
+                this.forgotenButton.Text = "Obnova lozinke?";
                 this.firstStep.Visibility = Visibility.Hidden;
                 this.secondStep.Visibility = Visibility.Visible;
             }

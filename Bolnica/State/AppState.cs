@@ -10,7 +10,7 @@ namespace Bolnica.State
 {
     class AppState
     {
-        private UserDTO currentUser;
+        private UserDTO currentUser = null;
 
         public UserDTO CurrentUser
         {
@@ -21,7 +21,7 @@ namespace Bolnica.State
             set { currentUser = value; }
         }
 
-        private PatientDTO currentPatient;
+        private PatientDTO currentPatient = null;
 
         public PatientDTO CurrentPatient
         {

@@ -65,14 +65,15 @@ namespace Bolnica.Modals
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
-            this.Close();
-               
+            this.Close();   
         }
 
         private void CancelAppointment_Handler(object sender, RoutedEventArgs e)
         {
             patientController.CancelAppointment(Appointment.Id);
             this.Close();
+            FeedbackModal feedback = new FeedbackModal("Uspešno otkazan pregled", "Uspešno otkazivanje", "Izvršili ste uspešno otkazivanje pregleda koji je trebao da bude izvršen datuma " + Appointment.StartDate + " kod lekara " + Appointment.DoctorName + ".", true);
+            feedback.ShowDialog();
         }
     }
 }

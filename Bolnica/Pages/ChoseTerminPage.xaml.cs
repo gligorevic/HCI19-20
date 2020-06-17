@@ -153,7 +153,7 @@ namespace Bolnica.Pages
             else if (Priority.Equals("Termin"))
                 this.NavigationService.Navigate(new ScheduleAppointmentPage());
             else
-                this.NavigationService.GoBack();
+                this.NavigationService.Navigate(new UpcomingServicesPage());
         }
 
         private void Continue_Handler(object sender, RoutedEventArgs e)

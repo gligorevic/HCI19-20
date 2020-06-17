@@ -110,7 +110,7 @@ namespace Bolnica.Pages
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new ServicesPage());
         }
 
         private void CancelAppointment_Handler(object sender, RoutedEventArgs e)
@@ -120,8 +120,7 @@ namespace Bolnica.Pages
 
             CancelAppointmentModal modalWindow = new CancelAppointmentModal(appointment);
             modalWindow.ShowDialog();
-            FeedbackModal feedback = new FeedbackModal("Uspešno otkazan pregled", "Uspešno otkazivanje", "Izvršili ste uspešno otkazivanje pregleda koji je trebao da bude izvršen datuma " + appointment.StartDate + " kod lekara " + appointment.DoctorName + ".", true);
-            feedback.ShowDialog();
+            
             Appointments = appointmentController.getAllUpcomingAppointmentsByPatientId(AppState.GetInstance().CurrentPatient.getId());
         }
 

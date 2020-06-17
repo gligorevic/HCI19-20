@@ -61,7 +61,7 @@
             </MenuItem>
             <MenuItem Visibility="{Binding LogoutVisibility, Mode=OneWay}" Header="_Početna" Command="local:MainWindow.Home" ToolTip="Idi na početnu stranicu"/>
             <MenuItem Header="_Blog" Command="local:MainWindow.Blog" ToolTip="Idi na blog stranicu"/>
-            <MenuItem Header="Po_moć" Command="local:MainWindow.Help" ToolTip="Klikni za pomoc u rukovanju softverom"/>
+            <MenuItem InputGestureText="ALT+M" Header="Po_moć" Command="local:MainWindow.Help" ToolTip="Klikni za pomoc u rukovanju softverom"/>
             <MenuItem Visibility="{Binding LogoutVisibility, Mode=OneWay}" HorizontalAlignment="Right" Header="_Odjavi se" Command="local:MainWindow.Logout" FontSize="13" InputGestureText="Ctrl+ALT+Q" Background="#444444" Foreground="White"/>
         </Menu>
         

@@ -88,6 +88,7 @@ namespace Bolnica.Modals
         {
             InitializeComponent();
             this.DataContext = this;
+            appointment = appointment;
             TimesList = appointmentController.GetAvailableAppointmentTimesByDateAndPatientAndDoctorId(appointment.getStartDate(), AppState.GetInstance().CurrentPatient.getId(), appointment.getDoctorId());
             this.poruka.Text = "Neko je u međuvremenu zauzeo izabran termin kod lekara " + doctor.Name + " " + doctor.LastName; 
         }

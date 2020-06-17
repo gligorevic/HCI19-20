@@ -109,7 +109,7 @@ namespace Bolnica.Pages
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            this.NavigationService.Navigate(new ServicesPage());
         }
 
         private void RateDoctor_Handler(object sender, RoutedEventArgs e)
