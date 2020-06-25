@@ -1,4 +1,5 @@
 ﻿using Bolnica.Modals;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Controller.UserControllers;
 using Dto.UserDTOs;
 using System;
@@ -24,7 +25,7 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class ForgotenPasswordPage : Page, INotifyPropertyChanged
     {
-        private UserProfileController userProfileController = new UserProfileController();
+        private IUserProfileController _userProfileController;
 
         #region NotifyProperties
         private Visibility _visibilityErr = Visibility.Hidden;
@@ -168,6 +169,8 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _userProfileController = app.UserProfileController;
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
@@ -181,7 +184,7 @@ namespace Bolnica.Pages
             pdto.userEmail = Email;
             pdto.OldPassword = OldPassword;
             pdto.NewPassword = Password;
-            Boolean success = userProfileController.ChangePassword(pdto);
+            Boolean success = _userProfileController.ChangePassword(pdto);
             if (!success)
             {
                 VisibilityErr1 = Visibility.Visible;

@@ -1,4 +1,5 @@
-﻿using Controller.PatientControllers;
+﻿using Class_Diagram___Hospital.Controller.Abstract;
+using Controller.PatientControllers;
 using Dto.MedicalServiceDTOs;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Bolnica.Modals
     /// </summary>
     public partial class CancelAppointmentModal : Window, INotifyPropertyChanged
     {
-        private PatientController patientController = new PatientController();
+        private IPatientController _patientController;
 
         #region NotifyProperties
 
@@ -60,6 +61,9 @@ namespace Bolnica.Modals
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
+
             Appointment = appointment;
         }
 
@@ -70,7 +74,7 @@ namespace Bolnica.Modals
 
         private void CancelAppointment_Handler(object sender, RoutedEventArgs e)
         {
-            patientController.CancelAppointment(Appointment.Id);
+            _patientController.CancelAppointment(Appointment.Id);
             this.Close();
             FeedbackModal feedback = new FeedbackModal("Uspešno otkazan pregled", "Uspešno otkazivanje", "Izvršili ste uspešno otkazivanje pregleda koji je trebao da bude izvršen datuma " + Appointment.StartDate + " kod lekara " + Appointment.DoctorName + ".", true);
             feedback.ShowDialog();

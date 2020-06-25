@@ -1,4 +1,5 @@
 ﻿using Bolnica.State;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Controller.UserControllers;
 using Dto.UserDTOs;
 using System;
@@ -24,7 +25,7 @@ namespace Bolnica.Modals
     /// </summary>
     public partial class ChangePasswordModal : Window, INotifyPropertyChanged
     {
-        private UserProfileController userProfileController = new UserProfileController();
+        private IUserProfileController _userProfileController;
 
         #region INotifyPropertyChanged
         private Boolean _isEnabled = false;
@@ -149,6 +150,9 @@ namespace Bolnica.Modals
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _userProfileController = app.UserProfileController;
+            
         }
 
         private void Go_Back_Handler(object sender, RoutedEventArgs e)
@@ -162,7 +166,7 @@ namespace Bolnica.Modals
             pdto.userEmail = AppState.GetInstance().CurrentPatient.getEmail();
             pdto.OldPassword = OldPassword;
             pdto.NewPassword = Password;
-            Boolean success = userProfileController.ChangePassword(pdto);
+            Boolean success = _userProfileController.ChangePassword(pdto);
             if(!success)
             {
                 VisibilityErr1 = Visibility.Visible;

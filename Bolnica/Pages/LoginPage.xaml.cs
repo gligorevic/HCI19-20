@@ -1,5 +1,6 @@
 ﻿using Bolnica.Modals;
 using Bolnica.State;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Class_Diagram___Hospital.Dto.UserDTOs;
 using Controller.PatientControllers;
 using Controller.UserControllers;
@@ -27,9 +28,9 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class LoginPage : Page, INotifyPropertyChanged
     {
-        private UnautheticatedUserController unautheticatedUserController = new UnautheticatedUserController();
+        private readonly IUnatuhenticatedUserController _unautheticatedUserController;
         private AppState state = AppState.GetInstance();
-        private PatientController patientController = new PatientController();
+        private IPatientController _patientController;
 
         #region NotifyProperties
         private string _nameAndLastName;
@@ -121,6 +122,10 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _unautheticatedUserController = app.UnatuhenticatedUserController;
+            _patientController = app.PatientController;
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
@@ -145,7 +150,7 @@ namespace Bolnica.Pages
         {
             if(ActiveStep == 1)
             {
-                UserInfoDTO foundUser = unautheticatedUserController.GetUserInfoByEmail(Email);
+                UserInfoDTO foundUser = _unautheticatedUserController.GetUserInfoByEmail(Email);
                 if(foundUser == null)
                 {
                     FeedbackModal f = new FeedbackModal("Korisnik nije pronađen", "Greška, korisnik ne postoji", "Korisnik sa unetom email adresom ne postoji, pokusajte sa ponovnim unosom vodeci racuna o velikim i malim slovima.", false);
@@ -165,10 +170,10 @@ namespace Bolnica.Pages
             }
             else if (ActiveStep == 2)
             {
-                UserDTO user = unautheticatedUserController.Login(Email, Password);
+                UserDTO user = _unautheticatedUserController.Login(Email, Password);
                 if(user != null)
                 {
-                    PatientDTO patient = patientController.GetPatientByUserId(user.getId());
+                    PatientDTO patient = _patientController.GetPatientByUserId(user.getId());
                     state.CurrentUser = user;
                     state.CurrentPatient = patient;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).setLogoutVisible();

@@ -1,5 +1,6 @@
 ﻿using Bolnica.Modals;
 using Bolnica.State;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Controller.EquipmentAndRoomsController;
 using Controller.PatientControllers;
 using Dto.MedicalServiceDTOs;
@@ -32,7 +33,7 @@ namespace Bolnica.Pages
     {
         private DoctorDTO PickedDoctor { get; set; }
         private ServiceRoomController serviceRoomController = new ServiceRoomController();
-        private PatientController patientController = new PatientController();
+        private IPatientController _patientController;
 
         private ServiceRoom serviceRoom { get; set; }
         private AppointmentOperationDTO Appointment { get; set; }
@@ -122,6 +123,8 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
 
             Appointment = appointment;
 
@@ -144,6 +147,9 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
+
             DoctorName = "dr. " + pickedDoctor.Name + " " + pickedDoctor.LastName;
             PickedDoctor = pickedDoctor;
             PickedDateTime = selectedDate.Date + pickedTime;
@@ -184,7 +190,7 @@ namespace Bolnica.Pages
                 else {
                     appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.id, AppState.GetInstance().CurrentPatient.getId(), -1, Priority, PickedDateTime);
                 }
-                AppointmentOperationDTO appointment = patientController.scheduleAppointment(appointmentOperationDTO);
+                AppointmentOperationDTO appointment = _patientController.scheduleAppointment(appointmentOperationDTO);
                 if (appointment != null)
                 {
                     this.NavigationService.Navigate(new HomePage());
@@ -208,7 +214,7 @@ namespace Bolnica.Pages
                 }
             } else
             {
-                AppointmentOperationDTO appointment = patientController.PostponeAppointment(Appointment);
+                AppointmentOperationDTO appointment = _patientController.PostponeAppointment(Appointment);
                 if (appointment != null)
                 {
                     this.NavigationService.Navigate(new UpcomingServicesPage());

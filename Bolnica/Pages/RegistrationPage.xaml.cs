@@ -1,4 +1,5 @@
 ﻿using Bolnica.Modals;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Class_Diagram___Hospital.Controller.LocationControllers;
 using Class_Diagram___Hospital.Dto.LocationDTOs;
 using Class_Diagram___Hospital.Dto.UserDTOs;
@@ -284,12 +285,15 @@ namespace Bolnica.Pages
         #endregion
 
 
-        private UnautheticatedUserController unautheticatedUserController = new UnautheticatedUserController();
+        private IUnatuhenticatedUserController _unautheticatedUserController;
 
         public RegistrationPage()
         {
             InitializeComponent();
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _unautheticatedUserController = app.UnatuhenticatedUserController;
 
             _countries = countryController.getAllCountries();
             Country = _countries[0];
@@ -319,7 +323,7 @@ namespace Bolnica.Pages
                     break;
                 case 4:
                     PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, Password, Email, Telephone, Address, Int32.Parse(AddressNumber));
-                    PatientDTO returnedPatient = unautheticatedUserController.Registration(patientDTO);
+                    PatientDTO returnedPatient = _unautheticatedUserController.Registration(patientDTO);
                     if (returnedPatient != null)
                     {
                         this.NavigationService.Navigate(new LoginPage());

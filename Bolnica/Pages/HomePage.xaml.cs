@@ -1,6 +1,7 @@
 ﻿using Bolnica.Modals;
 using Bolnica.Pages;
 using Bolnica.State;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Controller.PatientControllers;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -28,12 +29,13 @@ namespace Bolnica
     /// </summary>
     public partial class HomePage : Page
     {
-        private PatientController patientController = new PatientController();
+        private IPatientController _patientController;
 
         public HomePage()
         {
             InitializeComponent();
-           
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
         }
 
         private void Show_Profile_Handler(object sender, RoutedEventArgs e)
@@ -59,7 +61,7 @@ namespace Bolnica
 
         private void Generate_TherapyUse_Handler(object sender, RoutedEventArgs e)
         {
-            List<PrescriptionItem> prescriptionItems = patientController.getPrescriptionItemsByPatientId(AppState.GetInstance().CurrentPatient.getId());
+            List<PrescriptionItem> prescriptionItems = _patientController.getPrescriptionItemsByPatientId(AppState.GetInstance().CurrentPatient.getId());
 
             string strPath = Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory);

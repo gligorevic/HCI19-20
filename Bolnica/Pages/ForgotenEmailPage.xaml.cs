@@ -1,4 +1,5 @@
 ﻿using Bolnica.Modals;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Controller.UserControllers;
 using Dto.UserDTOs;
 using System;
@@ -24,7 +25,7 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class ForgotenEmailPage : Page, INotifyPropertyChanged
     {
-        private UnautheticatedUserController unautheticatedUserController = new UnautheticatedUserController();
+        private readonly IUnatuhenticatedUserController _unautheticatedUserController; 
 
         #region NotifyProperties
         private Visibility _visibilityErr = Visibility.Hidden;
@@ -156,6 +157,9 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _unautheticatedUserController = app.UnatuhenticatedUserController;
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
@@ -166,7 +170,7 @@ namespace Bolnica.Pages
         private void Finsih_Handler(object sender, RoutedEventArgs e)
         {
             ChangeEmailDTO changeEmail = new ChangeEmailDTO(NameU, LastName, Jmbg, Email, Password);
-            Boolean success = unautheticatedUserController.ChangeEmail(changeEmail);
+            Boolean success = _unautheticatedUserController.ChangeEmail(changeEmail);
             if (success)
             {
                 this.NavigationService.Navigate(new LoginPage());

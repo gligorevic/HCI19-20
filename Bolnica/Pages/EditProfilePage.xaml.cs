@@ -1,5 +1,6 @@
 ﻿using Bolnica.Modals;
 using Bolnica.State;
+using Class_Diagram___Hospital.Controller.Abstract;
 using Class_Diagram___Hospital.Controller.LocationControllers;
 using Class_Diagram___Hospital.Dto.LocationDTOs;
 using Class_Diagram___Hospital.Dto.UserDTOs;
@@ -33,7 +34,7 @@ namespace Bolnica.Pages
         private CityController cityController = new CityController();
         private AppState state = AppState.GetInstance();
 
-        private PatientController patientController = new PatientController();
+        private IPatientController _patientController;
 
         #region NotifyProperties
         private string _name;
@@ -281,6 +282,9 @@ namespace Bolnica.Pages
             InitializeComponent();
             this.DataContext = this;
 
+            var app = Application.Current as App;
+            _patientController = app.PatientController;
+
             PatientDTO patient = state.CurrentPatient;
 
             Countries = countryController.getAllCountries();
@@ -310,7 +314,7 @@ namespace Bolnica.Pages
         {
             PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, null, Email, Telephone, Address, Int32.Parse(AddressNumber));
             patientDTO.setId(AppState.GetInstance().CurrentPatient.getId());
-            PatientDTO returnedPatient = patientController.editPatient(patientDTO);
+            PatientDTO returnedPatient = _patientController.EditPatient(patientDTO);
             AppState.GetInstance().CurrentPatient = returnedPatient;
             AppState.GetInstance().CurrentUser = returnedPatient;
 
