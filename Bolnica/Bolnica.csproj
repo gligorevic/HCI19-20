@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ComparisonConverter.cs" />
+    <Compile Include="IDoctorService.cs" />
     <Compile Include="Modals\PickNewDateOrGetRecomended.xaml.cs">
       <DependentUpon>PickNewDateOrGetRecomended.xaml</DependentUpon>
     </Compile>

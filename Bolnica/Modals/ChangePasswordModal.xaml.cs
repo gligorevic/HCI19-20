@@ -163,7 +163,7 @@ namespace Bolnica.Modals
         private void Password_Change_Handler(object sender, RoutedEventArgs e)
         {
             ChangePasswordDTO pdto = new ChangePasswordDTO();
-            pdto.userEmail = AppState.GetInstance().CurrentPatient.getEmail();
+            pdto.userEmail = AppState.GetInstance().CurrentPatient.Email;
             pdto.OldPassword = OldPassword;
             pdto.NewPassword = Password;
             Boolean success = _userProfileController.ChangePassword(pdto);

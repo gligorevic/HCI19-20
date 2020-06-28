@@ -1,6 +1,7 @@
 ﻿using Bolnica.Modals;
 using Bolnica.State;
 using Class_Diagram___Hospital.Controller.Abstract;
+using Class_Diagram___Hospital.Controller.EquipmentAndRoomsController.Abstract;
 using Controller.EquipmentAndRoomsController;
 using Controller.PatientControllers;
 using Dto.MedicalServiceDTOs;
@@ -32,7 +33,7 @@ namespace Bolnica.Pages
     public partial class ConfirmAppointmentPage : Page, INotifyPropertyChanged
     {
         private DoctorDTO PickedDoctor { get; set; }
-        private ServiceRoomController serviceRoomController = new ServiceRoomController();
+        private IServiceRoomController _serviceRoomController;
         private IPatientController _patientController;
 
         private ServiceRoom serviceRoom { get; set; }
@@ -125,19 +126,20 @@ namespace Bolnica.Pages
             this.DataContext = this;
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _serviceRoomController = app.ServiceRoomController;
 
             Appointment = appointment;
 
             DoctorName = "dr. " + appointment.DoctorName;
             PickedDateTime = appointment.StartDate;
-            serviceRoom = serviceRoomController.getAvailableServiceRoom(appointment.StartDate);
+            serviceRoom = _serviceRoomController.GetAvailableServiceRoom(appointment.StartDate);
             if (serviceRoom == null)
             {
                 AvailableServiceRoom = "Soba ce biti naknadno dodeljena.";
             }
             else
             {
-                AvailableServiceRoom = serviceRoom.getRoomName();
+                AvailableServiceRoom = serviceRoom.RoomName;
             }
             Priority = Priority.Date;
         }
@@ -149,18 +151,19 @@ namespace Bolnica.Pages
             this.DataContext = this;
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _serviceRoomController = app.ServiceRoomController;
 
             DoctorName = "dr. " + pickedDoctor.Name + " " + pickedDoctor.LastName;
             PickedDoctor = pickedDoctor;
             PickedDateTime = selectedDate.Date + pickedTime;
-            serviceRoom = serviceRoomController.getAvailableServiceRoom(selectedDate.Date + pickedTime);
+            serviceRoom = _serviceRoomController.GetAvailableServiceRoom(selectedDate.Date + pickedTime);
             if (serviceRoom == null)
             {
                 AvailableServiceRoom = "Soba ce biti naknadno dodeljena.";
             }
             else
             {
-                AvailableServiceRoom = serviceRoom.getRoomName();
+                AvailableServiceRoom = serviceRoom.RoomName;
             }
 
             if (priority.Equals("Doctor"))
@@ -185,16 +188,16 @@ namespace Bolnica.Pages
                 AppointmentOperationDTO appointmentOperationDTO;
                 if (serviceRoom != null)
                 {  
-                    appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.id, AppState.GetInstance().CurrentPatient.getId(), serviceRoom.getId(), Priority, PickedDateTime);
+                    appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.Id, AppState.GetInstance().CurrentPatient.GetId(), serviceRoom.GetId(), Priority, PickedDateTime, 0);
                 }
                 else {
-                    appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.id, AppState.GetInstance().CurrentPatient.getId(), -1, Priority, PickedDateTime);
+                    appointmentOperationDTO = new AppointmentOperationDTO(PickedDoctor.Id, AppState.GetInstance().CurrentPatient.GetId(), -1, Priority, PickedDateTime, 0);
                 }
-                AppointmentOperationDTO appointment = _patientController.scheduleAppointment(appointmentOperationDTO);
+                AppointmentOperationDTO appointment = _patientController.ScheduleAppointment(appointmentOperationDTO);
                 if (appointment != null)
                 {
                     this.NavigationService.Navigate(new HomePage());
-                    FeedbackModal feedback = new FeedbackModal("Usepešno zakazan pregled", "Uspešno zakazan pregled", "Izvšili ste uspešno zakazivanje pregleda za " + appointment.getStartDate() + " kod doktora " + PickedDoctor.Name + " " + PickedDoctor.LastName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
+                    FeedbackModal feedback = new FeedbackModal("Usepešno zakazan pregled", "Uspešno zakazan pregled", "Izvšili ste uspešno zakazivanje pregleda za " + appointment.StartDate + " kod doktora " + PickedDoctor.Name + " " + PickedDoctor.LastName + ". Proverite salu na dan izvršavanja pregleda, jer može doći do promene.", true);
                     feedback.ShowDialog();
                 }
                 else
@@ -209,7 +212,7 @@ namespace Bolnica.Pages
                     }
                     else
                     {
-                        PickedDateTime = appointmentWithNewDate.getStartDate();
+                        PickedDateTime = appointmentWithNewDate.StartDate;
                     }
                 }
             } else
@@ -233,7 +236,7 @@ namespace Bolnica.Pages
                     }
                     else
                     {
-                        PickedDateTime = appointmentWithNewDate.getStartDate();
+                        PickedDateTime = appointmentWithNewDate.StartDate;
                     }
                 }
             }

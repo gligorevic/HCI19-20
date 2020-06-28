@@ -61,7 +61,7 @@ namespace Bolnica
 
         private void Generate_TherapyUse_Handler(object sender, RoutedEventArgs e)
         {
-            List<PrescriptionItem> prescriptionItems = _patientController.getPrescriptionItemsByPatientId(AppState.GetInstance().CurrentPatient.getId());
+            List<PrescriptionItem> prescriptionItems = _patientController.GetPrescriptionItemsByPatientId(AppState.GetInstance().CurrentPatient.GetId());
 
             string strPath = Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory);
@@ -106,22 +106,22 @@ namespace Bolnica
 
             foreach (PrescriptionItem p in prescriptionItems)
             {
-                PdfPCell cellToAdd = new PdfPCell(new Phrase(p.getDrug().getName() + " " + p.getAmountToUse()));
+                PdfPCell cellToAdd = new PdfPCell(new Phrase(p.Drug.Name + " " + p.AmountToUse));
                 cellToAdd.Colspan = 1;
 
                 PdfPCell cellEmpty = new PdfPCell(new Phrase("-"));
                 cellEmpty.Colspan = 1;
 
-                for (int i = 0; i < p.getTimeToUse().Count; i++)
+                for (int i = 0; i < p.TimeToUse.Count; i++)
                 {
-                    DayOfWeek day = p.getTimeToUse()[i];
+                    DayOfWeek day = p.TimeToUse[i];
 
                    
 
                     int z = 0;
                     if(day != DayOfWeek.Monday)
                     {
-                        if (i != 0) z = (int)p.getTimeToUse()[i - 1] ; 
+                        if (i != 0) z = (int)p.TimeToUse[i - 1] ; 
                         while(z < (int)day - 1) { z++; table.AddCell(cellEmpty); }
                         
                     }
@@ -129,7 +129,7 @@ namespace Bolnica
 
                     table.AddCell(cellToAdd);
 
-                    if (i == p.getTimeToUse().Count - 1)
+                    if (i == p.TimeToUse.Count - 1)
                     {
                         i = (int)day == 0 ? 7 : (int)day;
                         while (i < 7)

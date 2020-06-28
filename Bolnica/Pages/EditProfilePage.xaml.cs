@@ -2,6 +2,7 @@
 using Bolnica.State;
 using Class_Diagram___Hospital.Controller.Abstract;
 using Class_Diagram___Hospital.Controller.LocationControllers;
+using Class_Diagram___Hospital.Controller.LocationControllers.Abstract;
 using Class_Diagram___Hospital.Dto.LocationDTOs;
 using Class_Diagram___Hospital.Dto.UserDTOs;
 using Controller.PatientControllers;
@@ -30,8 +31,8 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class EditProfilePage : Page, INotifyPropertyChanged
     {
-        private CountryController countryController = new CountryController();
-        private CityController cityController = new CityController();
+        private ICountryController _countryController;
+        private ICityController _cityController;
         private AppState state = AppState.GetInstance();
 
         private IPatientController _patientController;
@@ -284,25 +285,27 @@ namespace Bolnica.Pages
 
             var app = Application.Current as App;
             _patientController = app.PatientController;
+            _cityController = app.CityController;
+            _countryController = app.CountryController;
 
             PatientDTO patient = state.CurrentPatient;
 
-            Countries = countryController.getAllCountries();
-            Country = Countries.Find(c => c.Name.Equals(patient.getBirthPlace().CountryName));
+            Countries = _countryController.GetAllCountries();
+            Country = Countries.Find(c => c.Name.Equals(patient.BirthPlace.CountryName));
             
 
-            Cities = cityController.getCitiesByCountryName(patient.getBirthPlace().CountryName);
-            City = Cities.Find(c => c.Name.Equals(patient.getBirthPlace().Name));
+            Cities = _cityController.GetCitiesByCountryName(patient.BirthPlace.CountryName);
+            City = Cities.Find(c => c.Name.Equals(patient.BirthPlace.Name));
 
-            NameU = patient.getName();
-            LastName = patient.getLastName();
-            DateOfBirth = patient.getBirthDate();
-            Sex = patient.getSex();
-            Address = patient.getAddress();
-            AddressNumber = patient.getAppartmentNumber().ToString();
-            Telephone = patient.getTelephone();
-            Email = patient.getEmail();
-            Jmbg = patient.getJmbg();
+            NameU = patient.Name;
+            LastName = patient.Lastname;
+            DateOfBirth = patient.BirthDate;
+            Sex = patient.Sex;
+            Address = patient.Address;
+            AddressNumber = patient.AppartmentNumber.ToString();
+            Telephone = patient.Telephone;
+            Email = patient.Email;
+            Jmbg = patient.Jmbg;
         }
 
         private void Go_Back_Handler(object sender, RoutedEventArgs e)
@@ -313,7 +316,7 @@ namespace Bolnica.Pages
         private void SaveChanges_Handler(object sender, RoutedEventArgs e)
         {
             PatientDTO patientDTO = new PatientDTO(Sex, DateOfBirth, City, NameU, LastName, Jmbg, null, Email, Telephone, Address, Int32.Parse(AddressNumber));
-            patientDTO.setId(AppState.GetInstance().CurrentPatient.getId());
+            patientDTO.SetId(AppState.GetInstance().CurrentPatient.GetId());
             PatientDTO returnedPatient = _patientController.EditPatient(patientDTO);
             AppState.GetInstance().CurrentPatient = returnedPatient;
             AppState.GetInstance().CurrentUser = returnedPatient;
@@ -329,8 +332,8 @@ namespace Bolnica.Pages
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Cities = cityController.getCitiesByCountryName(Country.Name);
-            CityDTO curCity = Cities.Find(c => c.Name.Equals(AppState.GetInstance().CurrentPatient.getBirthPlace().Name));
+            Cities = _cityController.GetCitiesByCountryName(Country.Name);
+            CityDTO curCity = Cities.Find(c => c.Name.Equals(AppState.GetInstance().CurrentPatient.BirthPlace.Name));
             if (curCity == null) City = _cities[0];
             else City = curCity;
         }

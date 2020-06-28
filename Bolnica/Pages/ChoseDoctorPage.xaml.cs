@@ -1,4 +1,5 @@
-﻿using Controller.DoctorControllers;
+﻿using Class_Diagram___Hospital.Controller.DoctorControllers.Abstract;
+using Controller.DoctorControllers;
 using Dto.MedicalServiceDTOs;
 using Dto.UserDTOs;
 using System;
@@ -24,7 +25,7 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class ChoseDoctorPage : Page, INotifyPropertyChanged
     {
-        private DoctorsController doctorsController = new DoctorsController();
+        private IDoctorsController _doctorsController;
         private TimeSpan PickedTime { get; set; }
         private DateTime PickedDate { get; set; }
         private AppointmentOperationDTO Appointment { get; set; }
@@ -134,11 +135,14 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _doctorsController = app.DoctorController;
+
             Priority = "Postpone";
 
             Appointment = appointment;
 
-            allDoctors = doctorsController.getDoctorsByDateTime(Appointment.StartDate);
+            allDoctors = _doctorsController.GetDoctorsByDateTime(Appointment.StartDate);
             Doctors = allDoctors;
             if (Doctors != null) Doctor = Doctors[0];
 
@@ -156,9 +160,12 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _doctorsController = app.DoctorController;
+
             Priority = "Doctor";
 
-            allDoctors = doctorsController.GetAllDoctors();
+            allDoctors = _doctorsController.GetAllDoctors();
             Doctors = allDoctors;
             if (Doctors != null) Doctor = Doctors[0];
 
@@ -176,11 +183,14 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _doctorsController = app.DoctorController;
+
             Priority = "Termin";
             PickedTime = pickedTime;
             PickedDate = pickedDate;
 
-            allDoctors = doctorsController.getDoctorsByDateTime(PickedDate.Date + pickedTime);
+            allDoctors = _doctorsController.GetDoctorsByDateTime(PickedDate.Date + pickedTime);
             
             Doctors = allDoctors;
             if (Doctors != null) Doctor = Doctors[0];
@@ -212,7 +222,7 @@ namespace Bolnica.Pages
                 this.NavigationService.Navigate(new ConfirmAppointmentPage(Doctor, PickedTime, PickedDate, Priority));
             else
             {
-                Appointment.DoctorId = Doctor.id;
+                Appointment.DoctorId = Doctor.Id;
                 Appointment.DoctorName = Doctor.Name + " " + Doctor.LastName;
                 this.NavigationService.Navigate(new ConfirmAppointmentPage(Appointment));
             }

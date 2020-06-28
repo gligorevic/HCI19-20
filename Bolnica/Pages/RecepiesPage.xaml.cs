@@ -1,4 +1,5 @@
 ﻿using Bolnica.State;
+using Class_Diagram___Hospital.Controller.MedicalInfoControllers.Abstract;
 using Controller.MedicalInfoControllers;
 using Dto.MedicalInfoDTOs;
 using System;
@@ -24,7 +25,7 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class RecepiesPage : Page, INotifyPropertyChanged
     {
-        private MedicalRecordController medicalRecordController = new MedicalRecordController();
+        private IMedicalRecordController _medicalRecordController;
 
         #region NotifyProperties
 
@@ -57,7 +58,10 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
-            MedicalRecordDTO mr = medicalRecordController.GetMedicalRecordByPatientId(AppState.GetInstance().CurrentPatient.getId());
+            var app = Application.Current as App;
+            _medicalRecordController = app.MedicalRecordController;
+
+            MedicalRecordDTO mr = _medicalRecordController.GetMedicalRecordByPatientId(AppState.GetInstance().CurrentPatient.GetId());
             Prescriptions = mr.Prescriptions;
         }
 

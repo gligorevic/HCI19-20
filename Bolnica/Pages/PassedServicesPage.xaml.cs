@@ -1,4 +1,5 @@
 ﻿using Bolnica.State;
+using Class_Diagram___Hospital.Controller.MedicalServiceControllers.Abstract;
 using Class_Diagram___Hospital.Dto.UserDTOs;
 using Controller.MedicalServiceControllers;
 using Dto.MedicalServiceDTOs;
@@ -25,9 +26,9 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class PassedServicesPage : Page, INotifyPropertyChanged
     {
-        private AppointmentController appointmentController = new AppointmentController();
-        private OperationController operationController = new OperationController();
-        private HospitalizationController hospitalizationController = new HospitalizationController();
+        private IAppointmentController _appointmentController;
+        private IOperationController _operationController;
+        private IHospitalizationController _hospitalizationController;
 
         #region NotifyProperties
 
@@ -100,11 +101,16 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _operationController = app.OperationController;
+            _hospitalizationController = app.HospitalizationController;
+            _appointmentController = app.AppointmentController;
+
             PatientDTO curPatient = AppState.GetInstance().CurrentPatient;
 
-            Appointments = appointmentController.getAllPasedAppointmentsByPatientId(curPatient.getId());
-            Operations = operationController.getAllPasedOperationsByPatientId(curPatient.getId());
-            Hospitalizations = hospitalizationController.getAllPasedHospitalizationsByPatientId(curPatient.getId());
+            Appointments = _appointmentController.GetAllPasedAppointmentsByPatientId(curPatient.GetId());
+            Operations = _operationController.getAllPasedOperationsByPatientId(curPatient.GetId());
+            Hospitalizations = _hospitalizationController.getAllPasedHospitalizationsByPatientId(curPatient.GetId());
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)

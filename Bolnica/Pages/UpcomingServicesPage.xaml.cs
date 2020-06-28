@@ -1,5 +1,6 @@
 ﻿using Bolnica.Modals;
 using Bolnica.State;
+using Class_Diagram___Hospital.Controller.MedicalServiceControllers.Abstract;
 using Class_Diagram___Hospital.Dto.UserDTOs;
 using Controller.MedicalServiceControllers;
 using Dto.MedicalServiceDTOs;
@@ -26,9 +27,9 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class UpcomingServicesPage : Page, INotifyPropertyChanged
     {
-        private AppointmentController appointmentController = new AppointmentController();
-        private OperationController operationController = new OperationController();
-        private HospitalizationController hospitalizationController = new HospitalizationController();
+        private IAppointmentController _appointmentController;
+        private IOperationController _operationController;
+        private IHospitalizationController _hospitalizationController;
 
         #region NotifyProperties
 
@@ -101,11 +102,17 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _operationController = app.OperationController;
+            _hospitalizationController = app.HospitalizationController;
+            _appointmentController = app.AppointmentController;
+
             PatientDTO curPatient = AppState.GetInstance().CurrentPatient;
 
-            Appointments = appointmentController.getAllUpcomingAppointmentsByPatientId(curPatient.getId());
-            Operations = operationController.getAllUpcomingOperationsByPatientId(curPatient.getId());
-            Hospitalizations = hospitalizationController.getAllUpcomingHospitalizationsByPatientId(curPatient.getId());
+            Appointments = _appointmentController.GetAllUpcomingAppointmentsByPatientId(curPatient.GetId());
+            Operations = _operationController.getAllUpcomingOperationsByPatientId(curPatient.GetId());
+            Hospitalizations = _hospitalizationController.getAllUpcomingHospitalizationsByPatientId(curPatient.GetId());
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)
@@ -121,7 +128,7 @@ namespace Bolnica.Pages
             CancelAppointmentModal modalWindow = new CancelAppointmentModal(appointment);
             modalWindow.ShowDialog();
             
-            Appointments = appointmentController.getAllUpcomingAppointmentsByPatientId(AppState.GetInstance().CurrentPatient.getId());
+            Appointments = _appointmentController.GetAllUpcomingAppointmentsByPatientId(AppState.GetInstance().CurrentPatient.GetId());
         }
 
         private void PostponeAppointment_Handler(object sender, RoutedEventArgs e)

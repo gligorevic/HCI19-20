@@ -225,19 +225,17 @@ namespace Bolnica.Pages
             InitializeComponent();
             this.DataContext = this;
             PatientDTO currentPatient = state.CurrentPatient;
-            NameAndLastName = currentPatient.getName() + " " + currentPatient.getLastName();
-            Jmbg = currentPatient.getJmbg();
-            Address = currentPatient.getAddress();
-            AddressNumber = currentPatient.getAppartmentNumber().ToString();
-            Email = currentPatient.getEmail();
-            Telephone = currentPatient.getTelephone();
-            DateOfBirth = currentPatient.getBirthDate().ToString();
-            City = currentPatient.getBirthPlace().Name;
-            Country = currentPatient.getBirthPlace().CountryName;
-            Sex = currentPatient.getSex();
+            NameAndLastName = currentPatient.Name + " " + currentPatient.Lastname;
+            Jmbg = currentPatient.Jmbg;
+            Address = currentPatient.Address;
+            AddressNumber = currentPatient.AppartmentNumber.ToString();
+            Email = currentPatient.Email;
+            Telephone = currentPatient.Telephone;
+            DateOfBirth = currentPatient.BirthDate.ToString();
+            City = currentPatient.BirthPlace.Name;
+            Country = currentPatient.BirthPlace.CountryName;
+            Sex = currentPatient.Sex;
         }
-
-
 
         private void Go_Back_Handler(object sender, RoutedEventArgs e)
         {

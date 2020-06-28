@@ -158,8 +158,8 @@ namespace Bolnica.Pages
                     return;
                 } 
 
-                FoundEmail = foundUser.getEmail();
-                NameAndLastName = foundUser.getName() + " " + foundUser.getLastName();
+                FoundEmail = foundUser.Email;
+                NameAndLastName = foundUser.Name + " " + foundUser.Lastname;
 
                 ActiveStep = ActiveStep + 1;
                 this.ContinueButton.Content = "Uloguj se";
@@ -173,7 +173,7 @@ namespace Bolnica.Pages
                 UserDTO user = _unautheticatedUserController.Login(Email, Password);
                 if(user != null)
                 {
-                    PatientDTO patient = _patientController.GetPatientByUserId(user.getId());
+                    PatientDTO patient = _patientController.GetPatientByUserId(user.GetId());
                     state.CurrentUser = user;
                     state.CurrentPatient = patient;
                     ((MainWindow)System.Windows.Application.Current.MainWindow).setLogoutVisible();

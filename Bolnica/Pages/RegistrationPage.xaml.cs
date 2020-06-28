@@ -1,6 +1,7 @@
 ﻿using Bolnica.Modals;
 using Class_Diagram___Hospital.Controller.Abstract;
 using Class_Diagram___Hospital.Controller.LocationControllers;
+using Class_Diagram___Hospital.Controller.LocationControllers.Abstract;
 using Class_Diagram___Hospital.Dto.LocationDTOs;
 using Class_Diagram___Hospital.Dto.UserDTOs;
 using Controller.UserControllers;
@@ -30,8 +31,8 @@ namespace Bolnica.Pages
     {
         public int ActiveStep { get; set; } = 1;
 
-        private CountryController countryController = new CountryController();
-        private CityController cityController = new CityController();
+        private ICountryController _countryController;
+        private ICityController _cityController;
 
         #region NotifyProperties
 
@@ -294,10 +295,12 @@ namespace Bolnica.Pages
 
             var app = Application.Current as App;
             _unautheticatedUserController = app.UnatuhenticatedUserController;
+            _cityController = app.CityController;
+            _countryController = app.CountryController;
 
-            _countries = countryController.getAllCountries();
+            _countries = _countryController.GetAllCountries();
             Country = _countries[0];
-            _cities = cityController.getCitiesByCountryName(_countries[0].Name);
+            _cities = _cityController.GetCitiesByCountryName(_countries[0].Name);
             City = _cities[0];
         }
 
@@ -327,7 +330,7 @@ namespace Bolnica.Pages
                     if (returnedPatient != null)
                     {
                         this.NavigationService.Navigate(new LoginPage());
-                        FeedbackModal feedback = new FeedbackModal("Uspešno izvršena registracija", "Uspešna registracija", "Izvršili ste uspešnu registraciju, možete se ulogovati sa emailom " + patientDTO.getEmail() + " i unetom lozinkom i koristiti funkcionalnosti koje nudi aplikacija.", true);
+                        FeedbackModal feedback = new FeedbackModal("Uspešno izvršena registracija", "Uspešna registracija", "Izvršili ste uspešnu registraciju, možete se ulogovati sa emailom " + patientDTO.Email + " i unetom lozinkom i koristiti funkcionalnosti koje nudi aplikacija.", true);
                         feedback.ShowDialog();
                     } else
                     {
@@ -413,7 +416,7 @@ namespace Bolnica.Pages
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Cities = cityController.getCitiesByCountryName(Country.Name);
+            Cities = _cityController.GetCitiesByCountryName(Country.Name);
             City = _cities[0];
         }
 

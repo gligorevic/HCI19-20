@@ -1,5 +1,6 @@
 ﻿using Bolnica.Modals;
 using Class_Diagram___Hospital.Controller.DoctorControllers;
+using Class_Diagram___Hospital.Controller.DoctorControllers.Abstract;
 using Dto.DoctorDTOs;
 using Dto.MedicalServiceDTOs;
 using System;
@@ -25,7 +26,7 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class RateDoctorPage : Page, INotifyPropertyChanged
     {
-        private RatingController ratingController = new RatingController();
+        private IRatingController _ratingController;
 
 
         #region NotifyProperties
@@ -82,12 +83,15 @@ namespace Bolnica.Pages
             InitializeComponent();
             this.DataContext = this;
 
+            var app = Application.Current as App;
+            _ratingController = app.RatingController;
+
             RateDTO rateDTO = new RateDTO();
             rateDTO.PatientId = appointment.PatientId;
             rateDTO.DoctorId = appointment.DoctorId;
             
             Appointment = appointment;
-            RateDTO exRate = ratingController.getExistingRate(rateDTO);
+            RateDTO exRate = _ratingController.GetExistingRate(rateDTO);
             if(exRate == null)
             {
                 Rate= 0;
@@ -122,7 +126,7 @@ namespace Bolnica.Pages
             rateDTO.DoctorId = Appointment.DoctorId;
             rateDTO.Rate = Rate;
 
-            ratingController.rateDoctor(rateDTO);
+            _ratingController.RateDoctor(rateDTO);
             this.NavigationService.GoBack();
             FeedbackModal feedback = new FeedbackModal("Uspešno ocenjivanje", "Uspešno ocenjivanje", "Izvršili ste uspešno ocenjivanje lekara " + Appointment.DoctorName + " sa ocenom " + Rate + ".", true);
             feedback.ShowDialog();

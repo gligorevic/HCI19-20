@@ -1,4 +1,6 @@
 ﻿using Bolnica.State;
+using Class_Diagram___Hospital.Controller.DoctorControllers.Abstract;
+using Class_Diagram___Hospital.Controller.MedicalServiceControllers.Abstract;
 using Controller.DoctorControllers;
 using Controller.MedicalServiceControllers;
 using Dto.MedicalServiceDTOs;
@@ -29,8 +31,8 @@ namespace Bolnica.Pages
     {
         private int counterSelectionDate { get; set; } = 0;
 
-        private DoctorsController doctorController = new DoctorsController();
-        private AppointmentController appointmentController = new AppointmentController();
+        private IDoctorsController _doctorController;
+        private IAppointmentController _appointmentController;
         private DoctorDTO PickedDoctor { get; set; }
         private List<DateTime> availableDates;
         private DateTime SelectedDate { get; set; }
@@ -107,9 +109,13 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _doctorController = app.DoctorController;
+            _appointmentController = app.AppointmentController;
+
             Appointment = appointment;
 
-            availableDates = doctorController.GetAllAvailableAppointmentDates();
+            availableDates = _doctorController.GetAllAvailableAppointmentDates();
             Priority = "Postpone";
 
             foreach (DateTime date in availableDates)
@@ -122,10 +128,15 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
+
+            var app = Application.Current as App;
+            _doctorController = app.DoctorController;
+            _appointmentController = app.AppointmentController;
+
             Priority = "Doctor";
             PickedDoctor = doctor;
 
-            availableDates = doctorController.GetAllAvailableAppointmentDatesByDocotrId(doctor.id);
+            availableDates = _doctorController.GetAllAvailableAppointmentDatesByDocotrId(doctor.Id);
             foreach (DateTime date in availableDates)
             {
                 MonthlyCalendar.SelectedDates.Add(date);
@@ -138,7 +149,12 @@ namespace Bolnica.Pages
             Priority = "Termin";
             this.DataContext = this;
 
-            availableDates = doctorController.GetAllAvailableAppointmentDates();
+            var app = Application.Current as App;
+            _doctorController = app.DoctorController;
+            _appointmentController = app.AppointmentController;
+
+
+            availableDates = _doctorController.GetAllAvailableAppointmentDates();
             
             foreach (DateTime date in availableDates)
             {
@@ -180,7 +196,7 @@ namespace Bolnica.Pages
                     
                     if(Priority.Equals("Doctor"))
                     {
-                        TimesList = appointmentController.GetAvailableAppointmentTimesByDateAndPatientAndDoctorId(SelectedDate, AppState.GetInstance().CurrentPatient.getId(), PickedDoctor.id);
+                        TimesList = _appointmentController.GetAvailableAppointmentTimesByDateAndPatientAndDoctorId(SelectedDate, AppState.GetInstance().CurrentPatient.GetId(), PickedDoctor.Id);
                         
                         if(TimesList != null && TimesList.Count > 0)
                         {
@@ -192,7 +208,7 @@ namespace Bolnica.Pages
                         }
                     } else 
                     {
-                        TimesList = appointmentController.GetAvailableAppointmentTimesByDateAndPatientId(SelectedDate, AppState.GetInstance().CurrentPatient.getId());
+                        TimesList = _appointmentController.GetAvailableAppointmentTimesByDateAndPatientId(SelectedDate, AppState.GetInstance().CurrentPatient.GetId());
 
                         if (TimesList != null && TimesList.Count > 0)
                         {

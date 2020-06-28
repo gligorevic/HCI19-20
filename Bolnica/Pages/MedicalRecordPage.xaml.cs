@@ -1,4 +1,5 @@
 ﻿using Bolnica.State;
+using Class_Diagram___Hospital.Controller.MedicalInfoControllers.Abstract;
 using Class_Diagram___Hospital.Dto.MedicalInfoDTOs;
 using Class_Diagram___Hospital.Dto.UserDTOs;
 using Controller.MedicalInfoControllers;
@@ -182,13 +183,15 @@ namespace Bolnica.Pages
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        private MedicalRecordController medicalRecordController = new MedicalRecordController();
+        private IMedicalRecordController _medicalRecordController;
 
         public MedicalRecordPage()
         {
             InitializeComponent();
             this.DataContext = this;
-            medicalRecord = medicalRecordController.GetMedicalRecordByPatientId(AppState.GetInstance().CurrentPatient.getId());
+            var app = Application.Current as App;
+            _medicalRecordController = app.MedicalRecordController;
+            medicalRecord = _medicalRecordController.GetMedicalRecordByPatientId(AppState.GetInstance().CurrentPatient.GetId());
             HeightP = medicalRecord.Height == 0 ? "Biće uneto" : medicalRecord.Height.ToString();
             Weight = medicalRecord.Weight == 0 ? "Biće uneto" : medicalRecord.Weight.ToString();
             BloodType = medicalRecord.BloodType == Model.Patient.BloodType.NOT_SETTED ? "Biće uneto" : medicalRecord.BloodType.ToString();
@@ -196,9 +199,9 @@ namespace Bolnica.Pages
             Allergies = medicalRecord.Allergies;
 
             PatientDTO curPatient = AppState.GetInstance().CurrentPatient;
-            Sex = curPatient.getSex();
-            NameU = curPatient.getName() + " " + curPatient.getLastName();
-            DateOfBirth = curPatient.getBirthDate();
+            Sex = curPatient.Sex;
+            NameU = curPatient.Name + " " + curPatient.Lastname;
+            DateOfBirth = curPatient.BirthDate;
         }
 
         private void GoBack_Handler(object sender, RoutedEventArgs e)

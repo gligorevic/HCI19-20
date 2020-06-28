@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Bolnica.State;
+using Class_Diagram___Hospital.Controller.MedicalServiceControllers.Abstract;
 using Controller.MedicalServiceControllers;
 using Dto.MedicalServiceDTOs;
 using Dto.UserDTOs;
@@ -27,7 +28,7 @@ namespace Bolnica.Modals
     /// </summary>
     public partial class PickNewDateOrGetRecomended : Window, INotifyPropertyChanged
     {
-        private AppointmentController appointmentController = new AppointmentController();
+        private IAppointmentController _appointmentController;
 
         #region INotifyPropertyChanged
         private TimeSpan _pickedTime;
@@ -82,14 +83,19 @@ namespace Bolnica.Modals
         public PickNewDateOrGetRecomended()
         {
             InitializeComponent();
+            var app = Application.Current as App;
+            _appointmentController = app.AppointmentController;
         }
 
         public PickNewDateOrGetRecomended(AppointmentOperationDTO appointment, DoctorDTO doctor)
         {
             InitializeComponent();
             this.DataContext = this;
+            var app = Application.Current as App;
+            _appointmentController = app.AppointmentController;
+
             appointment = appointment;
-            TimesList = appointmentController.GetAvailableAppointmentTimesByDateAndPatientAndDoctorId(appointment.getStartDate(), AppState.GetInstance().CurrentPatient.getId(), appointment.getDoctorId());
+            TimesList = _appointmentController.GetAvailableAppointmentTimesByDateAndPatientAndDoctorId(appointment.StartDate, AppState.GetInstance().CurrentPatient.GetId(), appointment.DoctorId);
             this.poruka.Text = "Neko je u međuvremenu zauzeo izabran termin kod lekara " + doctor.Name + " " + doctor.LastName; 
         }
 
@@ -101,7 +107,7 @@ namespace Bolnica.Modals
 
         private void Submit_Handler(object sender, RoutedEventArgs e)
         {
-            appointment.setStartDate(appointment.getStartDate().Date + PickedTime);
+            appointment.StartDate = appointment.StartDate.Date + PickedTime;
             this.Close();
         }
 

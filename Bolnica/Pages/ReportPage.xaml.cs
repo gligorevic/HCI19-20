@@ -1,4 +1,5 @@
-﻿using Controller.MedicalInfoControllers;
+﻿using Class_Diagram___Hospital.Controller.MedicalInfoControllers.Abstract;
+using Controller.MedicalInfoControllers;
 using Controller.MedicalServiceControllers;
 using Dto.MedicalInfoDTOs;
 using Dto.MedicalServiceDTOs;
@@ -25,7 +26,7 @@ namespace Bolnica.Pages
     /// </summary>
     public partial class ReportPage : Page, INotifyPropertyChanged
     {
-        private ReportController reportController= new ReportController();
+        private IReportController _reportController;
 
         #region NotifyProperties
         private AppointmentOperationDTO _appointment;
@@ -80,7 +81,10 @@ namespace Bolnica.Pages
         {
             InitializeComponent();
             this.DataContext = this;
-            Report = reportController.GetReportByAppointmentId(appointment.Id);
+            var app = Application.Current as App;
+            _reportController = app.ReportController;
+
+            Report = _reportController.GetReportByAppointmentId(appointment.Id);
             Appointment = appointment;
 
         }
