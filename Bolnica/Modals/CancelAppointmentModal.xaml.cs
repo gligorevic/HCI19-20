@@ -74,10 +74,19 @@ namespace Bolnica.Modals
 
         private void CancelAppointment_Handler(object sender, RoutedEventArgs e)
         {
-            _patientController.CancelAppointment(Appointment.Id);
-            this.Close();
-            FeedbackModal feedback = new FeedbackModal("Uspešno otkazan pregled", "Uspešno otkazivanje", "Izvršili ste uspešno otkazivanje pregleda koji je trebao da bude izvršen datuma " + Appointment.StartDate + " kod lekara " + Appointment.DoctorName + ".", true);
-            feedback.ShowDialog();
+            try
+            {
+                _patientController.CancelAppointment(Appointment.Id);
+                this.Close();
+                FeedbackModal feedback = new FeedbackModal("Uspešno otkazan pregled", "Uspešno otkazivanje", "Izvršili ste uspešno otkazivanje pregleda koji je trebao da bude izvršen datuma " + Appointment.StartDate + " kod lekara " + Appointment.DoctorName + ".", true);
+                feedback.ShowDialog();
+            } catch(Exception err)
+            {
+                FeedbackModal feedback = new FeedbackModal("Neuspesno otkazivanje", "Neuspesno otkazivanje", err.Message, true);
+                feedback.ShowDialog();
+            }
+
+                
         }
     }
 }

@@ -78,7 +78,7 @@ namespace Bolnica.Modals
         #endregion
 
 
-        private AppointmentOperationDTO appointment { get; set; }
+        private AppointmentOperationDTO Appointment { get; set; }
 
         public PickNewDateOrGetRecomended()
         {
@@ -94,26 +94,35 @@ namespace Bolnica.Modals
             var app = Application.Current as App;
             _appointmentController = app.AppointmentController;
 
-            appointment = appointment;
+            Appointment = appointment;
             TimesList = _appointmentController.GetAvailableAppointmentTimesByDateAndPatientAndDoctorId(appointment.StartDate, AppState.GetInstance().CurrentPatient.GetId(), appointment.DoctorId);
-            this.poruka.Text = "Neko je u međuvremenu zauzeo izabran termin kod lekara " + doctor.Name + " " + doctor.LastName; 
+            if (doctor == null)
+            {
+                this.poruka.Text = "Neko je u međuvremenu zauzeo izabran termin kod lekara " + appointment.DoctorName;
+
+            }
+            else
+            {
+                this.poruka.Text = "Neko je u međuvremenu zauzeo izabran termin kod lekara " + doctor.Name + " " + doctor.LastName;
+
+            }
         }
 
         private void PickMySelf_Handler(object sender, RoutedEventArgs e)
         {
-            appointment = null;
-            this.Close();   
+            Appointment = null;
+            this.Close();
         }
 
         private void Submit_Handler(object sender, RoutedEventArgs e)
         {
-            appointment.StartDate = appointment.StartDate.Date + PickedTime;
+            Appointment.StartDate = Appointment.StartDate.Date + PickedTime;
             this.Close();
         }
 
         public AppointmentOperationDTO getAppointmentInfo()
         {
-            return appointment;
+            return Appointment;
         }
     }
 }

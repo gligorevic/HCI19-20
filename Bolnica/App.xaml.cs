@@ -39,6 +39,7 @@ using Controller.PatientControllers;
 using Controller.UserControllers;
 using Dto.UserDTOs;
 using Model.Doctor;
+using Model.Doctor.InstructionAndPrescription;
 using Model.EquipmentAndRooms;
 using Model.MedicalService;
 using Model.Patient;
@@ -123,6 +124,20 @@ namespace Bolnica
 
         private readonly IReportService reportService;
 
+        private readonly IAllergyRepository allergyRepository;
+
+        private readonly IAnalysisTypeRepository analysisTypeRepository;
+
+        private readonly IDrugRepository drugRepository;
+
+        private readonly IVacationRepository vacationRepository;
+        private readonly IVacationService vacationService;
+
+        private readonly IReportRepository reportRepository;
+        private readonly IDiagnosisRepository diagnosisRepository;
+
+
+
         public IUnatuhenticatedUserController UnauthenticatedUserController { get; private set; }
         public IHospitalizationController HospitalizationController { get; private set; }
         public IHospitalizationRoomController HospitalizationRoomController { get; private set; }
@@ -140,9 +155,11 @@ namespace Bolnica
         public IRatingController RatingController { get; private set; }
         public IReportController ReportController { get; private set; }
 
+
         private List<User> users = new List<User>();
         private List<Patient> patients = new List<Patient>();
         private List<Doctor> doctors = new List<Doctor>();
+        private List<SpecialistDoctor> specialistDoctors = new List<SpecialistDoctor>();
         private List<Hospitalization> hospitalizations = new List<Hospitalization>();
         private List<MedicalRecord> medicalRecords = new List<MedicalRecord>();
         private List<Room> rooms = new List<Room>();
@@ -181,11 +198,15 @@ namespace Bolnica
             doctorRepository = new DoctorRepository(new BinaryStream<Doctor>(Constants.dbPath + Constants.doctorFilePath), new IdLongGenerator());
             doctorService = new DoctorsService(doctorRepository, shiftService, appointmentRepository, durationPeriodService);
 
-            medicalRecordService = new MedicalRecordService(medicalRecordRepository, userRepository);
+            allergyRepository = new AllergyRepository(new BinaryStream<Allergy>(Constants.dbPath + Constants.allergyFilePath), new IdLongGenerator());
+            drugRepository = new DrugRepository(new BinaryStream<Drug>(Constants.dbPath + Constants.drugFilePath), new IdLongGenerator());
+
+            medicalRecordService = new MedicalRecordService(medicalRecordRepository, drugRepository, doctorRepository, allergyRepository, analysisTypeRepository);
             MedicalRecordController = new MedicalRecordController(medicalRecordService);
 
-            
-            appointmentService = new AppointmentService(userRepository,serviceRoomRepository,hospitalizationRepository,durationPeriodRepository,doctorService,medicalRecordRepository, appointmentRepository, operationRepository, doctorRepository);
+            vacationService = new VacationService(operationRepository, appointmentRepository, vacationRepository);
+
+            appointmentService = new AppointmentService(serviceRoomRepository, doctorService, medicalRecordRepository, appointmentRepository, operationRepository, doctorRepository, durationPeriodService, vacationService);
             AppointmentController = new AppointmentController(appointmentService);
 
             patientRepository = new PatientRepository(new BinaryStream<Patient>(Constants.dbPath + Constants.patientFilePath), new IdLongGenerator(), medicalRecordRepository);
@@ -222,23 +243,18 @@ namespace Bolnica
             ServiceRoomController = new ServiceRoomController(serviceRoomService);
 
             operationTypeRepository = new OperationTypeRepository(new BinaryStream<OperationType>(Constants.dbPath + Constants.operationTypeFilePath), new IdLongGenerator());
-            
-            operationService = new OperationService(
-                                    operationRepository,
-                                    hospitalizationRepository,
-                                    serviceRoomRepository,
-                                    operationTypeRepository,
-                                    doctorRepository,
-                                    medicalRecordRepository,
-                                    equipmentReservationTimeService,
-                                    appointmentRepository);
+
+            operationService = new OperationService(operationRepository, serviceRoomRepository, operationTypeRepository, doctorRepository, medicalRecordRepository, equipmentReservationTimeService, durationPeriodService, vacationService);
             OperationController = new OperationController(operationService);
 
             serviceTypeRepository = new ServiceTypeRepository(new BinaryStream<ServiceType>(Constants.dbPath + Constants.serviceTypeFilePath), new IdLongGenerator());
             serviceTypeService = new ServiceTypeService(serviceTypeRepository);
             ServiceTypeController = new ServiceTypeController(serviceTypeService);
 
-            reportService = new ReportService(appointmentRepository);
+            diagnosisRepository = new DiagnosisRepository(new BinaryStream<Diagnosis>(Constants.dbPath + Constants.diagnosisFilePath), new IdLongGenerator());
+            reportRepository = new ReportRepository(new BinaryStream<Report>(Constants.dbPath + Constants.reportFilePath), new IdLongGenerator());
+
+            reportService = new ReportService(appointmentRepository, reportRepository, diagnosisRepository);
             ReportController = new ReportController(reportService);
 
             initData();
@@ -255,7 +271,9 @@ namespace Bolnica
             loadDurationPeriods();
             loadMedicalRecords();
             loadRooms();
+            loadPassedServices();
             loadPassedAppointments();
+            loadUpcommingServices();
         }
 
         public void loadCitiesAndCountries()
@@ -344,11 +362,11 @@ namespace Bolnica
 
             UserDTO uDoctorDTO2 = new UserDTO("DoctorSpec", "DocPrez", "0509878905401", "drname2", "drname2@smt.com", "0574567898", "Address 1", 15);
             Speciality spec = new Speciality("Oftamolog");
-            Doctor doctor2spec = new SpecialistDoctor(spec, uDoctorDTO2);
+            SpecialistDoctor doctor2spec = new SpecialistDoctor(spec, uDoctorDTO2);
             //User proba = new SpecialistDoctor(spec, uDoctorDTO2);
             User uDoctor2 = userRepository.Create((User)doctor2spec);
             doctorRepository.Create(doctor2spec, uDoctor2.GetId());
-
+            specialistDoctors.Add(doctor2spec);
 
             Console.WriteLine("\n-- Users and Specialist Doctors --\n");
             IList<User> usersList = userRepository.GetAll();
@@ -394,14 +412,42 @@ namespace Bolnica
         public void loadPassedAppointments() {
             
 
-            Diagnosis d = new Diagnosis(0, "Sapun u ruke", "Sapunjaj");
+            Diagnosis d = new Diagnosis("Sapun u ruke", "Sapunjaj");
 
             List<Diagnosis> diagnoses = new List<Diagnosis>() { d };
-            Report report = new Report(0, "Veliki problemi", "Pacijent se ne kupa", diagnoses);
+            Report report = new Report("Veliki problemi", "Pacijent se ne kupa", diagnoses);
             Appointment pa1 = new Appointment(report, doctors[0], true, 30, Priority.Doctor, serviceRoomRepository.Create(new ServiceRoom(new ServiceType("Pregledanje"), rooms[0])), medicalRecords[0], new DateTime(2020, 6, 10));
             appointmentRepository.Create(pa1);
         }
 
+        public void loadPassedServices()
+        {
+            Hospitalization passedHospitalization1 = new Hospitalization(hRooms[0], new DateTime(2020, 6, 16), medicalRecords[0], new DateTime(2020, 6, 10));
+            Hospitalization passedHospitalization2 = new Hospitalization(hRooms[0], new DateTime(2020, 6, 9), medicalRecords[0], new DateTime(2020, 6, 6));
+
+            hospitalizationRepository.Create(passedHospitalization1);
+            hospitalizationRepository.Create(passedHospitalization2);
+
+            Operation passedOp = new Operation(new OperationType("Operisan", new Speciality("Kardio")), specialistDoctors[0], 30, new ServiceRoom(new ServiceType("Oftamoloska"), rooms[0]), medicalRecords[0], new DateTime(2020, 6, 20));
+            operationRepository.Create(passedOp);
+        }
+
+        public void loadUpcommingServices()
+        {
+            Hospitalization uppcomingHospitalization1 = new Hospitalization(hRooms[0], new DateTime(2020, 7, 16), medicalRecords[0], new DateTime(2020, 7, 10));
+            Hospitalization uppcomingHospitalization2 = new Hospitalization(hRooms[0], new DateTime(2020, 7, 9), medicalRecords[0], new DateTime(2020, 7, 6));
+
+            hospitalizationRepository.Create(uppcomingHospitalization1);
+            hospitalizationRepository.Create(uppcomingHospitalization2);
+
+            Operation uppcomingOp = new Operation(new OperationType("Operisan", new Speciality("Kardio")), specialistDoctors[0], 30, new ServiceRoom(new ServiceType("Oftamoloska"), rooms[0]), medicalRecords[0], new DateTime(2020, 7, 20));
+            operationRepository.Create(uppcomingOp);
+
+            Appointment appointment = new Appointment(null, doctors[0], false, 30, Priority.Doctor, new ServiceRoom(new ServiceType("Pregledanje"), rooms[0]), medicalRecords[0], new DateTime(2020, 6, 29, 20, 0, 0));
+            Appointment appointment1 = new Appointment(null, doctors[0], false, 30, Priority.Doctor, new ServiceRoom(new ServiceType("Pregledanje"), rooms[0]), medicalRecords[0], new DateTime(2020, 6, 30, 20, 0, 0));
+            appointmentRepository.Create(appointment);
+            appointmentRepository.Create(appointment1);
+        }
 
         public void deleteRepo()
         {
